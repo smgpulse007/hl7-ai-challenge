@@ -1,0 +1,36 @@
+# HL7 Processing Service Dependencies
+
+# FastAPI and web framework
+fastapi
+uvicorn[standard]
+python-multipart
+
+# RabbitMQ client
+pika
+
+# NLP and text processing
+spacy
+langchain-community
+langchain
+
+# PDF processing
+PyPDF2
+pymupdf4llm
+
+# Data processing
+pandas
+numpy
+
+# Logging and utilities
+python-json-logger
+python-dotenv
+
+# HTTP client
+httpx
+requests
+
+# Date and time utilities
+python-dateutil
+
+# Type hints
+typing-extensions

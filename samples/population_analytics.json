@@ -1,0 +1,298 @@
+{
+  "population_overview": {
+    "total_members": 45000,
+    "measures": {
+      "CCS": {
+        "eligible_members": 18500,
+        "current_compliance": 0.68,
+        "projected_compliance": 0.85,
+        "evidence_found": 12580,
+        "no_evidence": 5920,
+        "quality_bonus_per_member": 125,
+        "hedis_benchmark": 0.82,
+        "star_rating_impact": "4.5 to 5.0 stars",
+        "compliance_methodology": "Based on NCQA HEDIS 2024 specifications for cervical cancer screening"
+      },
+      "WCV": {
+        "eligible_members": 8200,
+        "current_compliance": 0.72,
+        "projected_compliance": 0.88,
+        "evidence_found": 5904,
+        "no_evidence": 2296,
+        "quality_bonus_per_member": 100,
+        "hedis_benchmark": 0.85,
+        "star_rating_impact": "4.0 to 4.5 stars",
+        "compliance_methodology": "HEDIS Well-Child Visits in the First 30 Months of Life (W30)"
+      },
+      "COL": {
+        "eligible_members": 12800,
+        "current_compliance": 0.65,
+        "projected_compliance": 0.78,
+        "evidence_found": 8320,
+        "no_evidence": 4480,
+        "quality_bonus_per_member": 150,
+        "hedis_benchmark": 0.75,
+        "star_rating_impact": "3.5 to 4.0 stars",
+        "compliance_methodology": "HEDIS Colorectal Cancer Screening (COL) - includes colonoscopy, FIT, and Cologuard"
+      }
+    },
+    "input_sources_active": {
+      "EHR_EPIC": {
+        "status": "ACTIVE",
+        "members_covered": 28500,
+        "evidence_yield": 0.78,
+        "processing_time_avg": 0.05
+      },
+      "HIE_MMX": {
+        "status": "ACTIVE",
+        "members_covered": 45000,
+        "evidence_yield": 0.45,
+        "processing_time_avg": 0.12
+      },
+      "COREPOINT_INTEGRATION": {
+        "status": "ACTIVE",
+        "members_covered": 22000,
+        "evidence_yield": 0.65,
+        "processing_time_avg": 0.08
+      },
+      "SFTP_CHARTS": {
+        "status": "ACTIVE",
+        "members_covered": 15000,
+        "evidence_yield": 0.82,
+        "processing_time_avg": 0.06
+      },
+      "FTP_LOAD": {
+        "status": "ACTIVE",
+        "members_covered": 8500,
+        "evidence_yield": 0.71,
+        "processing_time_avg": 0.09
+      }
+    }
+  },
+  "risk_stratification": {
+    "high_risk": {
+      "count": 312,
+      "percentage": 0.25,
+      "intervention_success_rate": 0.65,
+      "average_intervention_cost": 150,
+      "projected_compliance_lift": 0.45
+    },
+    "medium_risk": {
+      "count": 374,
+      "percentage": 0.30,
+      "intervention_success_rate": 0.45,
+      "average_intervention_cost": 75,
+      "projected_compliance_lift": 0.25
+    },
+    "low_risk": {
+      "count": 561,
+      "percentage": 0.45,
+      "intervention_success_rate": 0.85,
+      "average_intervention_cost": 25,
+      "projected_compliance_lift": 0.10
+    }
+  },
+  "evidence_sources": {
+    "HL7_MDM_PDF": {
+      "count": 445,
+      "percentage": 0.357,
+      "processing_time_avg": 0.08,
+      "confidence_avg": 0.94,
+      "cost_per_extraction": 2.50
+    },
+    "FAX_PDF": {
+      "count": 298,
+      "percentage": 0.239,
+      "processing_time_avg": 0.12,
+      "confidence_avg": 0.89,
+      "cost_per_extraction": 3.75
+    },
+    "HL7_HIE": {
+      "count": 187,
+      "percentage": 0.150,
+      "processing_time_avg": 0.05,
+      "confidence_avg": 0.92,
+      "cost_per_extraction": 1.25
+    },
+    "MULTIPLE": {
+      "count": 93,
+      "percentage": 0.075,
+      "processing_time_avg": 0.15,
+      "confidence_avg": 0.97,
+      "cost_per_extraction": 5.00
+    },
+    "NONE": {
+      "count": 224,
+      "percentage": 0.180,
+      "processing_time_avg": 0.03,
+      "confidence_avg": 0.00,
+      "cost_per_extraction": 0.50
+    }
+  },
+  "financial_impact": {
+    "current_state": {
+      "total_quality_bonus": 8750000,
+      "missed_bonus_opportunity": 4250000,
+      "traditional_outreach_cost": 2850000,
+      "traditional_success_rate": 0.22,
+      "star_rating_revenue_risk": 12500000,
+      "methodology": "Based on CMS Star Ratings impact on MA revenue and HEDIS quality bonuses"
+    },
+    "projected_with_ai": {
+      "total_quality_bonus": 13000000,
+      "quality_bonus_increase": 4250000,
+      "ai_intervention_cost": 850000,
+      "ai_success_rate": 0.68,
+      "net_roi": 3400000,
+      "roi_percentage": 4.0,
+      "star_rating_improvement": "0.5 star increase",
+      "additional_ma_revenue": 6250000,
+      "total_financial_benefit": 9650000
+    },
+    "cost_comparison": {
+      "traditional_cost_per_success": 285.50,
+      "ai_cost_per_success": 89.25,
+      "cost_reduction_percentage": 0.69,
+      "efficiency_multiplier": 3.2,
+      "hedis_compliance_improvement": {
+        "CCS": "68% to 85% (+17 percentage points)",
+        "WCV": "72% to 88% (+16 percentage points)",
+        "COL": "65% to 78% (+13 percentage points)"
+      }
+    },
+    "research_basis": {
+      "hedis_low_scores_impact": "Plans with low HEDIS scores lose 15-25% of members annually (Smile Digital Health, 2024)",
+      "administrative_cost_savings": "AI reduces administrative burden by $2.1B annually (CAQH Index 2024)",
+      "quality_bonus_methodology": "Based on CMS Medicare Advantage quality bonus payments and Medicaid managed care incentives",
+      "star_rating_revenue": "Each 0.5 star improvement = $139 PMPM increase in MA revenue"
+    }
+  },
+  "provider_network_analysis": {
+    "total_providers": 45,
+    "in_network_evidence": 0.67,
+    "out_network_evidence": 0.33,
+    "top_performing_providers": [
+      {
+        "provider_id": "PROV002",
+        "name": "Women's Health Associates",
+        "ccs_rate": 0.95,
+        "wcv_rate": 0.89,
+        "col_rate": 0.91,
+        "evidence_contribution": 0.23,
+        "quality_score": 0.92
+      },
+      {
+        "provider_id": "PROV004",
+        "name": "Gastroenterology Associates",
+        "ccs_rate": 0.88,
+        "wcv_rate": 0.82,
+        "col_rate": 0.90,
+        "evidence_contribution": 0.18,
+        "quality_score": 0.87
+      },
+      {
+        "provider_id": "PROV005",
+        "name": "Pediatric Care Center",
+        "ccs_rate": 0.92,
+        "wcv_rate": 0.87,
+        "col_rate": 0.85,
+        "evidence_contribution": 0.15,
+        "quality_score": 0.88
+      }
+    ],
+    "improvement_opportunities": [
+      {
+        "provider_id": "PROV003",
+        "name": "Riverside Medical Center",
+        "current_col_rate": 0.65,
+        "target_col_rate": 0.78,
+        "potential_bonus_increase": 125000,
+        "recommended_intervention": "Colonoscopy scheduling optimization"
+      }
+    ]
+  },
+  "competitive_analysis": {
+    "market_position": {
+      "iehp_compliance_rate": 0.72,
+      "market_average": 0.68,
+      "top_quartile_threshold": 0.75,
+      "projected_position": "Top 10%"
+    },
+    "unique_advantages": [
+      {
+        "advantage": "Input-Agnostic Processing",
+        "market_penetration": 0.05,
+        "competitive_moat": "High",
+        "revenue_impact": 2340000
+      },
+      {
+        "advantage": "Predictive Risk Modeling",
+        "market_penetration": 0.15,
+        "competitive_moat": "Medium",
+        "revenue_impact": 1560000
+      },
+      {
+        "advantage": "Multi-Industry Platform",
+        "market_penetration": 0.02,
+        "competitive_moat": "Very High",
+        "revenue_impact": 4680000
+      }
+    ]
+  },
+  "implementation_timeline": {
+    "phase_1": {
+      "duration_months": 3,
+      "investment": 450000,
+      "expected_roi": 0.15,
+      "key_milestones": ["Backend deployment", "Initial data integration", "Pilot testing"]
+    },
+    "phase_2": {
+      "duration_months": 6,
+      "investment": 750000,
+      "expected_roi": 0.45,
+      "key_milestones": ["Full platform deployment", "Provider integration", "Care team training"]
+    },
+    "phase_3": {
+      "duration_months": 12,
+      "investment": 300000,
+      "expected_roi": 1.25,
+      "key_milestones": ["Multi-industry expansion", "Advanced analytics", "Market leadership"]
+    }
+  },
+  "success_metrics": {
+    "primary_kpis": [
+      {
+        "metric": "Quality Bonus Revenue",
+        "baseline": 4680000,
+        "target": 6552000,
+        "improvement": 0.40
+      },
+      {
+        "metric": "Intervention Success Rate",
+        "baseline": 0.20,
+        "target": 0.65,
+        "improvement": 2.25
+      },
+      {
+        "metric": "Cost per Successful Intervention",
+        "baseline": 311.75,
+        "target": 96.15,
+        "improvement": -0.69
+      }
+    ],
+    "secondary_kpis": [
+      {
+        "metric": "Evidence Processing Time",
+        "baseline": 0.25,
+        "target": 0.08,
+        "improvement": -0.68
+      },
+      {
+        "metric": "Provider Network Engagement",
+        "baseline": 0.45,
+        "target": 0.75,
+        "improvement": 0.67
+      }
+    ]
+  }
+}

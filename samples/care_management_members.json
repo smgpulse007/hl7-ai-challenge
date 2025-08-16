@@ -1,0 +1,313 @@
+[
+  {
+    "member_id": "99990001000000",
+    "name": "Maria Rodriguez",
+    "age": 35,
+    "gender": "F",
+    "language": "Spanish",
+    "measure_type": "CCS",
+    "risk_level": "LOW",
+    "risk_probability": 0.15,
+    "priority": "low",
+    "intervention_due_date": "2025-12-15",
+    "evidence_found": true,
+    "evidence_source": "HL7_MDM_PDF",
+    "evidence_details": {
+      "source_type": "HL7 MDM Message with Embedded PDF",
+      "facility": "Community Health Clinic",
+      "date": "2024-07-22",
+      "document_type": "Cytology Report",
+      "result": "Normal cervical cytology (LOINC: 33717-0)",
+      "provider": "Dr. Sarah Chen, MD",
+      "confidence": 0.95
+    },
+    "care_features": {
+      "transportation_barriers": false,
+      "language_barriers": true,
+      "insurance_issues": false,
+      "previous_no_shows": 0,
+      "anxiety_documented": false,
+      "preferred_contact": "Phone (Spanish)",
+      "care_coordinator": "Rosa Martinez, RN"
+    },
+    "next_appointments": [
+      {
+        "date": "2025-09-15",
+        "type": "Annual Wellness Visit",
+        "provider": "Dr. Martinez",
+        "status": "Scheduled"
+      }
+    ],
+    "alerts_sent": [],
+    "gap_closure_available": false,
+    "processing_time": 0.05,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  },
+  {
+    "member_id": "99990002000000",
+    "name": "Jennifer Thompson",
+    "age": 28,
+    "gender": "F",
+    "language": "English",
+    "measure_type": "CCS",
+    "risk_level": "MEDIUM",
+    "risk_probability": 0.45,
+    "priority": "medium",
+    "intervention_due_date": "2025-10-30",
+    "evidence_found": true,
+    "evidence_source": "FAX_PDF",
+    "evidence_details": {
+      "source_type": "Fax/PDF sent to IEHP",
+      "facility": "Women's Health Associates",
+      "date": "2024-06-18",
+      "document_type": "Pap Smear Results",
+      "result": "Satisfactory for evaluation, NILM",
+      "provider": "Dr. Lisa Park, MD",
+      "confidence": 0.88,
+      "fax_number": "(909) 555-0123"
+    },
+    "care_features": {
+      "transportation_barriers": false,
+      "language_barriers": false,
+      "insurance_issues": false,
+      "previous_no_shows": 1,
+      "anxiety_documented": true,
+      "preferred_contact": "Text Message",
+      "care_coordinator": "Amanda Johnson, RN"
+    },
+    "next_appointments": [
+      {
+        "date": "2025-08-25",
+        "type": "Follow-up Visit",
+        "provider": "Dr. Park",
+        "status": "Confirmed"
+      }
+    ],
+    "alerts_sent": [
+      {
+        "date": "2025-08-10",
+        "type": "Automated Reminder",
+        "status": "Delivered",
+        "response": "None"
+      }
+    ],
+    "gap_closure_available": true,
+    "processing_time": 0.12,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  },
+  {
+    "member_id": "99990003000000",
+    "name": "Patricia Williams",
+    "age": 42,
+    "gender": "F",
+    "language": "English",
+    "measure_type": "CCS",
+    "risk_level": "HIGH",
+    "risk_probability": 0.85,
+    "priority": "high",
+    "intervention_due_date": "2025-08-25",
+    "evidence_found": false,
+    "evidence_source": "NONE",
+    "evidence_details": {
+      "source_type": "No evidence found in any data source",
+      "last_screening": "2021-03-15",
+      "overdue_months": 18,
+      "search_confidence": 0.92
+    },
+    "care_features": {
+      "transportation_barriers": true,
+      "language_barriers": false,
+      "insurance_issues": true,
+      "previous_no_shows": 3,
+      "anxiety_documented": true,
+      "preferred_contact": "Phone",
+      "care_coordinator": "Michael Davis, RN",
+      "risk_factors": [
+        "3+ missed appointments in past 12 months",
+        "Transportation barriers documented",
+        "Insurance coverage gaps",
+        "Documented procedure anxiety",
+        "18 months overdue for screening"
+      ]
+    },
+    "next_appointments": [],
+    "alerts_sent": [
+      {
+        "date": "2025-08-05",
+        "type": "Automated Reminder",
+        "status": "Delivered",
+        "response": "None"
+      },
+      {
+        "date": "2025-08-12",
+        "type": "Care Coordinator Call",
+        "status": "No Answer",
+        "response": "Voicemail left"
+      }
+    ],
+    "gap_closure_available": false,
+    "processing_time": 0.18,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  },
+  {
+    "member_id": "99990004000000",
+    "name": "Robert Johnson",
+    "age": 58,
+    "gender": "M",
+    "language": "English",
+    "measure_type": "COL",
+    "risk_level": "LOW",
+    "risk_probability": 0.22,
+    "priority": "low",
+    "intervention_due_date": "2026-01-15",
+    "evidence_found": true,
+    "evidence_source": "HL7_HIE",
+    "evidence_details": {
+      "source_type": "Raw HL7 message from HIE",
+      "facility": "Riverside Medical Center",
+      "date": "2024-05-10",
+      "document_type": "Colonoscopy Report",
+      "result": "Normal colonoscopy, no polyps detected",
+      "provider": "Dr. James Wilson, MD",
+      "confidence": 0.91,
+      "hie_source": "Riverside HIE Network"
+    },
+    "care_features": {
+      "transportation_barriers": false,
+      "language_barriers": false,
+      "insurance_issues": false,
+      "previous_no_shows": 0,
+      "anxiety_documented": false,
+      "preferred_contact": "Email",
+      "care_coordinator": "Sarah Kim, RN"
+    },
+    "next_appointments": [
+      {
+        "date": "2025-09-20",
+        "type": "Annual Physical",
+        "provider": "Dr. Martinez",
+        "status": "Scheduled"
+      }
+    ],
+    "alerts_sent": [],
+    "gap_closure_available": false,
+    "processing_time": 0.08,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  },
+  {
+    "member_id": "99990005000000",
+    "name": "David Chen",
+    "age": 52,
+    "gender": "M",
+    "language": "English",
+    "measure_type": "COL",
+    "risk_level": "HIGH",
+    "risk_probability": 0.78,
+    "priority": "high",
+    "intervention_due_date": "2025-08-20",
+    "evidence_found": false,
+    "evidence_source": "NONE",
+    "evidence_details": {
+      "source_type": "Comprehensive search - no evidence found",
+      "sources_checked": [
+        "HL7 Messages",
+        "Fax/PDF",
+        "HIE Data",
+        "Claims"
+      ],
+      "last_screening": "Never documented",
+      "age_eligible": "2 years overdue",
+      "search_confidence": 0.95
+    },
+    "care_features": {
+      "transportation_barriers": false,
+      "language_barriers": false,
+      "insurance_issues": false,
+      "previous_no_shows": 1,
+      "anxiety_documented": true,
+      "preferred_contact": "Phone",
+      "care_coordinator": "Lisa Rodriguez, RN",
+      "risk_factors": [
+        "Never had documented colonoscopy",
+        "2 years overdue for initial screening",
+        "Documented procedure anxiety",
+        "Family history of colon cancer"
+      ]
+    },
+    "next_appointments": [
+      {
+        "date": "2025-08-28",
+        "type": "Gastroenterology Consultation",
+        "provider": "Dr. Anderson",
+        "status": "Pending Confirmation"
+      }
+    ],
+    "alerts_sent": [
+      {
+        "date": "2025-08-08",
+        "type": "Automated Reminder",
+        "status": "Delivered",
+        "response": "Acknowledged"
+      },
+      {
+        "date": "2025-08-14",
+        "type": "Care Coordinator Call",
+        "status": "Completed",
+        "response": "Appointment scheduled"
+      }
+    ],
+    "gap_closure_available": false,
+    "processing_time": 0.25,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  },
+  {
+    "member_id": "99990006000000",
+    "name": "Emma Martinez",
+    "age": 8,
+    "gender": "F",
+    "language": "Spanish",
+    "measure_type": "WCV",
+    "risk_level": "LOW",
+    "risk_probability": 0.18,
+    "priority": "low",
+    "intervention_due_date": "2025-12-01",
+    "evidence_found": true,
+    "evidence_source": "MULTIPLE",
+    "evidence_details": {
+      "source_type": "Multiple data sources confirmed",
+      "primary_source": "HL7 MDM with embedded PDF",
+      "secondary_sources": [
+        "HIE Data",
+        "Claims Data"
+      ],
+      "facility": "Pediatric Associates",
+      "date": "2024-07-15",
+      "document_type": "Well-Child Visit Summary",
+      "result": "Age-appropriate development, immunizations current",
+      "provider": "Dr. Maria Gonzalez, MD",
+      "confidence": 0.98
+    },
+    "care_features": {
+      "transportation_barriers": false,
+      "language_barriers": true,
+      "insurance_issues": false,
+      "previous_no_shows": 0,
+      "anxiety_documented": false,
+      "preferred_contact": "Phone (Spanish)",
+      "care_coordinator": "Carmen Lopez, RN",
+      "parent_guardian": "Sofia Martinez"
+    },
+    "next_appointments": [
+      {
+        "date": "2025-07-15",
+        "type": "Annual Well-Child Visit",
+        "provider": "Dr. Gonzalez",
+        "status": "Scheduled"
+      }
+    ],
+    "alerts_sent": [],
+    "gap_closure_available": false,
+    "processing_time": 0.03,
+    "created_at": "2025-08-14T19:10:11.060Z"
+  }
+]

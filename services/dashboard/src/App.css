@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Custom gradient backgrounds */
+.gradient-blue {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Custom card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom dashboard styles */
+.dashboard-card {
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.risk-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.risk-high {
+  background-color: #ff4d4f;
+}
+
+.risk-medium {
+  background-color: #faad14;
+}
+
+.risk-low {
+  background-color: #52c41a;
+}
+
+.member-details {
+  font-size: 14px;
+  color: #666;
+}
+
+.intervention-badge {
+  background-color: #f0f2f5;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: #666;
+}
+
+.priority-high {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.priority-medium {
+  color: #faad14;
+  font-weight: bold;
+}
+
+.priority-low {
+  color: #52c41a;
+  font-weight: bold;
+}

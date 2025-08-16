@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Docker
+.docker/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Database
+*.db
+*.sqlite
+
+# Model files (large)
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Data files (large)
+*.csv
+*.json.gz
+*.parquet
