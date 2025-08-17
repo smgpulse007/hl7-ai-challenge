@@ -1,0 +1,91 @@
+flowchart TB
+    %% External Systems
+    EHR[EHR Systems<br/>Epic, Cerner, Allscripts]
+    Clinician[Clinician/Provider]
+    HIE[Health Information Exchange]
+    Claims[Claims Data Sources]
+    Labs[Laboratory Systems]
+    
+    %% SMART on FHIR Layer
+    subgraph SMART["SMART on FHIR Integration"]
+        Auth[OAuth2/SMART<br/>Authorization Server]
+        SmartApp[SMART on FHIR App<br/>Port 3002]
+        CDSHooks[CDS Hooks Server<br/>Port 3001]
+    end
+    
+    %% API Gateway
+    Gateway[Nginx API Gateway<br/>Port 8080/8443<br/>SSL/TLS Termination]
+    
+    %% Core Platform Services
+    subgraph Platform["AI-Powered HEDIS Care Gap Closure Platform"]
+        subgraph Processing["Data Processing Layer"]
+            HL7Service[HL7 Processing Service<br/>Port 8001<br/>spaCy NLP + LLaMA 3.2 RAG]
+            RiskService[Risk Prediction Service<br/>Port 8002<br/>XGBoost ML Models]
+            CareService[Care Orchestration Service<br/>Port 8003<br/>FHIR R4 Resource Creation]
+        end
+        
+        subgraph UI["User Interface Layer"]
+            Dashboard[React Dashboard<br/>Port 3000<br/>Population Health Intelligence]
+        end
+        
+        subgraph Data["Data & Messaging Layer"]
+            RabbitMQ[RabbitMQ Message Broker<br/>Port 5672<br/>Event-Driven Architecture]
+            PostgreSQL[PostgreSQL Database<br/>Port 5432<br/>Structured Data Storage]
+            Redis[Redis Cache<br/>Port 6379<br/>Session & Performance Cache]
+        end
+        
+        subgraph ML["ML Operations"]
+            MLflow[MLflow<br/>Port 5000<br/>Model Versioning & Deployment]
+        end
+    end
+    
+    %% Data Flow Connections
+    Clinician -->|SMART Launch| SmartApp
+    SmartApp -->|OAuth2 Flow| Auth
+    SmartApp -->|FHIR R4 APIs| EHR
+    EHR -->|CDS Hooks| CDSHooks
+    
+    %% External Data Sources
+    EHR -->|HL7 v2.x Messages<br/>MDM, ORU, ADT| Gateway
+    HIE -->|FHIR R4 Resources<br/>Patient, Observation| Gateway
+    Claims -->|Claims Data<br/>CPT, ICD-10| Gateway
+    Labs -->|Lab Results<br/>LOINC Codes| Gateway
+    
+    %% Internal Service Communication
+    Gateway --> HL7Service
+    Gateway --> RiskService
+    Gateway --> CareService
+    Gateway --> Dashboard
+    
+    %% Message Flow
+    HL7Service -->|Clinical Evidence| RabbitMQ
+    RabbitMQ -->|Risk Features| RiskService
+    RiskService -->|Risk Predictions| RabbitMQ
+    RabbitMQ -->|Care Gap Data| CareService
+    CareService -->|FHIR Resources| RabbitMQ
+    RabbitMQ -->|Dashboard Updates| Dashboard
+    
+    %% Data Storage
+    HL7Service --> PostgreSQL
+    RiskService --> PostgreSQL
+    CareService --> PostgreSQL
+    Dashboard --> Redis
+    
+    %% ML Operations
+    RiskService --> MLflow
+    
+    %% FHIR Write-back
+    CareService -->|FHIR R4 Resources<br/>Patient, RiskAssessment<br/>CarePlan, Task| EHR
+    
+    %% Styling
+    classDef external fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef smart fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef service fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    classDef data fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef ui fill:#fce4ec,stroke:#880e4f,stroke-width:2px
+    
+    class EHR,Clinician,HIE,Claims,Labs external
+    class Auth,SmartApp,CDSHooks smart
+    class HL7Service,RiskService,CareService service
+    class RabbitMQ,PostgreSQL,Redis,MLflow data
+    class Dashboard ui

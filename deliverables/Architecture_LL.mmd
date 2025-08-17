@@ -1,0 +1,126 @@
+flowchart TB
+    %% Input Sources
+    subgraph Sources["Data Sources"]
+        HL7Msg[HL7 v2.x Messages<br/>MDM, ORU, ADT<br/>Base64 PDF Embedded]
+        FHIRRes[FHIR R4 Resources<br/>Patient, DiagnosticReport<br/>Observation, Procedure]
+        ClaimsData[Claims Data<br/>CPT Codes, Visit Records]
+    end
+    
+    %% HL7 Processing Service Detail
+    subgraph HL7Detail["HL7 Processing Service (Port 8001)"]
+        subgraph NLP["NLP Pipeline"]
+            SpaCy[spaCy en_core_web_sm<br/>Clinical NER]
+            Matcher[Pattern Matcher<br/>CCS, COL, WCV Keywords]
+            PDFExtract[PDF Extraction<br/>PyPDF2 + Base64 Decode]
+        end
+        
+        subgraph RAG["RAG Implementation"]
+            LLaMA[LLaMA 3.2<br/>Contextual Evidence Extraction]
+            ConfidenceScore[Confidence Scoring<br/>95% Threshold]
+        end
+        
+        subgraph FHIRProc["FHIR Processor"]
+            ResourceParser[FHIR Resource Parser<br/>Patient, DiagnosticReport]
+            HEDISMapper[HEDIS Measure Mapper<br/>SNOMED/LOINC Codes]
+        end
+    end
+    
+    %% Risk Prediction Service Detail
+    subgraph RiskDetail["Risk Prediction Service (Port 8002)"]
+        subgraph Models["ML Models"]
+            CCSModel[CCS XGBoost Model<br/>36 Features<br/>85%+ Accuracy]
+            WCVModel[WCV XGBoost Model<br/>34 Features<br/>85%+ Accuracy]
+        end
+        
+        subgraph Features["Feature Engineering"]
+            Demographics[Demographics<br/>Age, Gender, Ethnicity]
+            Clinical[Clinical History<br/>Chronic Conditions, PCP Visits]
+            Utilization[Utilization Patterns<br/>ER Visits, Admissions]
+            Social[Social Determinants<br/>Language, Geography]
+        end
+        
+        subgraph Scoring["Risk Scoring"]
+            Probability[Risk Probability<br/>0.0 - 1.0 Scale]
+            Stratification[Risk Stratification<br/>HIGH ≥70%, MEDIUM 40-69%, LOW <40%]
+        end
+    end
+    
+    %% Care Orchestration Service Detail
+    subgraph CareDetail["Care Orchestration Service (Port 8003)"]
+        subgraph BusinessLogic["Business Logic Engine"]
+            RiskRules[Risk-Based Rules<br/>HIGH: 7-day window<br/>MEDIUM: 45-day window<br/>LOW: 90-day window]
+            WorkflowEngine[Workflow Engine<br/>Care Plan Generation]
+        end
+        
+        subgraph FHIRCreation["FHIR R4 Resource Creation"]
+            PatientRes[Patient Resource<br/>Demographics + Risk Score]
+            RiskAssess[RiskAssessment Resource<br/>AI Predictions + Evidence]
+            CarePlan[CarePlan Resource<br/>Interventions + Timeline]
+            TaskRes[Task Resource<br/>Provider Actions + Priority]
+        end
+    end
+    
+    %% Message Queues Detail
+    subgraph Messaging["RabbitMQ Message Queues"]
+        HL7Exchange[hl7.exchange<br/>Clinical Evidence Messages]
+        RiskExchange[risk.exchange<br/>Risk Prediction Messages]
+        CareExchange[care.exchange<br/>Care Gap Messages]
+        DashExchange[dashboard.exchange<br/>UI Update Messages]
+    end
+    
+    %% Data Storage Detail
+    subgraph Storage["Data Storage Layer"]
+        subgraph PGDB["PostgreSQL Database"]
+            MemberTable[members<br/>Demographics + Features]
+            EvidenceTable[clinical_evidence<br/>Extracted Evidence + Confidence]
+            PredictionTable[risk_predictions<br/>Model Outputs + Timestamps]
+            CareGapTable[care_gaps<br/>Generated Care Plans]
+        end
+        
+        subgraph RedisCache["Redis Cache"]
+            SessionCache[Session Data<br/>User Authentication]
+            ModelCache[Model Predictions<br/>TTL: 24 hours]
+            FeatureCache[Member Features<br/>Frequently Accessed]
+        end
+    end
+    
+    %% ML Operations Detail
+    subgraph MLOps["MLflow Operations"]
+        ModelRegistry[Model Registry<br/>Version Control]
+        ExperimentTrack[Experiment Tracking<br/>Performance Metrics]
+        ModelServing[Model Serving<br/>A/B Testing]
+    end
+    
+    %% Data Flow
+    Sources --> HL7Detail
+    HL7Detail --> HL7Exchange
+    HL7Exchange --> RiskDetail
+    RiskDetail --> RiskExchange
+    RiskExchange --> CareDetail
+    CareDetail --> CareExchange
+    CareExchange --> DashExchange
+    
+    %% Storage Connections
+    HL7Detail --> PGDB
+    RiskDetail --> PGDB
+    CareDetail --> PGDB
+    RiskDetail --> MLOps
+    
+    %% Cache Connections
+    RiskDetail --> RedisCache
+    CareDetail --> RedisCache
+    
+    %% Styling
+    classDef source fill:#e3f2fd,stroke:#0277bd,stroke-width:2px
+    classDef nlp fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef ml fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef fhir fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef queue fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef storage fill:#f1f8e9,stroke:#558b2f,stroke-width:2px
+    
+    class Sources source
+    class NLP,RAG,FHIRProc nlp
+    class Models,Features,Scoring ml
+    class BusinessLogic,FHIRCreation fhir
+    class Messaging queue
+    class Storage,MLOps storage

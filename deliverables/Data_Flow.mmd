@@ -1,0 +1,111 @@
+sequenceDiagram
+    participant EHR as EHR System
+    participant SMART as SMART on FHIR App
+    participant Auth as OAuth2/SMART Auth
+    participant Gateway as API Gateway
+    participant HL7 as HL7 Processing Service
+    participant Queue as RabbitMQ
+    participant Risk as Risk Prediction Service
+    participant Care as Care Orchestration
+    participant DB as PostgreSQL
+    participant Cache as Redis
+    participant MLflow as MLflow
+    participant Dashboard as Dashboard UI
+    participant CDS as CDS Hooks Server
+
+    %% SMART on FHIR Launch Flow
+    Note over EHR,SMART: SMART on FHIR Launch Sequence
+    EHR->>SMART: SMART Launch (patient context)
+    SMART->>Auth: Authorization Code Flow
+    Auth-->>SMART: Access Token + Scopes
+    SMART->>EHR: GET Patient/{{patientId}}
+    EHR-->>SMART: Patient Resource (FHIR R4)
+    SMART->>EHR: GET Observation?patient={{patientId}}
+    EHR-->>SMART: Observation Bundle
+    
+    %% Clinical Data Processing Flow
+    Note over EHR,HL7: Clinical Evidence Extraction
+    EHR->>Gateway: HL7 v2.x Message (MDM/ORU/ADT)
+    Gateway->>HL7: Route Message
+    HL7->>HL7: Extract PDF from Base64
+    HL7->>HL7: spaCy NLP Processing
+    HL7->>HL7: Pattern Matching (CCS/COL/WCV)
+    HL7->>HL7: LLaMA 3.2 RAG Analysis
+    HL7->>HL7: Confidence Scoring (95% threshold)
+    HL7->>DB: Store Clinical Evidence
+    HL7->>Queue: Publish to hl7.exchange
+    
+    %% FHIR Resource Processing
+    Note over EHR,HL7: FHIR R4 Resource Processing
+    EHR->>Gateway: FHIR R4 Resources
+    Gateway->>HL7: Route FHIR Bundle
+    HL7->>HL7: Parse FHIR Resources
+    HL7->>HL7: Extract HEDIS Evidence
+    HL7->>HL7: Map SNOMED/LOINC Codes
+    HL7->>DB: Store FHIR Evidence
+    HL7->>Queue: Publish Evidence Message
+    
+    %% Risk Prediction Flow
+    Note over Queue,Risk: AI Risk Prediction
+    Queue->>Risk: Consume Evidence Message
+    Risk->>DB: Retrieve Member Features
+    Risk->>Cache: Check Cached Predictions
+    Cache-->>Risk: Cache Miss
+    Risk->>Risk: Feature Engineering (80+ features)
+    Risk->>MLflow: Load XGBoost Models
+    MLflow-->>Risk: CCS/WCV Models
+    Risk->>Risk: Predict Non-compliance Risk
+    Risk->>Risk: Risk Stratification (HIGH/MEDIUM/LOW)
+    Risk->>DB: Store Risk Predictions
+    Risk->>Cache: Cache Predictions (TTL: 24h)
+    Risk->>Queue: Publish to risk.exchange
+    
+    %% Care Orchestration Flow
+    Note over Queue,Care: FHIR Resource Creation
+    Queue->>Care: Consume Risk Message
+    Care->>Care: Apply Business Rules
+    Care->>Care: Generate Care Plans
+    Care->>Care: Create FHIR Resources
+    Note over Care: Patient, RiskAssessment, CarePlan, Task
+    Care->>DB: Store Care Gaps
+    Care->>EHR: POST FHIR Resources (Write-back)
+    EHR-->>Care: 201 Created
+    Care->>Queue: Publish to care.exchange
+    
+    %% Dashboard Updates
+    Note over Queue,Dashboard: Real-time UI Updates
+    Queue->>Dashboard: Consume Care Gap Message
+    Dashboard->>Dashboard: Update Population Health View
+    Dashboard->>Cache: Update Session Data
+    Dashboard-->>SMART: WebSocket Update
+    
+    %% CDS Hooks Integration
+    Note over EHR,CDS: Clinical Decision Support
+    EHR->>CDS: patient-view Hook
+    CDS->>DB: Query Care Gaps for Patient
+    DB-->>CDS: Active Care Gaps + Risk Scores
+    CDS->>CDS: Generate CDS Cards
+    CDS-->>EHR: CDS Hook Response
+    Note over CDS,EHR: Cards with Recommendations<br/>& Suggested Actions
+    
+    %% Provider Workflow
+    Note over EHR,SMART: Provider Actions
+    EHR->>SMART: View Care Gap Details
+    SMART->>DB: Query Evidence + Predictions
+    DB-->>SMART: Clinical Evidence + AI Rationale
+    SMART-->>EHR: Display in Provider UI
+    
+    %% High-Risk Alert Flow
+    Note over Care,Dashboard: High-Risk Member Alert
+    Care->>Care: Detect HIGH Risk (≥70%)
+    Care->>Queue: Publish High-Priority Alert
+    Queue->>Dashboard: Priority Queue Update
+    Dashboard->>Dashboard: Generate Provider Notification
+    Dashboard-->>SMART: Real-time Alert
+    
+    %% Model Performance Monitoring
+    Note over Risk,MLflow: Continuous Learning
+    Risk->>MLflow: Log Prediction Metrics
+    MLflow->>MLflow: Monitor Model Drift
+    MLflow->>MLflow: Trigger Retraining (if needed)
+    MLflow-->>Risk: Updated Model Version
