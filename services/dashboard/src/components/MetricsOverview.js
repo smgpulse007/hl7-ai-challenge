@@ -86,10 +86,10 @@ const MetricsOverview = () => {
     });
 
     setEvidenceSources({
-      'Clinical Notes': 35,
-      'Lab Results': 28,
-      'Imaging Reports': 18,
-      'Medication History': 19
+      'HL7 ORU/MDM': 42,
+      'FHIR R4 CA Bundles': 38,
+      'Claims Processed': 31,
+      'Lab Results': 24
     });
 
     return () => clearInterval(interval);
@@ -101,7 +101,7 @@ const MetricsOverview = () => {
       value: realTimeMetrics.messagesProcessed.toLocaleString(),
       change: '+12.3%',
       icon: Activity,
-      color: 'var(--primary-blue)',
+      color: '#0066CC',
       trend: 'up'
     },
     {
@@ -109,7 +109,7 @@ const MetricsOverview = () => {
       value: `${realTimeMetrics.successRate.toFixed(1)}%`,
       change: '+0.3%',
       icon: CheckCircle,
-      color: 'var(--success-green)',
+      color: '#10B981',
       trend: 'up'
     },
     {
@@ -117,7 +117,7 @@ const MetricsOverview = () => {
       value: `${realTimeMetrics.avgProcessingTime.toFixed(1)}s`,
       change: '-0.2s',
       icon: Clock,
-      color: 'var(--accent-orange)',
+      color: '#FF6B35',
       trend: 'down'
     },
     {
@@ -125,7 +125,7 @@ const MetricsOverview = () => {
       value: `${realTimeMetrics.aiConfidence.toFixed(1)}%`,
       change: '+1.2%',
       icon: Brain,
-      color: 'var(--secondary-green)',
+      color: '#8B5CF6',
       trend: 'up'
     },
     {
@@ -133,7 +133,7 @@ const MetricsOverview = () => {
       value: `${realTimeMetrics.fhirCompliance.toFixed(1)}%`,
       change: '+0.1%',
       icon: CheckCircle,
-      color: 'var(--primary-blue)',
+      color: '#0066CC',
       trend: 'up'
     },
     {
@@ -141,7 +141,7 @@ const MetricsOverview = () => {
       value: realTimeMetrics.careGapsIdentified.toString(),
       change: '+8 today',
       icon: AlertTriangle,
-      color: 'var(--warning-yellow)',
+      color: '#F59E0B',
       trend: 'up'
     },
     {
@@ -149,7 +149,7 @@ const MetricsOverview = () => {
       value: realTimeMetrics.activeConnections.toString(),
       change: '+2',
       icon: Users,
-      color: 'var(--text-light)',
+      color: '#00A651',
       trend: 'up'
     },
     {
@@ -157,7 +157,7 @@ const MetricsOverview = () => {
       value: realTimeMetrics.interventionsTriggered.toString(),
       change: '+5 today',
       icon: Zap,
-      color: 'var(--accent-orange)',
+      color: '#10B981',
       trend: 'up'
     }
   ];
@@ -182,9 +182,9 @@ const MetricsOverview = () => {
       {
         data: [riskDistribution.high, riskDistribution.medium, riskDistribution.low],
         backgroundColor: [
-          'var(--error-red)',
-          'var(--warning-yellow)',
-          'var(--success-green)'
+          '#EF4444', // Red for high risk
+          '#F59E0B', // Yellow for medium risk
+          '#10B981'  // Green for low risk
         ],
         borderWidth: 0
       }
@@ -198,12 +198,20 @@ const MetricsOverview = () => {
         label: 'Evidence Sources (%)',
         data: Object.values(evidenceSources),
         backgroundColor: [
-          'var(--primary-blue)',
-          'var(--secondary-green)',
-          'var(--accent-orange)',
-          'var(--warning-yellow)'
+          '#0066CC', // Primary blue for HL7 ORU/MDM
+          '#00A651', // Secondary green for FHIR R4 CA Bundles
+          '#8B5CF6', // Purple for Claims Processed
+          '#10B981'  // Success green for Lab Results
         ],
-        borderRadius: 4
+        borderColor: [
+          '#0052A3',
+          '#059669',
+          '#7C3AED',
+          '#059669'
+        ],
+        borderWidth: 2,
+        borderRadius: 6,
+        borderSkipped: false
       }
     ]
   };
