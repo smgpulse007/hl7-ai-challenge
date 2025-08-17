@@ -344,11 +344,19 @@ const CareManagementDashboard = () => {
 
       {/* Enhanced Statistics - Value Proposition Focus */}
       <div style={styles.statsGrid}>
-        <div style={styles.statCard}>
-          <div style={{ ...styles.statValue, color: '#3b82f6' }}>{stats.total}</div>
-          <div style={styles.statLabel}>Total Members</div>
-          <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.25rem' }}>
-            Risk Distribution: {stats.highRisk}H / {stats.mediumRisk}M / {stats.lowRisk}L
+        <div style={{
+          ...styles.statCard,
+          background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+          color: 'white',
+          boxShadow: '0 8px 25px rgba(59, 130, 246, 0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '2.5rem' }}>👥</div>
+            <div style={{ ...styles.statValue, color: 'white', fontSize: '2.5rem', fontWeight: 'bold' }}>{stats.total}</div>
+          </div>
+          <div style={{ ...styles.statLabel, color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: '600' }}>Total Members</div>
+          <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.5rem', padding: '0.5rem', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '0.375rem' }}>
+            📊 Risk Distribution: <span style={{ fontWeight: 'bold' }}>{stats.highRisk}H</span> / <span style={{ fontWeight: 'bold' }}>{stats.mediumRisk}M</span> / <span style={{ fontWeight: 'bold' }}>{stats.lowRisk}L</span>
           </div>
         </div>
 
@@ -356,27 +364,74 @@ const CareManagementDashboard = () => {
           style={{
             ...styles.statCard,
             cursor: 'pointer',
-            border: filterEvidenceFound ? '2px solid #10b981' : '1px solid #e5e7eb',
-            backgroundColor: filterEvidenceFound ? '#f0fdf4' : 'white'
+            background: filterEvidenceFound
+              ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
+              : 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+            color: filterEvidenceFound ? 'white' : '#065f46',
+            border: filterEvidenceFound ? '3px solid #059669' : '2px solid #10b981',
+            boxShadow: filterEvidenceFound
+              ? '0 8px 25px rgba(16, 185, 129, 0.4)'
+              : '0 4px 15px rgba(16, 185, 129, 0.2)',
+            transform: filterEvidenceFound ? 'scale(1.02)' : 'scale(1)',
+            transition: 'all 0.3s ease'
           }}
           onClick={() => setFilterEvidenceFound(!filterEvidenceFound)}
         >
-          <div style={{ ...styles.statValue, color: '#10b981' }}>{stats.evidenceFound}</div>
-          <div style={styles.statLabel}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '2.5rem' }}>✅</div>
+            <div style={{
+              ...styles.statValue,
+              color: filterEvidenceFound ? 'white' : '#059669',
+              fontSize: '2.5rem',
+              fontWeight: 'bold'
+            }}>{stats.evidenceFound}</div>
+          </div>
+          <div style={{
+            ...styles.statLabel,
+            color: filterEvidenceFound ? 'rgba(255,255,255,0.9)' : '#065f46',
+            fontSize: '1rem',
+            fontWeight: '600'
+          }}>
             Evidence Found {filterEvidenceFound ? '(Filtered)' : '(Click to Filter)'}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#10b981', marginTop: '0.25rem' }}>
-            {stats.total > 0 ? Math.round((stats.evidenceFound / stats.total) * 100) : 0}% Completion Rate
+          <div style={{
+            fontSize: '0.875rem',
+            color: filterEvidenceFound ? 'rgba(255,255,255,0.8)' : '#059669',
+            marginTop: '0.5rem',
+            padding: '0.5rem',
+            backgroundColor: filterEvidenceFound ? 'rgba(255,255,255,0.1)' : 'rgba(16, 185, 129, 0.1)',
+            borderRadius: '0.375rem',
+            fontWeight: 'bold'
+          }}>
+            🎯 {stats.total > 0 ? Math.round((stats.evidenceFound / stats.total) * 100) : 0}% Automated Closure Rate
           </div>
         </div>
 
-        <div style={styles.statCard}>
-          <div style={{ ...styles.statValue, color: '#8b5cf6' }}>{Object.keys(stats.inputSources || {}).length}</div>
-          <div style={styles.statLabel}>Input Sources</div>
-          <div style={{ marginTop: '0.5rem', fontSize: '0.75rem' }}>
+        <div style={{
+          ...styles.statCard,
+          background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+          color: 'white',
+          boxShadow: '0 8px 25px rgba(139, 92, 246, 0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '2.5rem' }}>🔗</div>
+            <div style={{ ...styles.statValue, color: 'white', fontSize: '2.5rem', fontWeight: 'bold' }}>{Object.keys(stats.inputSources || {}).length}</div>
+          </div>
+          <div style={{ ...styles.statLabel, color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: '600' }}>Data Sources</div>
+          <div style={{
+            marginTop: '0.5rem',
+            fontSize: '0.875rem',
+            padding: '0.5rem',
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            borderRadius: '0.375rem'
+          }}>
             {Object.entries(stats.inputSources || {}).map(([source, count]) => (
-              <div key={source} style={{ marginBottom: '0.25rem' }}>
-                {getEvidenceSourceDisplay(source).icon} {getEvidenceSourceDisplay(source).label}: {count}
+              <div key={source} style={{
+                marginBottom: '0.25rem',
+                color: 'rgba(255,255,255,0.9)',
+                fontWeight: '500'
+              }}>
+                {getEvidenceSourceDisplay(source).icon} {getEvidenceSourceDisplay(source).label}: <span style={{ fontWeight: 'bold' }}>{count}</span>
               </div>
             ))}
           </div>
@@ -386,17 +441,46 @@ const CareManagementDashboard = () => {
           style={{
             ...styles.statCard,
             cursor: 'pointer',
-            border: filterHighRisk ? '2px solid #ef4444' : '1px solid #e5e7eb',
-            backgroundColor: filterHighRisk ? '#fef2f2' : 'white'
+            background: filterHighRisk
+              ? 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'
+              : 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
+            color: filterHighRisk ? 'white' : '#991b1b',
+            border: filterHighRisk ? '3px solid #dc2626' : '2px solid #ef4444',
+            boxShadow: filterHighRisk
+              ? '0 8px 25px rgba(239, 68, 68, 0.4)'
+              : '0 4px 15px rgba(239, 68, 68, 0.2)',
+            transform: filterHighRisk ? 'scale(1.02)' : 'scale(1)',
+            transition: 'all 0.3s ease'
           }}
           onClick={() => setFilterHighRisk(!filterHighRisk)}
         >
-          <div style={{ ...styles.statValue, color: '#ef4444' }}>{stats.highRisk || 0}</div>
-          <div style={styles.statLabel}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+            <div style={{ fontSize: '2.5rem' }}>⚠️</div>
+            <div style={{
+              ...styles.statValue,
+              color: filterHighRisk ? 'white' : '#dc2626',
+              fontSize: '2.5rem',
+              fontWeight: 'bold'
+            }}>{stats.highRisk || 0}</div>
+          </div>
+          <div style={{
+            ...styles.statLabel,
+            color: filterHighRisk ? 'rgba(255,255,255,0.9)' : '#991b1b',
+            fontSize: '1rem',
+            fontWeight: '600'
+          }}>
             High Risk - Immediate Action {filterHighRisk ? '(Filtered)' : '(Click to Filter)'}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.25rem' }}>
-            85% Non-Compliance Risk
+          <div style={{
+            fontSize: '0.875rem',
+            color: filterHighRisk ? 'rgba(255,255,255,0.8)' : '#dc2626',
+            marginTop: '0.5rem',
+            padding: '0.5rem',
+            backgroundColor: filterHighRisk ? 'rgba(255,255,255,0.1)' : 'rgba(239, 68, 68, 0.1)',
+            borderRadius: '0.375rem',
+            fontWeight: 'bold'
+          }}>
+            🚨 85% Non-Compliance Risk
           </div>
         </div>
 

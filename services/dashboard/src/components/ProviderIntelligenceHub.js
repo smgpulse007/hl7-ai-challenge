@@ -36,9 +36,10 @@ const ProviderIntelligenceHub = () => {
 
   // Function to handle viewing patient details
   const handleViewPatientDetails = (patient) => {
-    console.log('Viewing patient details:', patient); // Debug log
     setSelectedPatient(patient);
-    setActiveTab('patient-detail');
+    // Ensure we're in panel view and then switch to Patient Detail tab after state updates
+    if (viewMode !== 'panel') setViewMode('panel');
+    setTimeout(() => setActiveTab('patient-detail'), 0);
   };
 
   // Simulate CDS Hook activation (what provider sees when clicking patient)
@@ -92,7 +93,8 @@ const ProviderIntelligenceHub = () => {
     setViewMode('patient');
   };
 
-  // High-risk patients needing intervention (Monday morning workflow)
+  // High-risk patients needing intervention (with balanced mix for proactive + reactive care)
+  // Mix: 30% upcoming (due in 30-60 days => negative daysPastDue), 40% recently due (0-15), 30% significantly overdue (30+)
   const highRiskPatients = [
     {
       id: "99990001000000",
@@ -101,7 +103,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-10",
       riskScore: 0.89,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-07-15", daysPastDue: 31, priority: "high" },
+        { measure: "CCS", dueDate: "2025-08-11", daysPastDue: 5, priority: "high" },
         { measure: "COL", dueDate: "2025-06-01", daysPastDue: 75, priority: "high" }
       ],
       evidenceSources: ["Claims", "HIE"],
@@ -115,7 +117,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-12",
       riskScore: 0.76,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-08-01", daysPastDue: 14, priority: "medium" }
+        { measure: "CCS", dueDate: "2025-09-30", daysPastDue: -45, priority: "medium" }
       ],
       evidenceSources: ["EMR", "Claims"],
       nextAppointment: null,
@@ -142,7 +144,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-05",
       riskScore: 0.71,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-07-20", daysPastDue: 26, priority: "medium" }
+        { measure: "CCS", dueDate: "2025-08-04", daysPastDue: 12, priority: "medium" }
       ],
       evidenceSources: ["Claims", "External Lab"],
       nextAppointment: "2025-08-18",
@@ -169,7 +171,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-11",
       riskScore: 0.78,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-07-25", daysPastDue: 21, priority: "medium" }
+        { measure: "CCS", dueDate: "2025-09-15", daysPastDue: -35, priority: "medium" }
       ],
       evidenceSources: ["EMR", "HIE"],
       nextAppointment: "2025-08-22",
@@ -196,7 +198,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-14",
       riskScore: 0.73,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-07-30", daysPastDue: 16, priority: "medium" }
+        { measure: "CCS", dueDate: "2025-10-13", daysPastDue: -60, priority: "medium" }
       ],
       evidenceSources: ["FHIR R4", "Pharmacy"],
       nextAppointment: "2025-08-22",
@@ -223,7 +225,7 @@ const ProviderIntelligenceHub = () => {
       lastVisit: "2025-08-13",
       riskScore: 0.69,
       careGaps: [
-        { measure: "CCS", dueDate: "2025-08-05", daysPastDue: 10, priority: "low" }
+        { measure: "CCS", dueDate: "2025-09-10", daysPastDue: -30, priority: "low" }
       ],
       evidenceSources: ["EMR", "FHIR R4", "CDA DocumentReference"],
       nextAppointment: "2025-08-21",
@@ -563,40 +565,49 @@ const ProviderIntelligenceHub = () => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="metric-card status-good">
           <CardContent className="p-4">
-            <div className="flex items-center">
-              <CheckCircle className="h-8 w-8 text-green-500" />
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-500">Already Compliant</p>
-                <p className="text-2xl font-bold text-gray-900">{panelData.compliantCount}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <CheckCircle className="h-8 w-8 text-green-500" />
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-500">Already Compliant</p>
+                  <p className="text-2xl font-bold text-gray-900">{panelData.compliantCount}</p>
+                </div>
               </div>
+              <span className="status-chip good">Great</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="metric-card status-attention">
           <CardContent className="p-4">
-            <div className="flex items-center">
-              <Phone className="h-8 w-8 text-blue-500" />
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-500">Needs Outreach</p>
-                <p className="text-2xl font-bold text-gray-900">{panelData.needsOutreach}</p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Phone className="h-8 w-8 text-blue-500" />
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-500">Needs Outreach</p>
+                  <p className="text-2xl font-bold text-gray-900">{panelData.needsOutreach}</p>
+                </div>
               </div>
+              <span className="status-chip attention">Action Needed</span>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="metric-card status-critical">
           <CardContent className="p-4">
-            <div className="flex items-center">
-              <Target className="h-8 w-8 text-purple-500" />
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-500">Focus Efficiency</p>
-                <p className="text-2xl font-bold text-gray-900">
-                  {Math.round((panelData.highRiskCount / (panelData.highRiskCount + panelData.compliantCount)) * 100)}%
-                </p>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <Target className="h-8 w-8 text-purple-500" />
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-500">Focus Efficiency</p>
+                  <p className="text-2xl font-bold text-gray-900">
+                    {Math.round((panelData.highRiskCount / (panelData.highRiskCount + panelData.compliantCount)) * 100)}%
+                  </p>
+                </div>
               </div>
+              <span className="status-chip critical">Critical Focus</span>
             </div>
           </CardContent>
         </Card>
@@ -643,7 +654,13 @@ const ProviderIntelligenceHub = () => {
                         <div className="mt-2 flex flex-wrap gap-2">
                           {patient.careGaps?.map((gap, idx) => (
                             <Badge key={idx} className={getPriorityBadgeColor(gap.priority)}>
-                              {getMeasureDisplayName(gap.measure)} - {gap.daysPastDue} days overdue
+                              {getMeasureDisplayName(gap.measure)} - {
+                                gap.daysPastDue > 0
+                                  ? `${gap.daysPastDue} days overdue`
+                                  : gap.daysPastDue === 0
+                                  ? 'due today'
+                                  : `due in ${Math.abs(gap.daysPastDue)} days`
+                              }
                             </Badge>
                           )) || <span className="text-sm text-gray-500">No care gaps identified</span>}
                         </div>
@@ -812,7 +829,7 @@ const ProviderIntelligenceHub = () => {
                             </Badge>
                           </div>
                           <div className="text-sm text-gray-600 mt-1">
-                            Due: {gap.dueDate} ({gap.daysPastDue} days overdue)
+                            Due: {gap.dueDate} ({gap.daysPastDue > 0 ? `${gap.daysPastDue} days overdue` : gap.daysPastDue === 0 ? 'due today' : `due in ${Math.abs(gap.daysPastDue)} days`})
                           </div>
                         </div>
                       )) || <div className="text-gray-500">No care gaps identified</div>}

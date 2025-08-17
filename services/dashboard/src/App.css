@@ -53,21 +53,34 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   color: white;
-  padding: 8px 16px;
+  padding: 10px 18px;
   margin: 0 4px;
   transition: all 0.3s ease;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.875rem;
+  backdrop-filter: blur(5px);
 }
 
 .nav-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
 }
 
 .nav-button.active {
-  background: var(--secondary-green);
+  background: linear-gradient(135deg, var(--secondary-green) 0%, #059669 100%);
   border-color: var(--secondary-green);
-  box-shadow: 0 4px 12px rgba(0, 166, 81, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 166, 81, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Special styling for payer/provider tabs */
+.nav-button[data-audience="payer"] {
+  border-left: 4px solid #3b82f6;
+}
+
+.nav-button[data-audience="provider"] {
+  border-left: 4px solid #10b981;
 }
 
 /* Provider Intelligence View Mode Buttons */
@@ -164,6 +177,33 @@
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+/* Metric card status variants with accessible contrast */
+.metric-card.status-good {
+  border-left: 6px solid var(--success-green);
+  background: linear-gradient(90deg, rgba(16,185,129,0.06) 0%, rgba(255,255,255,1) 40%);
+}
+.metric-card.status-attention {
+  border-left: 6px solid var(--warning-yellow);
+  background: linear-gradient(90deg, rgba(245,158,11,0.08) 0%, rgba(255,255,255,1) 40%);
+}
+.metric-card.status-critical {
+  border-left: 6px solid var(--error-red);
+  background: linear-gradient(90deg, rgba(239,68,68,0.08) 0%, rgba(255,255,255,1) 40%);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 9999px;
+}
+.status-chip.good { background: rgba(16,185,129,0.12); color: #065f46; }
+.status-chip.attention { background: rgba(245,158,11,0.15); color: #7c2d12; }
+.status-chip.critical { background: rgba(239,68,68,0.15); color: #7f1d1d; }
 
 .risk-indicator {
   display: inline-block;
