@@ -41,10 +41,12 @@ class MLflowConfig:
     """MLflow server configuration"""
     tracking_uri: str = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000/")
     experiment_name: str = "hedis-ai-challenge-2025"
+    enabled: bool = os.getenv("MLFLOW_ENABLED", "false").lower() == "true"
 
     def __post_init__(self):
         """Set MLflow tracking URI"""
-        os.environ["MLFLOW_TRACKING_URI"] = self.tracking_uri
+        if self.enabled:
+            os.environ["MLFLOW_TRACKING_URI"] = self.tracking_uri
 
 
 @dataclass

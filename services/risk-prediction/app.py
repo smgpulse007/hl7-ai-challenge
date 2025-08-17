@@ -85,9 +85,15 @@ class RiskPredictor:
     
     def setup_mlflow(self):
         """Initialize MLflow connection"""
+        # Check if MLflow is enabled (with fallback for older config)
+        mlflow_enabled = getattr(config.mlflow, 'enabled', False)
+        if not mlflow_enabled:
+            logger.info("MLflow disabled for demo environment")
+            return
+
         try:
             mlflow.set_tracking_uri(config.mlflow.tracking_uri)
-            
+
             # Create experiment if it doesn't exist
             try:
                 experiment = mlflow.get_experiment_by_name(config.mlflow.experiment_name)
@@ -98,7 +104,7 @@ class RiskPredictor:
                     logger.info(f"Using existing MLflow experiment: {config.mlflow.experiment_name}")
             except Exception as e:
                 logger.warning(f"MLflow experiment setup warning: {e}")
-            
+
         except Exception as e:
             logger.error(f"Failed to setup MLflow: {e}")
             # Continue without MLflow for now
@@ -106,26 +112,31 @@ class RiskPredictor:
     def load_models(self):
         """Load XGBoost models from local files or MLflow"""
         try:
-            # Try to load from MLflow first
-            if self._load_models_from_mlflow():
+            # Try to load from MLflow first (if enabled)
+            mlflow_enabled = getattr(config.mlflow, 'enabled', False)
+            if mlflow_enabled and self._load_models_from_mlflow():
                 logger.info("Models loaded from MLflow successfully")
                 return
-            
+
             # Fallback to local model files
             if self._load_models_from_local():
                 logger.info("Models loaded from local files successfully")
                 return
-            
+
             # If no models available, create dummy models for demo
             self._create_dummy_models()
             logger.warning("Using dummy models for demonstration")
-            
+
         except Exception as e:
             logger.error(f"Failed to load models: {e}")
             self._create_dummy_models()
     
     def _load_models_from_mlflow(self) -> bool:
         """Load models from MLflow"""
+        mlflow_enabled = getattr(config.mlflow, 'enabled', False)
+        if not mlflow_enabled:
+            return False
+
         try:
             # Search for latest CCS model
             ccs_runs = mlflow.search_runs(

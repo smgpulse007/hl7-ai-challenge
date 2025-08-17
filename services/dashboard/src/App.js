@@ -2,86 +2,107 @@ import React, { useState } from 'react';
 import CareManagementDashboard from './components/CareManagementDashboard';
 import QualityActuarialDashboard from './components/QualityActuarialDashboard';
 import ProviderIntelligenceHub from './components/ProviderIntelligenceHub';
+import LiveProcessingDemo from './components/LiveProcessingDemo';
+import MetricsOverview from './components/MetricsOverview';
+import AIExplanationPanel from './components/AIExplanationPanel';
+import { Activity, Brain, BarChart3, Zap, Stethoscope } from 'lucide-react';
 import './App.css';
 
 function App() {
-  const [currentView, setCurrentView] = useState('care-management');
+  const [currentView, setCurrentView] = useState('live-demo');
 
-  const navigationStyle = {
-    backgroundColor: '#1f2937',
-    padding: '1rem 2rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    color: 'white'
-  };
-
-  const navButtonStyle = {
-    padding: '0.5rem 1rem',
-    margin: '0 0.25rem',
-    borderRadius: '0.375rem',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '0.875rem',
-    fontWeight: '500',
-    transition: 'all 0.2s'
-  };
-
-  const activeButtonStyle = {
-    ...navButtonStyle,
-    backgroundColor: '#3b82f6',
-    color: 'white'
-  };
-
-  const inactiveButtonStyle = {
-    ...navButtonStyle,
-    backgroundColor: 'transparent',
-    color: '#d1d5db',
-    border: '1px solid #4b5563'
-  };
+  const navigationViews = [
+    {
+      id: 'live-demo',
+      label: 'Live Processing Demo',
+      icon: Zap,
+      description: 'Real-time HL7 → FHIR transformation'
+    },
+    {
+      id: 'metrics',
+      label: 'Platform Metrics',
+      icon: BarChart3,
+      description: 'Real-time performance analytics'
+    },
+    {
+      id: 'care-management',
+      label: 'Population Health',
+      icon: Activity,
+      description: 'Care gap management dashboard'
+    },
+    {
+      id: 'provider-intelligence',
+      label: 'Clinical Decision Support',
+      icon: Stethoscope,
+      description: 'SMART on FHIR CDS Hooks integration'
+    },
+    {
+      id: 'ai-explanation',
+      label: 'AI Insights',
+      icon: Brain,
+      description: 'AI decision explanation panel'
+    }
+  ];
 
   const renderCurrentView = () => {
     switch (currentView) {
+      case 'live-demo':
+        return <LiveProcessingDemo />;
+      case 'metrics':
+        return <MetricsOverview />;
       case 'care-management':
         return <CareManagementDashboard />;
+      case 'ai-explanation':
+        return <AIExplanationPanel />;
       case 'provider-intelligence':
         return <ProviderIntelligenceHub />;
       default:
-        return <CareManagementDashboard />;
+        return <LiveProcessingDemo />;
     }
   };
 
   return (
-    <div>
-      {/* Navigation Header */}
-      <nav style={navigationStyle}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>
-            HEDIS AI Platform
-          </h1>
-          <p style={{ margin: 0, fontSize: '0.875rem', color: '#9ca3af' }}>
-            HL7 AI Challenge 2025 - Clinical Quality Improvement
-          </p>
-        </div>
+    <div className="App">
+      {/* Modern Navigation Header */}
+      <nav className="modern-nav p-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+              <Activity className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white m-0">
+                HL7 AI Platform
+              </h1>
+              <p className="text-sm text-blue-100 m-0">
+                HL7 AI Challenge 2025 - Standards-Based Clinical Intelligence
+              </p>
+            </div>
+          </div>
 
-        <div>
-          <button
-            style={currentView === 'care-management' ? activeButtonStyle : inactiveButtonStyle}
-            onClick={() => setCurrentView('care-management')}
-          >
-            Population Health Intelligence
-          </button>
-          <button
-            style={currentView === 'provider-intelligence' ? activeButtonStyle : inactiveButtonStyle}
-            onClick={() => setCurrentView('provider-intelligence')}
-          >
-            Clinical Decision Support
-          </button>
+          <div className="flex gap-2">
+            {navigationViews.map((view) => {
+              const Icon = view.icon;
+              return (
+                <button
+                  key={view.id}
+                  className={`nav-button ${currentView === view.id ? 'active' : ''}`}
+                  onClick={() => setCurrentView(view.id)}
+                  title={view.description}
+                >
+                  <Icon className="w-4 h-4 inline mr-2" />
+                  {view.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </nav>
 
       {/* Current View */}
-      {renderCurrentView()}
+      <div className="dashboard-container">
+        {renderCurrentView()}
+      </div>
     </div>
   );
 }

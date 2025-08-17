@@ -23,7 +23,8 @@ const ProviderIntelligenceHub = () => {
   const [loading, setLoading] = useState(true);
   const [showCDSHook, setShowCDSHook] = useState(false);
   const [cdsPatient, setCdsPatient] = useState(null);
-  const [viewMode, setViewMode] = useState('panel'); // 'panel' or 'patient'
+  const [viewMode, setViewMode] = useState('patient'); // 'panel' or 'patient' - default to patient view
+  const [activeTab, setActiveTab] = useState('high-risk'); // Track active tab for panel management
 
   // Mock provider data - in real implementation, this would come from API
   const providerInfo = {
@@ -31,6 +32,13 @@ const ProviderIntelligenceHub = () => {
     specialty: "Family Practice",
     panelSize: 1247,
     location: "IEHP Medical Group - Riverside"
+  };
+
+  // Function to handle viewing patient details
+  const handleViewPatientDetails = (patient) => {
+    console.log('Viewing patient details:', patient); // Debug log
+    setSelectedPatient(patient);
+    setActiveTab('patient-detail');
   };
 
   // Simulate CDS Hook activation (what provider sees when clicking patient)
@@ -180,13 +188,68 @@ const ProviderIntelligenceHub = () => {
       evidenceSources: ["Claims", "HIE", "Lab Results"],
       nextAppointment: "2025-08-19",
       phone: "(951) 555-0147"
+    },
+    {
+      id: "99990008000000",
+      name: "Sarah Williams",
+      age: 48,
+      lastVisit: "2025-08-14",
+      riskScore: 0.73,
+      careGaps: [
+        { measure: "CCS", dueDate: "2025-07-30", daysPastDue: 16, priority: "medium" }
+      ],
+      evidenceSources: ["FHIR R4", "Pharmacy"],
+      nextAppointment: "2025-08-22",
+      phone: "(951) 555-0892"
+    },
+    {
+      id: "99990009000000",
+      name: "Carlos Martinez",
+      age: 59,
+      lastVisit: "2025-08-02",
+      riskScore: 0.88,
+      careGaps: [
+        { measure: "COL", dueDate: "2025-05-20", daysPastDue: 87, priority: "high" },
+        { measure: "CCS", dueDate: "2025-07-10", daysPastDue: 36, priority: "high" }
+      ],
+      evidenceSources: ["HL7 v2.x", "Claims", "Pharmacy"],
+      nextAppointment: null,
+      phone: "(951) 555-0634"
+    },
+    {
+      id: "99990010000000",
+      name: "Emily Davis",
+      age: 43,
+      lastVisit: "2025-08-13",
+      riskScore: 0.69,
+      careGaps: [
+        { measure: "CCS", dueDate: "2025-08-05", daysPastDue: 10, priority: "low" }
+      ],
+      evidenceSources: ["EMR", "FHIR R4", "CDA DocumentReference"],
+      nextAppointment: "2025-08-21",
+      phone: "(951) 555-0445"
+    },
+    {
+      id: "99990011000000",
+      name: "James Wilson",
+      age: 67,
+      lastVisit: "2025-07-25",
+      riskScore: 0.94,
+      careGaps: [
+        { measure: "COL", dueDate: "2025-03-15", daysPastDue: 153, priority: "high" },
+        { measure: "WCV", dueDate: "2025-06-30", daysPastDue: 46, priority: "medium" },
+        { measure: "CCS", dueDate: "2025-07-01", daysPastDue: 45, priority: "high" }
+      ],
+      evidenceSources: ["HIE", "Claims", "Lab Results", "Pharmacy"],
+      nextAppointment: "2025-08-17",
+      phone: "(951) 555-0778"
     }
   ];
 
   // Patients already compliant (don't need outreach)
   const compliantPatients = [
     {
-      id: "99990008000000",
+      id: "99990012000000",
       name: "Sarah Wilson",
       age: 47,
       completedMeasures: ["CCS", "COL"],
@@ -194,7 +257,7 @@ const ProviderIntelligenceHub = () => {
       evidenceSource: "External Provider"
     },
     {
-      id: "99990009000000", 
+      id: "99990013000000",
       name: "James Garcia",
       age: 53,
       completedMeasures: ["COL"],
@@ -202,12 +265,44 @@ const ProviderIntelligenceHub = () => {
       evidenceSource: "Specialist Referral"
     },
     {
-      id: "99990010000000",
+      id: "99990014000000",
       name: "Patricia Lee",
       age: 44,
       completedMeasures: ["CCS"],
       completionDate: "2025-07-28",
       evidenceSource: "HIE Data"
+    },
+    {
+      id: "99990015000000",
+      name: "Thomas Anderson",
+      age: 56,
+      completedMeasures: ["COL", "WCV"],
+      completionDate: "2025-08-05",
+      evidenceSource: "FHIR R4 DiagnosticReport"
+    },
+    {
+      id: "99990016000000",
+      name: "Maria Gonzalez",
+      age: 49,
+      completedMeasures: ["CCS"],
+      completionDate: "2025-08-10",
+      evidenceSource: "HL7 v2.x MDM Message"
+    },
+    {
+      id: "99990017000000",
+      name: "Kevin O'Brien",
+      age: 61,
+      completedMeasures: ["COL"],
+      completionDate: "2025-07-15",
+      evidenceSource: "CDA DocumentReference"
+    },
+    {
+      id: "99990018000000",
+      name: "Linda Chang",
+      age: 42,
+      completedMeasures: ["CCS", "WCV"],
+      completionDate: "2025-08-12",
+      evidenceSource: "Pharmacy Claims + Lab Results"
     }
   ];
 
@@ -257,13 +352,13 @@ const ProviderIntelligenceHub = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="dashboard-container">
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Clinical Decision Support</h1>
-            <p className="text-gray-600 mt-1">
+            <h1 className="text-3xl font-bold" style={{ color: 'var(--text-dark)' }}>Clinical Decision Support</h1>
+            <p className="mt-1" style={{ color: 'var(--text-light)' }}>
               SMART on FHIR • Real-time Care Gap Alerts • Multi-Source Evidence Aggregation
             </p>
 
@@ -271,21 +366,13 @@ const ProviderIntelligenceHub = () => {
             <div className="flex gap-2 mt-3">
               <button
                 onClick={() => setViewMode('patient')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  viewMode === 'patient'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                className={`view-mode-button ${viewMode === 'patient' ? 'active' : ''}`}
               >
                 🎯 Patient-Specific CDS Hook
               </button>
               <button
                 onClick={() => setViewMode('panel')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  viewMode === 'panel'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                className={`view-mode-button ${viewMode === 'panel' ? 'active' : ''}`}
               >
                 📊 Panel Management View
               </button>
@@ -302,18 +389,18 @@ const ProviderIntelligenceHub = () => {
       {viewMode === 'patient' && (
         <div className="space-y-6">
           {/* CDS Hook Simulation */}
-          <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+          <div className="glass-card" style={{ background: 'rgba(0, 102, 204, 0.1)', borderLeft: '4px solid var(--primary-blue)' }}>
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--primary-blue)' }}>
                   <span className="text-white text-sm font-bold">CDS</span>
                 </div>
               </div>
               <div className="ml-3">
-                <h3 className="text-lg font-medium text-blue-800">
+                <h3 className="text-lg font-medium" style={{ color: 'var(--primary-blue)' }}>
                   SMART on FHIR Clinical Decision Support Hook Activated
                 </h3>
-                <p className="text-blue-700 text-sm">
+                <p className="text-sm" style={{ color: 'var(--text-light)' }}>
                   Real-time care gap alert triggered during patient encounter
                 </p>
               </div>
@@ -321,18 +408,30 @@ const ProviderIntelligenceHub = () => {
           </div>
 
           {/* Demo Patient Selection */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold mb-4">Select Patient for CDS Demo</h3>
+          <div className="glass-card">
+            <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-dark)' }}>Select Patient for CDS Demo</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {highRiskPatients.slice(0, 3).map((patient) => (
                 <button
                   key={patient.id}
                   onClick={() => activateCDSHook(patient)}
-                  className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-left"
+                  className="p-4 border-2 rounded-lg transition-all text-left hover:scale-105"
+                  style={{
+                    borderColor: 'var(--border-light)',
+                    backgroundColor: 'white'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.borderColor = 'var(--primary-blue)';
+                    e.target.style.backgroundColor = 'rgba(0, 102, 204, 0.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.borderColor = 'var(--border-light)';
+                    e.target.style.backgroundColor = 'white';
+                  }}
                 >
-                  <div className="font-medium">{patient.name}</div>
-                  <div className="text-sm text-gray-600">Age {patient.age}</div>
-                  <div className="text-sm text-red-600">Risk Score: {(patient.riskScore * 100).toFixed(0)}%</div>
+                  <div className="font-medium" style={{ color: 'var(--text-dark)' }}>{patient.name}</div>
+                  <div className="text-sm" style={{ color: 'var(--text-light)' }}>Age {patient.age}</div>
+                  <div className="text-sm" style={{ color: 'var(--error-red)' }}>Risk Score: {(patient.riskScore * 100).toFixed(0)}%</div>
                 </button>
               ))}
             </div>
@@ -512,7 +611,7 @@ const ProviderIntelligenceHub = () => {
         </AlertDescription>
       </Alert>
 
-      <Tabs defaultValue="high-risk" className="w-full">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="high-risk">High-Risk Patients ({panelData.highRiskCount})</TabsTrigger>
           <TabsTrigger value="compliant">Already Compliant ({panelData.compliantCount})</TabsTrigger>
@@ -542,11 +641,11 @@ const ProviderIntelligenceHub = () => {
                         </div>
                         
                         <div className="mt-2 flex flex-wrap gap-2">
-                          {patient.careGaps.map((gap, idx) => (
+                          {patient.careGaps?.map((gap, idx) => (
                             <Badge key={idx} className={getPriorityBadgeColor(gap.priority)}>
                               {getMeasureDisplayName(gap.measure)} - {gap.daysPastDue} days overdue
                             </Badge>
-                          ))}
+                          )) || <span className="text-sm text-gray-500">No care gaps identified</span>}
                         </div>
                         
                         <div className="mt-2 text-sm text-gray-600">
@@ -563,20 +662,29 @@ const ProviderIntelligenceHub = () => {
                       </div>
                       
                       <div className="flex flex-col space-y-2">
-                        <Button 
-                          size="sm" 
-                          onClick={() => setSelectedPatient(patient)}
+                        <Button
+                          size="sm"
+                          onClick={() => handleViewPatientDetails(patient)}
                           className="bg-blue-600 hover:bg-blue-700"
                         >
                           <Eye className="h-4 w-4 mr-1" />
                           View Details
                         </Button>
-                        {!patient.nextAppointment && (
-                          <Button size="sm" variant="outline">
-                            <Phone className="h-4 w-4 mr-1" />
-                            Call Patient
-                          </Button>
-                        )}
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => alert(`Calling ${patient.name}...`)}
+                        >
+                          <Phone className="h-4 w-4 mr-1" />
+                          Call Member
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => alert(`Sending text to ${patient.name}...`)}
+                        >
+                          📱 Text Member
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -599,20 +707,48 @@ const ProviderIntelligenceHub = () => {
                 {compliantPatients.map((patient) => (
                   <div key={patient.id} className="border rounded-lg p-4 bg-green-50">
                     <div className="flex items-center justify-between">
-                      <div>
+                      <div className="flex-1">
                         <h3 className="font-semibold">{patient.name}</h3>
                         <div className="mt-1 flex flex-wrap gap-2">
-                          {patient.completedMeasures.map((measure, idx) => (
+                          {patient.completedMeasures?.map((measure, idx) => (
                             <Badge key={idx} className="bg-green-100 text-green-800">
                               {getMeasureDisplayName(measure)} ✓
                             </Badge>
-                          ))}
+                          )) || <span className="text-sm text-gray-500">No completed measures</span>}
                         </div>
                         <div className="mt-1 text-sm text-gray-600">
                           Completed: {patient.completionDate} • Source: {patient.evidenceSource}
                         </div>
                       </div>
-                      <CheckCircle className="h-8 w-8 text-green-500" />
+
+                      <div className="flex items-center space-x-3">
+                        <div className="flex flex-col space-y-2">
+                          <Button
+                            size="sm"
+                            onClick={() => handleViewPatientDetails(patient)}
+                            className="bg-blue-600 hover:bg-blue-700"
+                          >
+                            <Eye className="h-4 w-4 mr-1" />
+                            View Details
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => alert(`Calling ${patient.name}...`)}
+                          >
+                            <Phone className="h-4 w-4 mr-1" />
+                            Call Member
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => alert(`Sending text to ${patient.name}...`)}
+                          >
+                            📱 Text Member
+                          </Button>
+                        </div>
+                        <CheckCircle className="h-8 w-8 text-green-500" />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -625,14 +761,49 @@ const ProviderIntelligenceHub = () => {
           {selectedPatient ? (
             <Card>
               <CardHeader>
-                <CardTitle>Patient Detail: {selectedPatient.name}</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  <span>Patient Detail: {selectedPatient.name}</span>
+                  <Badge className={selectedPatient.riskScore > 0.7 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}>
+                    {selectedPatient.riskScore > 0.7 ? 'HIGH' : 'LOW'} Risk
+                  </Badge>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Patient Demographics */}
                   <div>
-                    <h4 className="font-semibold mb-3">Care Gaps & Risk Factors</h4>
+                    <h4 className="font-semibold mb-3 flex items-center">
+                      <Users className="h-4 w-4 mr-2" />
+                      Patient Information
+                    </h4>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Age:</span>
+                        <span className="font-medium">{selectedPatient.age}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Member ID:</span>
+                        <span className="font-medium">{selectedPatient.id}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Last Visit:</span>
+                        <span className="font-medium">{selectedPatient.lastVisit}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Next Appointment:</span>
+                        <span className="font-medium">{selectedPatient.nextAppointment || 'Not scheduled'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Care Gaps & Measures */}
+                  <div>
+                    <h4 className="font-semibold mb-3 flex items-center">
+                      <AlertTriangle className="h-4 w-4 mr-2" />
+                      Care Gaps & Measures
+                    </h4>
                     <div className="space-y-3">
-                      {selectedPatient.careGaps.map((gap, idx) => (
+                      {selectedPatient.careGaps?.map((gap, idx) => (
                         <div key={idx} className="border rounded p-3">
                           <div className="flex items-center justify-between">
                             <span className="font-medium">{getMeasureDisplayName(gap.measure)}</span>
@@ -644,27 +815,49 @@ const ProviderIntelligenceHub = () => {
                             Due: {gap.dueDate} ({gap.daysPastDue} days overdue)
                           </div>
                         </div>
-                      ))}
+                      )) || <div className="text-gray-500">No care gaps identified</div>}
                     </div>
                   </div>
-                  
+
+                  {/* Evidence & Risk Factors */}
                   <div>
-                    <h4 className="font-semibold mb-3">Evidence & Data Sources</h4>
-                    <div className="space-y-2">
-                      {selectedPatient.evidenceSources.map((source, idx) => (
-                        <div key={idx} className="flex items-center">
-                          <FileText className="h-4 w-4 mr-2 text-blue-500" />
-                          <span>{source}</span>
+                    <h4 className="font-semibold mb-3 flex items-center">
+                      <FileText className="h-4 w-4 mr-2" />
+                      Evidence & Risk Assessment
+                    </h4>
+                    <div className="space-y-3">
+                      <div className="border rounded p-3">
+                        <h5 className="font-medium mb-2">Evidence Sources</h5>
+                        <div className="space-y-1">
+                          {selectedPatient.evidenceSources?.map((source, idx) => (
+                            <div key={idx} className="flex items-center">
+                              <FileText className="h-4 w-4 mr-2 text-blue-500" />
+                              <span className="text-sm">{source}</span>
+                            </div>
+                          )) || <div className="text-sm text-gray-500">No evidence sources available</div>}
                         </div>
-                      ))}
-                    </div>
-                    
-                    <div className="mt-4">
-                      <h5 className="font-medium mb-2">Risk Score Breakdown</h5>
-                      <div className="bg-gray-100 rounded p-3">
-                        <div className="flex justify-between">
-                          <span>Overall Risk Score:</span>
-                          <span className="font-bold">{(selectedPatient.riskScore * 100).toFixed(0)}%</span>
+                      </div>
+
+                      <div className="border rounded p-3">
+                        <h5 className="font-medium mb-2">Risk Factors</h5>
+                        <div className="space-y-1">
+                          <div className="text-sm text-gray-600">• Age: {selectedPatient.age}</div>
+                          <div className="text-sm text-gray-600">• Risk Score: {(selectedPatient.riskScore * 100).toFixed(0)}%</div>
+                          <div className="text-sm text-gray-600">• Care Gaps: {selectedPatient.careGaps?.length || 0}</div>
+                        </div>
+                      </div>
+
+                      <div className="border rounded p-3">
+                        <h5 className="font-medium mb-2">Recommended Actions</h5>
+                        <div className="space-y-2">
+                          <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700">
+                            <Phone className="h-4 w-4 mr-2" />
+                            Call Patient
+                          </Button>
+                          <Button size="sm" variant="outline" className="w-full">
+                            <Target className="h-4 w-4 mr-2" />
+                            Schedule Appointment
+                          </Button>
                         </div>
                       </div>
                     </div>

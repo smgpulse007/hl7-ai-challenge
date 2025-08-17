@@ -300,47 +300,6 @@ const CareManagementDashboard = () => {
           <div style={{ fontSize: '1.5rem', color: '#6b7280' }}>Loading care management data...</div>
         </div>
       </div>
-    );
-  }
-
-  return (
-    <div style={styles.container}>
-      {/* Header */}
-      <div style={styles.header}>
-        <h1 style={styles.title}>Population Health Intelligence</h1>
-        <p style={styles.subtitle}>
-          Multi-Standard AI Platform: HL7 v2.x • FHIR R4 • CDA Documents • Real-time Clinical Decision Support
-        </p>
-
-        {/* Data Source Diversity Indicators */}
-        <div style={styles.dataSourceIndicators}>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>📋</div>
-            <div style={styles.sourceLabel}>HL7 v2.x</div>
-            <div style={styles.sourceCount}>MDM, ORU, ADT</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🔗</div>
-            <div style={styles.sourceLabel}>FHIR R4</div>
-            <div style={styles.sourceCount}>Patient, DiagnosticReport</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🏥</div>
-            <div style={styles.sourceLabel}>EMR</div>
-            <div style={styles.sourceCount}>Epic, Cerner</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🌐</div>
-            <div style={styles.sourceLabel}>HIE</div>
-            <div style={styles.sourceCount}>Multi-facility</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>💊</div>
-            <div style={styles.sourceLabel}>Pharmacy</div>
-            <div style={styles.sourceCount}>Claims, Labs</div>
-          </div>
-        </div>
-      </div>
 
       {/* Enhanced Statistics - Value Proposition Focus */}
       <div style={styles.statsGrid}>
@@ -495,290 +454,49 @@ const CareManagementDashboard = () => {
           );
         })}
       </div>
-
-      {/* Member Detail Modal */}
-      {showModal && selectedMember && (
-        <div style={styles.modal}>
-          <div style={styles.modalContent}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-                Member Details: {selectedMember.name || `Member ${selectedMember.member_id}`}
-              </h2>
-              <button
-                onClick={() => setShowModal(false)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  fontSize: '1.5rem',
-                  cursor: 'pointer',
-                  color: '#6b7280'
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
-              {/* Member Information */}
-              <div style={{
-                padding: '1rem',
-                backgroundColor: '#f8fafc',
-                borderRadius: '0.5rem',
-                border: '1px solid #e5e7eb'
-              }}>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--primary-blue)' }}>
-                  👤 Member Information
-                </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  <div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Member ID:</strong> {selectedMember.member_id}
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Name:</strong> {selectedMember.name}
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Age:</strong> {selectedMember.age}
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Language:</strong> {selectedMember.language}
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Risk Level:</strong>
-                      <span style={{
-                        ...styles.badge,
-                        backgroundColor: getRiskColor(selectedMember.risk_level),
-                        marginLeft: '0.5rem'
-                      }}>
-                        {selectedMember.risk_level}
-                      </span>
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Measure Type:</strong> {selectedMember.measure_type}
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Risk Probability:</strong> {(selectedMember.risk_probability * 100).toFixed(1)}%
-                    </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Due Date:</strong> {selectedMember.intervention_due_date}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* AI Layer 1: Evidence Extraction */}
-              {selectedMember.evidence_found && selectedMember.clinical_quote && (
-                <div style={{
-                  padding: '1rem',
-                  backgroundColor: '#f0fdf4',
-                  borderRadius: '0.5rem',
-                  border: '2px solid var(--success-green)'
-                }}>
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--success-green)' }}>
-                    🤖 AI Layer 1: Evidence Extraction Engine
-                  </h3>
-                  <div style={{
-                    backgroundColor: 'white',
-                    padding: '1rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #d1fae5',
-                    marginBottom: '1rem'
-                  }}>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#065f46', marginBottom: '0.5rem' }}>
-                      📋 Clinical Evidence Found:
-                    </div>
-                    <div style={{ fontSize: '0.875rem', lineHeight: '1.5', color: '#374151' }}>
-                      "{selectedMember.clinical_quote}"
-                    </div>
-                  </div>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Evidence Source:</strong>
-                    <span style={{
-                      ...styles.badge,
-                      backgroundColor: getEvidenceSourceDisplay(selectedMember.evidence_source).color,
-                      marginLeft: '0.5rem'
-                    }}>
-                      {getEvidenceSourceDisplay(selectedMember.evidence_source).icon} {getEvidenceSourceDisplay(selectedMember.evidence_source).label}
-                    </span>
-                  </div>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Processing Time:</strong> {selectedMember.processing_time}s
-                  </div>
-                </div>
-              )}
-
-              {/* AI Layer 2: Risk Prediction */}
-              {!selectedMember.evidence_found && (
-                <div style={{
-                  padding: '1rem',
-                  backgroundColor: '#fef2f2',
-                  borderRadius: '0.5rem',
-                  border: '2px solid #ef4444'
-                }}>
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#ef4444' }}>
-                    🧠 AI Layer 2: Non-Compliance Risk Prediction
-                  </h3>
-                  <div style={{
-                    backgroundColor: 'white',
-                    padding: '1rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #fecaca',
-                    marginBottom: '1rem'
-                  }}>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#dc2626', marginBottom: '0.5rem' }}>
-                      ⚠️ No Evidence Found - Risk Analysis:
-                    </div>
-                    <div style={{ fontSize: '0.875rem', lineHeight: '1.5', color: '#374151' }}>
-                      High probability ({(selectedMember.risk_probability * 100).toFixed(1)}%) of non-compliance based on member profile and historical patterns. Immediate intervention recommended.
-                    </div>
-                  </div>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Evidence Source:</strong>
-                    <span style={{
-                      ...styles.badge,
-                      backgroundColor: '#ef4444',
-                      marginLeft: '0.5rem'
-                    }}>
-                      ❌ No Evidence Found
-                    </span>
-                  </div>
-                  <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Processing Time:</strong> {selectedMember.processing_time}s
-                  </div>
-                </div>
-              )}
-
-              {/* Risk Factors and Protective Factors */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                {/* Risk Factors */}
-                <div style={{
-                  padding: '1rem',
-                  backgroundColor: '#fef2f2',
-                  borderRadius: '0.5rem',
-                  border: '1px solid #fecaca'
-                }}>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '0.75rem', color: '#dc2626' }}>
-                    ⚠️ Risk Factors
-                  </h4>
-                  {selectedMember.risk_factors && selectedMember.risk_factors.length > 0 ? (
-                    <ul style={{ margin: 0, paddingLeft: '1rem', fontSize: '0.875rem' }}>
-                      {selectedMember.risk_factors.map((factor, index) => (
-                        <li key={index} style={{ marginBottom: '0.25rem', color: '#374151' }}>
-                          {factor}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div style={{ fontSize: '0.875rem', color: '#6b7280', fontStyle: 'italic' }}>
-                      No specific risk factors identified
-                    </div>
-                  )}
-                </div>
-
-                {/* Protective Factors */}
-                <div style={{
-                  padding: '1rem',
-                  backgroundColor: '#f0fdf4',
-                  borderRadius: '0.5rem',
-                  border: '1px solid #d1fae5'
-                }}>
-                  <h4 style={{ fontSize: '1rem', fontWeight: '600', marginBottom: '0.75rem', color: '#059669' }}>
-                    ✅ Protective Factors
-                  </h4>
-                  {selectedMember.protective_factors && selectedMember.protective_factors.length > 0 ? (
-                    <ul style={{ margin: 0, paddingLeft: '1rem', fontSize: '0.875rem' }}>
-                      {selectedMember.protective_factors.map((factor, index) => (
-                        <li key={index} style={{ marginBottom: '0.25rem', color: '#374151' }}>
-                          {factor}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div style={{ fontSize: '0.875rem', color: '#6b7280', fontStyle: 'italic' }}>
-                      No protective factors identified
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div style={{
-                padding: '1rem',
-                backgroundColor: '#f8fafc',
-                borderRadius: '0.5rem',
-                border: '1px solid #e5e7eb'
-              }}>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--primary-blue)' }}>
-                  🎯 Care Management Actions
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <button
-                    style={{
-                      ...styles.button,
-                      backgroundColor: 'var(--primary-blue)',
-                      color: 'white',
-                      padding: '0.75rem 1rem',
-                      fontSize: '0.875rem',
-                      fontWeight: '600'
-                    }}
-                    onClick={() => sendManualAlert(selectedMember.member_id, 'text', 'Care gap intervention needed')}
-                  >
-                    📱 Text Patient Alert
-                  </button>
-                  <button
-                    style={{
-                      ...styles.button,
-                      backgroundColor: 'var(--success-green)',
-                      color: 'white',
-                      padding: '0.75rem 1rem',
-                      fontSize: '0.875rem',
-                      fontWeight: '600'
-                    }}
-                    onClick={() => sendManualAlert(selectedMember.member_id, 'reminder', 'Appointment reminder')}
-                  >
-                    📅 Send Appointment Reminder
-                  </button>
-                  {selectedMember.evidence_found ? (
-                    <button
-                      style={{
-                        ...styles.button,
-                        backgroundColor: '#059669',
-                        color: 'white',
-                        padding: '0.75rem 1rem',
-                        fontSize: '0.875rem',
-                        fontWeight: '600',
-                        cursor: 'default',
-                        opacity: 0.8
-                      }}
-                      disabled
-                    >
-                      ✅ Care Gap Closed (Automated)
-                    </button>
-                  ) : (
-                    <button
-                      style={{
-                        ...styles.button,
-                        backgroundColor: '#f59e0b',
-                        color: 'white',
-                        padding: '0.75rem 1rem',
-                        fontSize: '0.875rem',
-                        fontWeight: '600'
-                      }}
-                      onClick={() => closeGap(selectedMember.member_id, selectedMember.measure_type, 'Manual intervention', 'Provider review')}
-                    >
-                      🔄 Manual Gap Closure
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default CareManagementDashboard;
+    );
+  }
+
+  return (
+    <div style={styles.container}>
+      {/* Header */}
+      <div style={styles.header}>
+        <h1 style={styles.title}>Population Health Intelligence</h1>
+        <p style={styles.subtitle}>
+          Multi-Standard AI Platform: HL7 v2.x • FHIR R4 • CDA Documents • Real-time Clinical Decision Support
+        </p>
+
+        {/* Data Source Diversity Indicators */}
+        <div style={styles.dataSourceIndicators}>
+          <div style={styles.sourceCard}>
+            <div style={styles.sourceIcon}>📋</div>
+            <div style={styles.sourceLabel}>HL7 v2.x</div>
+            <div style={styles.sourceCount}>MDM, ORU, ADT</div>
+          </div>
+          <div style={styles.sourceCard}>
+            <div style={styles.sourceIcon}>🔗</div>
+            <div style={styles.sourceLabel}>FHIR R4</div>
+            <div style={styles.sourceCount}>Patient, DiagnosticReport</div>
+          </div>
+          <div style={styles.sourceCard}>
+            <div style={styles.sourceIcon}>🏥</div>
+            <div style={styles.sourceLabel}>EMR</div>
+            <div style={styles.sourceCount}>Epic, Cerner</div>
+          </div>
+          <div style={styles.sourceCard}>
+            <div style={styles.sourceIcon}>🌐</div>
+            <div style={styles.sourceLabel}>HIE</div>
+            <div style={styles.sourceCount}>Multi-facility</div>
+          </div>
+          <div style={styles.sourceCard}>
+            <div style={styles.sourceIcon}>💊</div>
+            <div style={styles.sourceLabel}>Pharmacy</div>
+            <div style={styles.sourceCount}>Claims, Labs</div>
+          </div>
+        </div>
+      </div>
