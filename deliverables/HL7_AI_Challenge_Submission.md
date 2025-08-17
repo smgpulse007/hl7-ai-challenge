@@ -2,7 +2,7 @@
 ## HL7 AI Challenge 2025 Submission
 
 **Category:** Clinical Quality Improvement  
-**Team:** smgpulse007  
+**Team:** Shailesh Dudala, William Laolagi, Xiangpei Zeng, Avinash Bachwani
 **Submission Date:** August 2025
 
 ---
@@ -287,6 +287,35 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 - **FHIR R4 CA Bundles:** 38 bundles analyzed
 - **Claims Processed:** 31 claims integrated
 - **Lab Results:** 24 results incorporated
+
+---
+
+---
+
+## Supporting Documentation Package
+
+This submission is accompanied by a comprehensive documentation package providing detailed technical implementation, security frameworks, and deployment procedures:
+
+### **Technical Documentation**
+- **`Technical_Design_Document.md`** (45 pages) - Complete system architecture, HL7 standards implementation with code paths, AI/ML details, security framework, and performance analysis
+- **`Security_Privacy_Appendix.md`** (25 pages) - Comprehensive threat model, HIPAA compliance, privacy-by-design implementation, and incident response procedures
+- **`Deployment_Runbook.md`** (30 pages) - Local and production deployment procedures, Kubernetes orchestration, monitoring, backup/recovery, and troubleshooting
+
+### **Architecture Diagrams**
+- **`Architecture_HL.mmd`** - High-level system architecture showing HL7 standards integration, SMART on FHIR workflow, and microservices communication
+- **`Architecture_LL.mmd`** - Detailed component architecture with AI/ML pipeline specifics, message queues, and data storage layers
+- **`Data_Flow.mmd`** - End-to-end sequence diagram illustrating SMART launch, HL7 processing, risk prediction, and CDS Hooks integration
+
+### **Evidence & Evaluation**
+- **`Criteria_Mapping.csv`** - Comprehensive mapping of HL7 judging criteria to specific implementation evidence with file paths, APIs, metrics, and diagrams
+- **`README_Submission.md`** - Package overview, evaluation guide, and quick start instructions for judges
+
+### **Repository Access**
+- **GitHub Repository:** `https://github.com/smgpulse007/hl7-ai-challenge`
+- **Live Demo:** `http://localhost:3000` (after running `docker-compose up -d`)
+- **End-to-End Test:** `python demo_end_to_end_test.py`
+
+All documentation uses synthetic data only - no PHI is included anywhere in the submission package.
 
 ---
 
