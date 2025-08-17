@@ -75,6 +75,11 @@
 }
 
 /* Special styling for payer/provider tabs */
+.nav-button[data-audience="demo"] {
+  border-left: 4px solid #95a5a6;
+  background: rgba(149, 165, 166, 0.1);
+}
+
 .nav-button[data-audience="payer"] {
   border-left: 4px solid #3b82f6;
 }

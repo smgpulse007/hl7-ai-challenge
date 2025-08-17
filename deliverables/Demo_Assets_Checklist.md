@@ -99,12 +99,51 @@ Insert → Screen Recording
 
 ## **DEMO FLOW COMMANDS & ACTIONS**
 
-### **Scene 1: Population Health Overview (3:15–4:15)**
+### **Opening: Legacy Dashboard (0:00–1:45)**
 
 #### **Navigation:**
 1. **Load Dashboard:** http://localhost:3000
-2. **Verify Tab:** "Population Health • For Payers" (should be default)
-3. **Wait for Data Load:** ~2-3 seconds for member data
+2. **Click Tab:** "Legacy System • Chase-and-Close" (first tab)
+3. **Wait for Load:** ~2-3 seconds for legacy interface
+
+#### **Key Actions:**
+```javascript
+// Click Legacy System tab
+document.querySelector('[data-audience="demo"]').click();
+
+// Point to key metrics
+// - 127 Open Care Gaps
+// - 45 Avg Days to Close
+// - Manual Chart Review
+
+// Click on Sarah Johnson task
+document.querySelector('.task-item:first-child').click();
+
+// Show Sarah's timeline in modal
+// Point to timeline events:
+// - Nov 17: Due date
+// - Dec 31: Completed (44 days late)
+// - NON-COMPLIANT status
+```
+
+#### **Talking Points:**
+- "127 care gaps still open with 0 days remaining"
+- "45-day average closure time"
+- "Manual chart review and phone calls"
+- "Sarah's COL due Nov 17, completed Dec 31 - NON-COMPLIANT"
+
+### **Transition: Modern Platform (1:45–3:15)**
+
+#### **Navigation:**
+1. **Click Tab:** "Population Health • For Payers"
+2. **Wait for Load:** ~2-3 seconds for modern dashboard
+3. **Highlight Contrast:** Legacy vs Modern metrics
+
+### **Scene 1: Population Health Overview (3:15–4:15)**
+
+#### **Navigation:**
+1. **Already on:** "Population Health • For Payers" tab
+2. **Verify Data Load:** ~2-3 seconds for member data refresh
 
 #### **Key Actions:**
 ```javascript

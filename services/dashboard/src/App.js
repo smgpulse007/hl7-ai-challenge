@@ -5,7 +5,8 @@ import ProviderIntelligenceHub from './components/ProviderIntelligenceHub';
 import LiveProcessingDemo from './components/LiveProcessingDemo';
 import MetricsOverview from './components/MetricsOverview';
 import AIExplanationPanel from './components/AIExplanationPanel';
-import { Activity, Brain, BarChart3, Zap, Stethoscope } from 'lucide-react';
+import LegacyDashboard from './components/LegacyDashboard';
+import { Activity, Brain, BarChart3, Zap, Stethoscope, Clock } from 'lucide-react';
 import './App.css';
 
 function App() {
@@ -14,6 +15,13 @@ function App() {
 
   // Reordered with explicit callouts for demo clarity
   const navigationViews = [
+    {
+      id: 'legacy-dashboard',
+      label: 'Legacy System • Chase-and-Close',
+      icon: Clock,
+      description: 'Traditional care management workflow',
+      audience: 'demo'
+    },
     {
       id: 'care-management',
       label: 'Population Health • For Payers',
@@ -53,6 +61,8 @@ function App() {
 
   const renderCurrentView = () => {
     switch (currentView) {
+      case 'legacy-dashboard':
+        return <LegacyDashboard />;
       case 'live-demo':
         return <LiveProcessingDemo />;
       case 'metrics':
