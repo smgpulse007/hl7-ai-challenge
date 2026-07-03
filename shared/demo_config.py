@@ -15,15 +15,15 @@ class RabbitMQConfig:
     port: int = int(os.getenv("RABBITMQ_PORT", "5672"))  # Non-SSL port
     vhost: str = os.getenv("RABBITMQ_VHOST", "ml-predictor")
     username: str = os.getenv("RABBITMQ_USER", "ml-predictor")
-    password: str = os.getenv("RABBITMQ_PASSWORD", "P@ssPr3dictor")
+    password: str = os.getenv("RABBITMQ_PASSWORD", "demo-rabbitmq-password")
     ssl_enabled: bool = os.getenv("RABBITMQ_SSL_ENABLED", "false").lower() == "true"
-    
+
     @property
     def connection_url(self) -> str:
         """Generate RabbitMQ connection URL"""
         protocol = "amqps" if self.ssl_enabled else "amqp"
         return f"{protocol}://{self.username}:{self.password}@{self.host}:{self.port}/{self.vhost}"
-    
+
     @property
     def ssl_context(self):
         """SSL context for secure connections"""
@@ -37,9 +37,9 @@ class RabbitMQConfig:
 @dataclass
 class MLflowConfig:
     """MLflow server configuration"""
-    tracking_uri: str = "http://pvposwbc02.iehp.local:8000/"
+    tracking_uri: str = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000/")
     experiment_name: str = "hedis-ai-challenge-2025"
-    
+
     def __post_init__(self):
         """Set MLflow tracking URI"""
         os.environ["MLFLOW_TRACKING_URI"] = self.tracking_uri
@@ -51,8 +51,8 @@ class DatabaseConfig:
     port: int = int(os.getenv("DB_PORT", "5432"))
     database: str = os.getenv("DB_NAME", "hedis_ai")
     username: str = os.getenv("DB_USER", "postgres")
-    password: str = os.getenv("DB_PASSWORD", "password")
-    
+    password: str = os.getenv("DB_PASSWORD", "demo-postgres-password")
+
     @property
     def connection_url(self) -> str:
         """Generate database connection URL"""
@@ -73,24 +73,24 @@ class ServiceConfig:
     host: str
     port: int
     health_endpoint: str = "/health"
-    
+
     @property
     def base_url(self) -> str:
         return f"http://{self.host}:{self.port}"
-    
+
     @property
     def health_url(self) -> str:
         return f"{self.base_url}{self.health_endpoint}"
 
 class DemoConfig:
     """Main configuration class for demo"""
-    
+
     def __init__(self):
         self.rabbitmq = RabbitMQConfig()
         self.mlflow = MLflowConfig()
         self.database = DatabaseConfig()
         self.redis = RedisConfig()
-        
+
         # Service configurations
         self.services = {
             "hl7-processing": ServiceConfig("hl7-processing", "hl7-processing", 8001),
@@ -98,7 +98,7 @@ class DemoConfig:
             "care-orchestration": ServiceConfig("care-orchestration", "care-orchestration", 8003),
             "dashboard": ServiceConfig("dashboard", "dashboard", 3000)
         }
-        
+
         # Exchange configurations
         self.exchanges = {
             "hl7_exchange": {
@@ -107,13 +107,13 @@ class DemoConfig:
                 "durable": True
             },
             "risk_exchange": {
-                "name": "risk.exchange", 
+                "name": "risk.exchange",
                 "type": "topic",
                 "durable": True
             },
             "care_exchange": {
                 "name": "care.exchange",
-                "type": "topic", 
+                "type": "topic",
                 "durable": True
             },
             "dashboard_exchange": {
@@ -122,7 +122,7 @@ class DemoConfig:
                 "durable": True
             }
         }
-        
+
         # Queue configurations
         self.queues = {
             "hl7_messages": {
@@ -151,7 +151,7 @@ class DemoConfig:
                 "exchange": "dashboard.exchange"
             }
         }
-    
+
     def get_service_config(self, service_name: str) -> ServiceConfig:
         """Get configuration for specific service"""
         return self.services.get(service_name)

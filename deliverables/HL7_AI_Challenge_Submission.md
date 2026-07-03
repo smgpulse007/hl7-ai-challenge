@@ -1,7 +1,7 @@
 # AI-Powered HEDIS Care Gap Closure Platform
 ## HL7 AI Challenge 2025 Submission
 
-**Category:** Clinical Quality Improvement  
+**Category:** Clinical Quality Improvement
 **Team:** Shailesh Dudala, William Laolagi, Xiangpei Zeng, Avinash Bachwani
 **Submission Date:** August 2025
 
@@ -17,15 +17,15 @@
 
 ### The Problem: Chase-and-Close Healthcare
 
-Meet Sarah. Her **Colorectal Cancer Screening (COL)** was due on **November 17**. In the current 'chase-and-close' flow, a care coordinator gets a task, manually reviews charts, and chases calls between member, PCP, and specialist. The cycle averages **~45 days**. Sarah completed the screening—but **after** the due date, so she's non-compliant for COL. Our platform shifts to **predict-and-prevent**, so members like Sarah get timely nudges and fewer end-of-quarter scrambles.
+Meet Sarah. Her **Colorectal Cancer Screening (COL)** was due on **November 17**. In the current 'chase-and-close' flow, a care coordinator gets a task, manually reviews charts, and chases calls between member, PCP, and specialist. The cycle averages **~45 days**. Sarah completed the screeningâ€”but **after** the due date, so she's non-compliant for COL. Our platform shifts to **predict-and-prevent**, so members like Sarah get timely nudges and fewer end-of-quarter scrambles.
 
 ### Our Innovation: Predict-and-Prevent Platform
 
 The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** with **HL7 standards** to transform quality management:
 
 - **GenAI Extraction Layer:** Converts unstructured clinical evidence (PDFs, notes) into structured proof of compliance
-- **Predictive Analytics Layer:** XGBoost models predict non-compliance risk with 85%+ accuracy  
-- **Standards Integration:** Seamless HL7 v2.x → FHIR R4 transformation with SMART on FHIR workflow integration
+- **Predictive Analytics Layer:** XGBoost models predict non-compliance risk with synthetic demo risk-scoring behavior
+- **Standards Integration:** Seamless HL7 v2.x â†’ FHIR R4 transformation with SMART on FHIR workflow integration
 - **Real-time Clinical Decision Support:** Point-of-care alerts through CDS Hooks
 
 ### Current Deployments & Scale
@@ -42,7 +42,7 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 
 **Clinical Quality Improvements:**
 - **Care Gap Closure Rate:** 95.3% automated evidence identification
-- **Risk Prediction Accuracy:** 85%+ for non-compliance prediction
+- **Risk Prediction Accuracy:** synthetic demo risk scoring
 - **Intervention Timing:** 7-day window for HIGH risk vs. 45-day traditional cycle
 - **Provider Efficiency:** Reduced manual chart review by 60%+
 
@@ -67,7 +67,7 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 **Event-Driven Microservices Architecture** with three core processing layers:
 
 1. **HL7 Processing Service (Port 8001):** spaCy NLP + LLaMA 3.2 RAG for clinical evidence extraction
-2. **Risk Prediction Service (Port 8002):** XGBoost models with 80+ features for non-compliance prediction  
+2. **Risk Prediction Service (Port 8002):** XGBoost models with 80+ features for non-compliance prediction
 3. **Care Orchestration Service (Port 8003):** FHIR R4 resource creation and business logic engine
 
 **Message Flow:** RabbitMQ with SSL/TLS enables asynchronous, scalable processing across services.
@@ -130,12 +130,12 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 **Predictive Analytics Layer** (`services/risk-prediction/app.py:314-357`)
 - **XGBoost Models:** Gradient boosting for binary non-compliance prediction
 - **Feature Engineering:** 80+ clinical, demographic, and utilization features
-- **Risk Stratification:** HIGH (≥70%), MEDIUM (40-69%), LOW (<40%) categories
+- **Risk Stratification:** HIGH (â‰¥70%), MEDIUM (40-69%), LOW (<40%) categories
 - **MLflow Integration:** Model versioning, A/B testing, performance monitoring
 
 **Model Performance:**
-- **CCS Model:** 36 features, 85%+ accuracy, AUC 0.89
-- **WCV Model:** 34 features, 85%+ accuracy, AUC 0.87
+- **CCS Model:** 36 features, synthetic demo risk-scoring behavior, synthetic demo metric
+- **WCV Model:** 34 features, synthetic demo risk-scoring behavior, synthetic demo metric
 - **Prediction Latency:** <3 seconds per risk assessment
 - **Continuous Learning:** Automated retraining based on outcome feedback
 
@@ -144,7 +144,7 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 **Technical Insights:**
 - **Multi-modal AI:** Combining NLP and ML provides superior clinical evidence extraction
 - **Event-driven Architecture:** Message queues enable scalable, resilient processing
-- **Standards Integration:** HL7 v2.x → FHIR R4 transformation preserves legacy while enabling innovation
+- **Standards Integration:** HL7 v2.x â†’ FHIR R4 transformation preserves legacy while enabling innovation
 
 **Clinical Workflow Insights:**
 - **Provider Adoption:** Native EHR integration critical for workflow acceptance
@@ -268,7 +268,7 @@ The AI-Powered HEDIS Care Gap Closure Platform combines **multi-layered AI** wit
 
 **Processing Flow:**
 1. **SMART Launch:** OAuth2 authentication with EHR context
-2. **HL7 Processing:** Message parsing and AI evidence extraction  
+2. **HL7 Processing:** Message parsing and AI evidence extraction
 3. **Risk Prediction:** ML model inference with feature engineering
 4. **FHIR Creation:** Resource generation and EHR write-back
 5. **CDS Integration:** Real-time provider alerts and recommendations

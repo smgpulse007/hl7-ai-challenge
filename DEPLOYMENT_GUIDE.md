@@ -1,31 +1,31 @@
 # HEDIS AI Platform - Deployment Guide
 
-**Event-Driven Microservices Architecture for HL7 AI Challenge**  
-**Target**: 5-day implementation with production-ready foundation  
+**Event-Driven Microservices Architecture for HL7 AI Challenge**
+**Target**: 5-day implementation with production-ready foundation
 
-## 🏗️ Architecture Overview
+## ðŸ—ï¸ Architecture Overview
 
 ```
 Real HL7 Messages (Manual De-identification)
-    ↓
-RabbitMQ hl7.exchange (IEHP Dev: rmq-dev.iehp.org)
-    ↓
+    â†“
+RabbitMQ hl7.exchange (IEHP Dev: rabbitmq)
+    â†“
 HL7 Processing Service (Port 8001) - NER + RAG
-    ↓
+    â†“
 RabbitMQ risk.exchange
-    ↓
+    â†“
 Risk Prediction Service (Port 8002) - XGBoost Models
-    ↓
+    â†“
 RabbitMQ care.exchange
-    ↓
+    â†“
 Care Orchestration Service (Port 8003) - FHIR Resources
-    ↓
+    â†“
 RabbitMQ dashboard.exchange
-    ↓
+    â†“
 Dashboard Service (Port 3000) - React Frontend
 ```
 
-## 🚀 Quick Start (5 Minutes)
+## ðŸš€ Quick Start (5 Minutes)
 
 ### Prerequisites
 ```bash
@@ -76,14 +76,14 @@ curl http://localhost:8003/health  # Care Orchestration
 open http://localhost:3000
 ```
 
-## 📋 Detailed Setup Instructions
+## ðŸ“‹ Detailed Setup Instructions
 
 ### Step 1: Environment Configuration
 
 **RabbitMQ (Local Environment)**
 - Host: localhost:5672 (Non-SSL)
 - VHost: ml-predictor
-- Credentials: ml-predictor / P@ssPr3dictor
+- Credentials: ml-predictor / demo-rabbitmq-password
 - Management UI: http://localhost:15672
 
 **MLflow (Local)**
@@ -132,7 +132,7 @@ npm start
 # 1. Extract 20-30 real HL7 messages from your system
 # 2. Manually de-identify:
 #    - Replace member IDs with synthetic ones
-#    - Replace names with fake names  
+#    - Replace names with fake names
 #    - Shift dates by random offsets
 #    - Keep clinical content intact
 
@@ -174,7 +174,7 @@ docker-compose logs -f risk-prediction
 docker-compose logs -f care-orchestration
 
 # Check RabbitMQ queues
-# Visit: https://rmq-dev.iehp.org:15672
+# Visit: https://rabbitmq:15672
 ```
 
 **4. Verify Results**
@@ -186,7 +186,7 @@ open http://localhost:3000
 curl -X POST http://localhost:8001/process -H "Content-Type: application/json" -d @samples/test_message.json
 ```
 
-## 🔧 Development Workflow
+## ðŸ”§ Development Workflow
 
 ### Day 1: Infrastructure Setup
 - [x] RabbitMQ connection and exchanges
@@ -218,14 +218,14 @@ curl -X POST http://localhost:8001/process -H "Content-Type: application/json" -
 - [ ] Performance optimization
 - [ ] Documentation completion
 
-## 🎯 Demo Scenarios
+## ðŸŽ¯ Demo Scenarios
 
 ### Scenario 1: CCS Care Gap Detection
 ```bash
 # 1. Feed HL7 MDM message with Pap smear report
 curl -X POST http://localhost:8001/process -d '{
   "message_id": "demo-ccs-001",
-  "member_id": "DEMO123456", 
+  "member_id": "DEMO123456",
   "message_type": "MDM",
   "message": "...HL7 message with Pap smear evidence..."
 }'
@@ -257,13 +257,13 @@ curl -X POST http://localhost:8001/process -d '{
 #    - Provider actionable insights
 ```
 
-## 🔍 Monitoring & Debugging
+## ðŸ” Monitoring & Debugging
 
 ### Service Health Monitoring
 ```bash
 # Health check endpoints
 curl http://localhost:8001/health | jq
-curl http://localhost:8002/health | jq  
+curl http://localhost:8002/health | jq
 curl http://localhost:8003/health | jq
 
 # Docker service status
@@ -274,7 +274,7 @@ docker stats
 ### RabbitMQ Monitoring
 ```bash
 # Management UI
-open https://rmq-dev.iehp.org:15672
+open https://rabbitmq:15672
 
 # Queue depths and message rates
 # Exchange message routing
@@ -300,17 +300,17 @@ docker-compose logs | grep ERROR
 # Resource utilization
 ```
 
-## 🚨 Troubleshooting
+## ðŸš¨ Troubleshooting
 
 ### Common Issues
 
 **RabbitMQ Connection Failed**
 ```bash
 # Check network connectivity
-ping rmq-dev.iehp.org
+ping rabbitmq
 
 # Verify SSL certificate
-openssl s_client -connect rmq-dev.iehp.org:5671
+openssl s_client -connect rabbitmq:5671
 
 # Check credentials and vhost
 ```
@@ -349,11 +349,11 @@ docker-compose restart hl7-processing
 # Verify message format
 ```
 
-## 📊 Performance Expectations
+## ðŸ“Š Performance Expectations
 
 ### Processing Throughput
 - **HL7 Processing**: 10-50 messages/minute
-- **Risk Prediction**: 100-500 predictions/minute  
+- **Risk Prediction**: 100-500 predictions/minute
 - **Care Orchestration**: 50-200 care gaps/minute
 - **Dashboard Updates**: Real-time (<2 seconds)
 
@@ -368,7 +368,7 @@ docker-compose restart hl7-processing
 - **Production**: 10K messages/day, 1.6M members
 - **Horizontal Scaling**: Kubernetes deployment ready
 
-## 🔐 Security Considerations
+## ðŸ” Security Considerations
 
 ### Data Protection
 - Manual de-identification for demo
@@ -388,7 +388,7 @@ docker-compose restart hl7-processing
 - Secure development practices
 - Regular security assessments
 
-## 📈 Success Metrics
+## ðŸ“ˆ Success Metrics
 
 ### Technical Metrics
 - [ ] All services healthy and responsive

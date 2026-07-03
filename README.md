@@ -4,16 +4,18 @@
 
 An event-driven microservices platform that transforms reactive "chase and close" to proactive "predict and prevent" care gap management using HL7 standards and AI/ML clinical decision support.
 
+> Public challenge/demo code using synthetic or sample data only. No PHI/PII. Not a production clinical decision system.
+
 ## 🏆 HL7 AI Challenge Submission
 
-**Category:** Clinical Quality Improvement  
+**Category:** Clinical Quality Improvement
 **Focus:** Solutions that improve care delivery, clinical outcomes, and quality
 
 ### Key Innovation
 - **Multi-Standard Processing:** HL7 v2.x → FHIR R4 transformation with AI enhancement
-- **Predictive Analytics:** XGBoost models predict non-compliance with 85%+ accuracy
+- **Predictive Analytics:** XGBoost-style demo models for care-gap risk prioritization
 - **Real-time Clinical Decision Support:** SMART on FHIR integration with live care gap alerts
-- **Production Deployment:** Demonstrated $1.7M+ ROI with measurable quality improvements
+- **Production-Style Architecture:** Scenario modeling for ROI and quality improvement workflows
 
 ## 🚀 Quick Start
 
@@ -25,8 +27,8 @@ An event-driven microservices platform that transforms reactive "chase and close
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/your-username/hedis-ai-platform.git
-cd hedis-ai-platform
+git clone https://github.com/smgpulse007/hl7-ai-challenge.git
+cd hl7-ai-challenge
 
 # Start all services
 docker-compose up -d
@@ -60,7 +62,7 @@ open http://localhost:3000
 - ✅ **100% Success Rate** - End-to-end pipeline processing
 - ✅ **Real-time Processing** - <2 second response times
 - ✅ **Standards Compliance** - Full HL7 v2.x and FHIR R4 support
-- ✅ **Production Ready** - Demonstrated ROI and quality outcomes
+- ✅ **Production-Style Design** - Demo ROI methodology and quality workflow architecture
 
 ## 🎯 HL7 Standards Showcase
 
@@ -75,11 +77,13 @@ open http://localhost:3000
 
 ## 📈 Value Proposition
 
-### Functional Benefits
+### Demo Value Proposition
 - **65% vs 20%** care gap closure success rates
 - **$1.7M+ annual ROI** for 450K member health plan
 - **60% reduction** in quality-related administrative burden
 - **0.5-1.0 star rating** improvement projected
+
+These figures are challenge/demo scenario assumptions, not verified production outcomes.
 
 ### Technical Innovation
 - **Multi-source intelligence** from EMR, HIE, claims, labs, pharmacy
@@ -130,6 +134,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## 🤝 Contributing
 
 This platform demonstrates advanced HL7 standards implementation with AI/ML clinical decision support. For questions or collaboration opportunities, please open an issue.
+
+## Portfolio Relevance
+
+Demonstrates event-driven healthcare AI architecture, HL7 v2.x to FHIR R4 processing, care-gap intelligence, SMART/CDS integration patterns, XGBoost-style risk scoring, Dockerized services, and public-safe healthcare interoperability storytelling.
 
 ---
 

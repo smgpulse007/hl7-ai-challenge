@@ -1,8 +1,8 @@
 # Demo Assets Checklist
 ## AI-Powered HEDIS Care Gap Closure Platform
 
-**Demo Date:** HL7 AI Challenge 2025  
-**Duration:** ≤10:00 minutes  
+**Demo Date:** HL7 AI Challenge 2025
+**Duration:** â‰¤10:00 minutes
 **Environment:** Local development with synthetic data
 
 ---
@@ -23,22 +23,22 @@ docker-compose up -d
 docker-compose ps
 
 # Expected services running:
-# ✅ postgres (port 5432)
-# ✅ redis (port 6379) 
-# ✅ rabbitmq (port 5672)
-# ✅ hl7-processing (port 8001)
-# ✅ risk-prediction (port 8002)
-# ✅ care-orchestration (port 8003)
-# ✅ dashboard (port 3000)
-# ✅ smart-app (port 3002)
-# ✅ cds-hooks (port 3001)
+# âœ… postgres (port 5432)
+# âœ… redis (port 6379)
+# âœ… rabbitmq (port 5672)
+# âœ… hl7-processing (port 8001)
+# âœ… risk-prediction (port 8002)
+# âœ… care-orchestration (port 8003)
+# âœ… dashboard (port 3000)
+# âœ… smart-app (port 3002)
+# âœ… cds-hooks (port 3001)
 ```
 
 #### **Health Check Verification**
 ```bash
 # Test all service endpoints
 curl http://localhost:8001/health  # HL7 Processing
-curl http://localhost:8002/health  # Risk Prediction  
+curl http://localhost:8002/health  # Risk Prediction
 curl http://localhost:8003/health  # Care Orchestration
 curl http://localhost:3000         # Dashboard
 curl http://localhost:3002         # SMART App
@@ -53,11 +53,11 @@ curl http://localhost:3001         # CDS Hooks
 python demo_end_to_end_test.py
 
 # Expected output:
-# ✅ HL7 Processing Service: Healthy
-# ✅ Risk Prediction Service: Healthy
-# ✅ Care Orchestration Service: Healthy
-# ✅ Dashboard: Accessible
-# ✅ End-to-end workflow: Success
+# âœ… HL7 Processing Service: Healthy
+# âœ… Risk Prediction Service: Healthy
+# âœ… Care Orchestration Service: Healthy
+# âœ… Dashboard: Accessible
+# âœ… End-to-end workflow: Success
 ```
 
 ### **2. Browser Configuration**
@@ -89,21 +89,21 @@ Tab 3: Architecture diagrams (if needed)
 #### **Alternative: Built-in Screen Recording**
 ```bash
 # Windows Game Bar
-Win + G → Start recording
+Win + G â†’ Start recording
 
 # PowerPoint Screen Recording
-Insert → Screen Recording
+Insert â†’ Screen Recording
 ```
 
 ---
 
 ## **DEMO FLOW COMMANDS & ACTIONS**
 
-### **Opening: Legacy Dashboard (0:00–1:45)**
+### **Opening: Legacy Dashboard (0:00â€“1:45)**
 
 #### **Navigation:**
 1. **Load Dashboard:** http://localhost:3000
-2. **Click Tab:** "Legacy System • Chase-and-Close" (first tab)
+2. **Click Tab:** "Legacy System â€¢ Chase-and-Close" (first tab)
 3. **Wait for Load:** ~2-3 seconds for legacy interface
 
 #### **Key Actions:**
@@ -132,17 +132,17 @@ document.querySelector('.task-item:first-child').click();
 - "Manual chart review and phone calls"
 - "Sarah's COL due Nov 17, completed Dec 31 - NON-COMPLIANT"
 
-### **Transition: Modern Platform (1:45–3:15)**
+### **Transition: Modern Platform (1:45â€“3:15)**
 
 #### **Navigation:**
-1. **Click Tab:** "Population Health • For Payers"
+1. **Click Tab:** "Population Health â€¢ For Payers"
 2. **Wait for Load:** ~2-3 seconds for modern dashboard
 3. **Highlight Contrast:** Legacy vs Modern metrics
 
-### **Scene 1: Population Health Overview (3:15–4:15)**
+### **Scene 1: Population Health Overview (3:15â€“4:15)**
 
 #### **Navigation:**
-1. **Already on:** "Population Health • For Payers" tab
+1. **Already on:** "Population Health â€¢ For Payers" tab
 2. **Verify Data Load:** ~2-3 seconds for member data refresh
 
 #### **Key Actions:**
@@ -167,7 +167,7 @@ document.querySelector('[data-filter="evidence-found"]').click();
 - "Risk stratification: HIGH (7 days), MEDIUM (45 days), LOW (90 days)"
 - "Multi-source data: HL7 ORU/MDM, FHIR R4, Claims, Labs"
 
-### **Scene 2: Provider Clinical Decision Support (4:15–5:15)**
+### **Scene 2: Provider Clinical Decision Support (4:15â€“5:15)**
 
 #### **Navigation:**
 ```javascript
@@ -185,7 +185,7 @@ document.querySelector('.patient-card[data-risk="HIGH"]').click();
 
 // Show patient details modal
 // Point to:
-// - Risk score (85%+)
+// - Synthetic high-risk score
 // - Evidence sources
 // - AI rationale
 // - Clinical recommendations
@@ -197,7 +197,7 @@ document.querySelector('.patient-card[data-risk="HIGH"]').click();
 - "AI rationale with 95% confidence scoring"
 - "CDS Hooks integration for real-time alerts"
 
-### **Scene 3: Live Processing Demo (5:15–6:30)**
+### **Scene 3: Live Processing Demo (5:15â€“6:30)**
 
 #### **Navigation:**
 ```javascript
@@ -215,7 +215,7 @@ document.querySelector('.demo-start-button').click();
 // Watch processing pipeline (auto-animated)
 // Steps will highlight automatically:
 // 1. HL7 Message Input
-// 2. spaCy NLP Processing  
+// 2. spaCy NLP Processing
 // 3. LLaMA 3.2 RAG Extraction
 // 4. XGBoost Risk Prediction
 // 5. FHIR Resource Creation
@@ -233,7 +233,7 @@ document.querySelector('.demo-start-button').click();
 - "Sub-3-second processing time"
 - "FHIR R4 resource creation"
 
-### **Scene 4: Platform Metrics (6:30–7:15)**
+### **Scene 4: Platform Metrics (6:30â€“7:15)**
 
 #### **Navigation:**
 ```javascript
@@ -254,9 +254,9 @@ document.querySelector('[data-view="metrics"]').click();
 - "1.1-second average processing time"
 - "Multi-standard data processing"
 - "99.1% FHIR compliance"
-- "Production-ready performance"
+- "Production-style performance"
 
-### **Scene 5: Security & Privacy (7:15–8:00)**
+### **Scene 5: Security & Privacy (7:15â€“8:00)**
 
 #### **Visual Assets:**
 ```
@@ -272,7 +272,7 @@ document.querySelector('[data-view="metrics"]').click();
 - "100% synthetic data - no PHI"
 - "AI ethics: bias testing, human-in-the-loop"
 
-### **Scene 6: Outcomes & ROI (8:00–8:45)**
+### **Scene 6: Outcomes & ROI (8:00â€“8:45)**
 
 #### **Navigation:**
 ```javascript
@@ -336,30 +336,30 @@ python demo_end_to_end_test.py
 ### **Pre-recorded Segments**
 ```
 /deliverables/backup_videos/
-├── live_processing_demo.mp4     # Scene 3 backup
-├── architecture_overview.mp4    # Scene 7 backup
-├── dashboard_navigation.mp4     # General navigation
-└── full_demo_silent.mp4         # Complete silent version
+â”œâ”€â”€ live_processing_demo.mp4     # Scene 3 backup
+â”œâ”€â”€ architecture_overview.mp4    # Scene 7 backup
+â”œâ”€â”€ dashboard_navigation.mp4     # General navigation
+â””â”€â”€ full_demo_silent.mp4         # Complete silent version
 ```
 
 ### **Static Screenshots**
 ```
 /deliverables/screenshots/
-├── population_health_overview.png
-├── provider_intelligence.png
-├── live_processing_steps.png
-├── platform_metrics.png
-├── architecture_diagram.png
-└── roi_metrics.png
+â”œâ”€â”€ population_health_overview.png
+â”œâ”€â”€ provider_intelligence.png
+â”œâ”€â”€ live_processing_steps.png
+â”œâ”€â”€ platform_metrics.png
+â”œâ”€â”€ architecture_diagram.png
+â””â”€â”€ roi_metrics.png
 ```
 
 ### **Architecture Diagrams**
 ```
 /deliverables/
-├── Architecture_HL.mmd          # High-level architecture
-├── Architecture_LL.mmd          # Low-level components  
-├── Data_Flow.mmd               # Sequence diagram
-└── architecture_images/        # PNG exports if needed
+â”œâ”€â”€ Architecture_HL.mmd          # High-level architecture
+â”œâ”€â”€ Architecture_LL.mmd          # Low-level components
+â”œâ”€â”€ Data_Flow.mmd               # Sequence diagram
+â””â”€â”€ architecture_images/        # PNG exports if needed
 ```
 
 ---
@@ -381,11 +381,11 @@ docker system prune -f  # If disk space issues
 ### **Browser Issues**
 ```bash
 # Clear cache and reload
-Ctrl + Shift + Delete → Clear cache
-Ctrl + F5 → Hard refresh
+Ctrl + Shift + Delete â†’ Clear cache
+Ctrl + F5 â†’ Hard refresh
 
 # Disable extensions
-Chrome → Settings → Extensions → Disable all
+Chrome â†’ Settings â†’ Extensions â†’ Disable all
 
 # Incognito mode
 Ctrl + Shift + N
@@ -404,7 +404,7 @@ netstat -an | findstr :8001
 ### **Performance Issues**
 ```bash
 # Check system resources
-Task Manager → Performance tab
+Task Manager â†’ Performance tab
 
 # Free up memory
 docker system prune -f
@@ -443,9 +443,9 @@ Close unnecessary applications
 
 ### **Post-Recording**
 - [ ] Video quality check (1920x1080, clear audio)
-- [ ] Duration verification (≤10:00)
+- [ ] Duration verification (â‰¤10:00)
 - [ ] Content accuracy review
 - [ ] Export in required format
 - [ ] Backup copy saved
 
-**Ready to record! 🎬**
+**Ready to record! ðŸŽ¬**

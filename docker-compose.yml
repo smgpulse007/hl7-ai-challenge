@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: hedis_ai
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-demo-postgres-password}
     ports:
       - "5432:5432"
     volumes:
@@ -46,9 +46,9 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      RABBITMQ_DEFAULT_USER: ml-predictor
-      RABBITMQ_DEFAULT_PASS: P@ssPr3dictor
-      RABBITMQ_DEFAULT_VHOST: ml-predictor
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-ml-predictor}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-demo-rabbitmq-password}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST:-ml-predictor}
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
@@ -75,14 +75,14 @@ services:
       - DB_PORT=5432
       - DB_NAME=hedis_ai
       - DB_USER=postgres
-      - DB_PASSWORD=password
+      - DB_PASSWORD=${DB_PASSWORD:-demo-postgres-password}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=ml-predictor
-      - RABBITMQ_PASSWORD=P@ssPr3dictor
-      - RABBITMQ_VHOST=ml-predictor
+      - RABBITMQ_USER=${RABBITMQ_USER:-ml-predictor}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-demo-rabbitmq-password}
+      - RABBITMQ_VHOST=${RABBITMQ_VHOST:-ml-predictor}
       - RABBITMQ_SSL_ENABLED=false
     depends_on:
       postgres:
@@ -114,16 +114,16 @@ services:
       - DB_PORT=5432
       - DB_NAME=hedis_ai
       - DB_USER=postgres
-      - DB_PASSWORD=password
+      - DB_PASSWORD=${DB_PASSWORD:-demo-postgres-password}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=ml-predictor
-      - RABBITMQ_PASSWORD=P@ssPr3dictor
-      - RABBITMQ_VHOST=ml-predictor
+      - RABBITMQ_USER=${RABBITMQ_USER:-ml-predictor}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-demo-rabbitmq-password}
+      - RABBITMQ_VHOST=${RABBITMQ_VHOST:-ml-predictor}
       - RABBITMQ_SSL_ENABLED=false
-      - MLFLOW_TRACKING_URI=http://pvposwbc02.iehp.local:8000/
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI:-http://localhost:5000/}
     depends_on:
       postgres:
         condition: service_healthy
@@ -156,14 +156,14 @@ services:
       - DB_PORT=5432
       - DB_NAME=hedis_ai
       - DB_USER=postgres
-      - DB_PASSWORD=password
+      - DB_PASSWORD=${DB_PASSWORD:-demo-postgres-password}
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
-      - RABBITMQ_USER=ml-predictor
-      - RABBITMQ_PASSWORD=P@ssPr3dictor
-      - RABBITMQ_VHOST=ml-predictor
+      - RABBITMQ_USER=${RABBITMQ_USER:-ml-predictor}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-demo-rabbitmq-password}
+      - RABBITMQ_VHOST=${RABBITMQ_VHOST:-ml-predictor}
       - RABBITMQ_SSL_ENABLED=false
     depends_on:
       postgres:

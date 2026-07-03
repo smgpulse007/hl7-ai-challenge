@@ -1,36 +1,36 @@
 # Demo Storyboard
 ## AI-Powered HEDIS Care Gap Closure Platform
 
-**HL7 AI Challenge 2025**  
-**Duration:** ≤10:00 minutes  
+**HL7 AI Challenge 2025**
+**Duration:** â‰¤10:00 minutes
 **Format:** One scene per page with visual callouts
 
 ---
 
 ## **STORYBOARD SCENE 1: HOOK & PROBLEM SETUP**
-**Timestamp:** 0:00–1:45  
+**Timestamp:** 0:00â€“1:45
 **Evaluation Lens:** Problem Context
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    NETFLIX INTERFACE                        │
-│  [Movie Poster] [Movie Poster] [Movie Poster]              │
-│  "Movies You Watched Last Year"                             │
-│                                                             │
-│  → TRANSITION TO →                                          │
-│                                                             │
-│  HEALTHCARE DASHBOARD - "OVERDUE CARE GAPS"                │
-│  [!] Sarah - COL Screening OVERDUE                         │
-│  [!] John - CCS Screening OVERDUE                          │
-│  [!] Maria - WCV Visit OVERDUE                             │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    NETFLIX INTERFACE                        â”‚
+â”‚  [Movie Poster] [Movie Poster] [Movie Poster]              â”‚
+â”‚  "Movies You Watched Last Year"                             â”‚
+â”‚                                                             â”‚
+â”‚  â†’ TRANSITION TO â†’                                          â”‚
+â”‚                                                             â”‚
+â”‚  HEALTHCARE DASHBOARD - "OVERDUE CARE GAPS"                â”‚
+â”‚  [!] Sarah - COL Screening OVERDUE                         â”‚
+â”‚  [!] John - CCS Screening OVERDUE                          â”‚
+â”‚  [!] Maria - WCV Visit OVERDUE                             â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **0:00–0:25:** "Imagine Netflix only recommending movies you watched last year..."
-- **0:25–0:45:** "Healthcare is catching up. Multi-layered AI-enabled HEDIS platform..."
-- **0:45–1:45:** "Meet Sarah. COL screening due November 17. 45-day cycle. Non-compliant."
+- **0:00â€“0:25:** "Imagine Netflix only recommending movies you watched last year..."
+- **0:25â€“0:45:** "Healthcare is catching up. Multi-layered AI-enabled HEDIS platform..."
+- **0:45â€“1:45:** "Meet Sarah. COL screening due November 17. 45-day cycle. Non-compliant."
 
 ### **Technical Callouts:**
 - **Problem:** Reactive "chase-and-close" workflow
@@ -40,29 +40,29 @@
 ---
 
 ## **STORYBOARD SCENE 2: SOLUTION ARCHITECTURE**
-**Timestamp:** 1:45–3:15  
+**Timestamp:** 1:45â€“3:15
 **Evaluation Lens:** Technical Innovation
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                 AI PLATFORM ARCHITECTURE                    │
-│                                                             │
-│  HL7 v2.x/FHIR R4 → [GenAI Layer] → [Predictive Layer]    │
-│       ↓                  ↓               ↓                  │
-│  Unstructured      Structured      Risk Prediction         │
-│  Evidence          Evidence        & Prioritization        │
-│                                                             │
-│  📊 HEDIS Measures: CCS, COL, WCV                          │
-│  🤖 AI: spaCy + LLaMA 3.2 + XGBoost                       │
-│  🔗 Standards: HL7/FHIR/SMART/CDS Hooks                   │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                 AI PLATFORM ARCHITECTURE                    â”‚
+â”‚                                                             â”‚
+â”‚  HL7 v2.x/FHIR R4 â†’ [GenAI Layer] â†’ [Predictive Layer]    â”‚
+â”‚       â†“                  â†“               â†“                  â”‚
+â”‚  Unstructured      Structured      Risk Prediction         â”‚
+â”‚  Evidence          Evidence        & Prioritization        â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“Š HEDIS Measures: CCS, COL, WCV                          â”‚
+â”‚  ðŸ¤– AI: spaCy + LLaMA 3.2 + XGBoost                       â”‚
+â”‚  ðŸ”— Standards: HL7/FHIR/SMART/CDS Hooks                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **1:45–2:15:** "HEDIS measures help quality but operationally heavy..."
-- **2:15–3:00:** "GenAI extraction layer + predictive layer..."
-- **3:00–3:15:** "End-to-end run for coordinator, provider, member..."
+- **1:45â€“2:15:** "HEDIS measures help quality but operationally heavy..."
+- **2:15â€“3:00:** "GenAI extraction layer + predictive layer..."
+- **3:00â€“3:15:** "End-to-end run for coordinator, provider, member..."
 
 ### **Technical Callouts:**
 - **HL7 Standards:** v2.x message processing, FHIR R4 resources
@@ -72,34 +72,34 @@
 ---
 
 ## **STORYBOARD SCENE 3: POPULATION HEALTH DASHBOARD**
-**Timestamp:** 3:15–4:15  
+**Timestamp:** 3:15â€“4:15
 **Evaluation Lens:** **[FUNCTIONAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  🏥 POPULATION HEALTH • FOR PAYERS                         │
-│                                                             │
-│  📊 METRICS CARDS:                                         │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │
-│  │ 1,260   │ │ 95.3%   │ │   27    │ │ 99.1%   │          │
-│  │Members  │ │Evidence │ │High Risk│ │Success  │          │
-│  └─────────┘ └─────────┘ └─────────┘ └─────────┘          │
-│                                                             │
-│  🔍 FILTERS: [Evidence Found ✓] [High Risk] [All]         │
-│                                                             │
-│  📋 MEMBER LIST:                                           │
-│  Sarah Johnson    | HIGH   | COL | Evidence: ✓            │
-│  Michael Chen     | MEDIUM | CCS | Evidence: ✓            │
-│  Lisa Rodriguez   | LOW    | WCV | Evidence: ✓            │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ¥ POPULATION HEALTH â€¢ FOR PAYERS                         â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“Š METRICS CARDS:                                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”‚
+â”‚  â”‚ 1,260   â”‚ â”‚ 95.3%   â”‚ â”‚   27    â”‚ â”‚ 99.1%   â”‚          â”‚
+â”‚  â”‚Members  â”‚ â”‚Evidence â”‚ â”‚High Riskâ”‚ â”‚Success  â”‚          â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜          â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ” FILTERS: [Evidence Found âœ“] [High Risk] [All]         â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“‹ MEMBER LIST:                                           â”‚
+â”‚  Sarah Johnson    | HIGH   | COL | Evidence: âœ“            â”‚
+â”‚  Michael Chen     | MEDIUM | CCS | Evidence: âœ“            â”‚
+â”‚  Lisa Rodriguez   | LOW    | WCV | Evidence: âœ“            â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **3:15–3:30:** "Population Health Intelligence for payers..."
-- **3:30–3:45:** "1,260 synthetic members, 95.3% evidence identification..."
-- **3:45–4:00:** "Risk stratification: HIGH 7-day, MEDIUM 45-day windows..."
-- **4:00–4:15:** "Multi-source data: HL7 ORU/MDM, FHIR R4, Claims, Labs..."
+- **3:15â€“3:30:** "Population Health Intelligence for payers..."
+- **3:30â€“3:45:** "1,260 synthetic members, 95.3% evidence identification..."
+- **3:45â€“4:00:** "Risk stratification: HIGH 7-day, MEDIUM 45-day windows..."
+- **4:00â€“4:15:** "Multi-source data: HL7 ORU/MDM, FHIR R4, Claims, Labs..."
 
 ### **HL7 Standards Highlighted:**
 - **FHIR R4:** Patient, Observation, Condition resources
@@ -109,39 +109,39 @@
 ---
 
 ## **STORYBOARD SCENE 4: PROVIDER CLINICAL DECISION SUPPORT**
-**Timestamp:** 4:15–5:15  
+**Timestamp:** 4:15â€“5:15
 **Evaluation Lens:** **[FUNCTIONAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  👩‍⚕️ CLINICAL DECISION SUPPORT • FOR PROVIDERS              │
-│                                                             │
-│  🔐 SMART ON FHIR INTEGRATION                              │
-│  OAuth2 Scopes: patient/Patient.read, patient/RiskAssess.. │
-│                                                             │
-│  📋 PATIENT: Sarah Johnson (ID: 12345)                     │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ 🚨 HIGH RISK: COL Screening (85% non-compliance)       │ │
-│  │                                                         │ │
-│  │ 🤖 AI RATIONALE:                                       │ │
-│  │ • Clinical notes mention "avoiding procedures"         │ │
-│  │ • No screening history in past 3 years                │ │
-│  │ • Age 52, family history positive                      │ │
-│  │                                                         │ │
-│  │ 💡 RECOMMENDATION:                                     │ │
-│  │ • Schedule screening within 7 days                     │ │
-│  │ • Patient education on importance                      │ │
-│  │ • Consider telehealth consultation                     │ │
-│  └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ‘©â€âš•ï¸ CLINICAL DECISION SUPPORT â€¢ FOR PROVIDERS              â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ” SMART ON FHIR INTEGRATION                              â”‚
+â”‚  OAuth2 Scopes: patient/Patient.read, patient/RiskAssess.. â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“‹ PATIENT: Sarah Johnson (ID: 12345)                     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ ðŸš¨ HIGH RISK: COL Screening (85% non-compliance)       â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚ ðŸ¤– AI RATIONALE:                                       â”‚ â”‚
+â”‚  â”‚ â€¢ Clinical notes mention "avoiding procedures"         â”‚ â”‚
+â”‚  â”‚ â€¢ No screening history in past 3 years                â”‚ â”‚
+â”‚  â”‚ â€¢ Age 52, family history positive                      â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚ ðŸ’¡ RECOMMENDATION:                                     â”‚ â”‚
+â”‚  â”‚ â€¢ Schedule screening within 7 days                     â”‚ â”‚
+â”‚  â”‚ â€¢ Patient education on importance                      â”‚ â”‚
+â”‚  â”‚ â€¢ Consider telehealth consultation                     â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **4:15–4:30:** "Provider experience. SMART on FHIR integration..."
-- **4:30–4:45:** "Sarah caught BEFORE deadline. HIGH risk prediction..."
-- **4:45–5:00:** "AI rationale from clinical notes, LLaMA 3.2 RAG..."
-- **5:00–5:15:** "CDS Hooks card, real-time alerts at point of care..."
+- **4:15â€“4:30:** "Provider experience. SMART on FHIR integration..."
+- **4:30â€“4:45:** "Sarah caught BEFORE deadline. HIGH risk prediction..."
+- **4:45â€“5:00:** "AI rationale from clinical notes, LLaMA 3.2 RAG..."
+- **5:00â€“5:15:** "CDS Hooks card, real-time alerts at point of care..."
 
 ### **HL7 Standards Highlighted:**
 - **SMART on FHIR:** OAuth2 authentication, patient context
@@ -151,42 +151,42 @@
 ---
 
 ## **STORYBOARD SCENE 5: LIVE PROCESSING DEMONSTRATION**
-**Timestamp:** 5:15–6:30  
+**Timestamp:** 5:15â€“6:30
 **Evaluation Lens:** **[TECHNICAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  ⚡ LIVE PROCESSING DEMO                                    │
-│                                                             │
-│  📥 INPUT: HL7 v2.x Message (MDM)                         │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ MSH|^~\&|LAB|HOSPITAL|EMR|CLINIC|20241117120000||MDM^T02│ │
-│  │ PID|1||12345^^^MRN||JOHNSON^SARAH^M||19720315|F|||...   │ │
-│  │ TXA|1|OP|TEXT|20241117|DOC123|^SMITH^JOHN^MD|||...     │ │
-│  │ OBX|1|ED|PDF^PDF^L|1|^APPLICATION^PDF^BASE64^[PDF]...  │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  🔄 PROCESSING PIPELINE:                                   │
-│  [1] spaCy NLP      → ✅ Entities extracted                │
-│  [2] LLaMA 3.2 RAG  → ✅ Evidence found                   │
-│  [3] XGBoost ML     → ✅ Risk: 85% HIGH                   │
-│  [4] FHIR Creation  → ✅ Resources generated              │
-│                                                             │
-│  📤 OUTPUT: FHIR R4 Resources                              │
-│  • Patient/12345                                           │
-│  • RiskAssessment/67890                                    │
-│  • CarePlan/11111                                          │
-│  • Task/22222                                              │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  âš¡ LIVE PROCESSING DEMO                                    â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“¥ INPUT: HL7 v2.x Message (MDM)                         â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ MSH|^~\&|LAB|HOSPITAL|EMR|CLINIC|20241117120000||MDM^T02â”‚ â”‚
+â”‚  â”‚ PID|1||12345^^^MRN||JOHNSON^SARAH^M||19720315|F|||...   â”‚ â”‚
+â”‚  â”‚ TXA|1|OP|TEXT|20241117|DOC123|^SMITH^JOHN^MD|||...     â”‚ â”‚
+â”‚  â”‚ OBX|1|ED|PDF^PDF^L|1|^APPLICATION^PDF^BASE64^[PDF]...  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ”„ PROCESSING PIPELINE:                                   â”‚
+â”‚  [1] spaCy NLP      â†’ âœ… Entities extracted                â”‚
+â”‚  [2] LLaMA 3.2 RAG  â†’ âœ… Evidence found                   â”‚
+â”‚  [3] XGBoost ML     â†’ âœ… Risk: 85% HIGH                   â”‚
+â”‚  [4] FHIR Creation  â†’ âœ… Resources generated              â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“¤ OUTPUT: FHIR R4 Resources                              â”‚
+â”‚  â€¢ Patient/12345                                           â”‚
+â”‚  â€¢ RiskAssessment/67890                                    â”‚
+â”‚  â€¢ CarePlan/11111                                          â”‚
+â”‚  â€¢ Task/22222                                              â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **5:15–5:30:** "AI processing pipeline in real-time..."
-- **5:30–5:45:** "HL7 v2.x message, spaCy NLP extraction..."
-- **5:45–6:00:** "LLaMA 3.2 contextual evidence, XGBoost prediction..."
-- **6:00–6:15:** "Microservices: 8001, 8002, 8003. RabbitMQ queues..."
-- **6:15–6:30:** "Sub-3-second processing. FHIR R4 resources created..."
+- **5:15â€“5:30:** "AI processing pipeline in real-time..."
+- **5:30â€“5:45:** "HL7 v2.x message, spaCy NLP extraction..."
+- **5:45â€“6:00:** "LLaMA 3.2 contextual evidence, XGBoost prediction..."
+- **6:00â€“6:15:** "Microservices: 8001, 8002, 8003. RabbitMQ queues..."
+- **6:15â€“6:30:** "Sub-3-second processing. FHIR R4 resources created..."
 
 ### **HL7 Standards Highlighted:**
 - **HL7 v2.x:** MDM, ORU, ADT message processing
@@ -196,40 +196,40 @@
 ---
 
 ## **STORYBOARD SCENE 6: PLATFORM METRICS & PERFORMANCE**
-**Timestamp:** 6:30–7:15  
+**Timestamp:** 6:30â€“7:15
 **Evaluation Lens:** **[TECHNICAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  📊 PLATFORM METRICS                                       │
-│                                                             │
-│  🔴 REAL-TIME METRICS:                                     │
-│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐          │
-│  │ 1,247   │ │ 95.2%   │ │ 1.1s    │ │ 94.8%   │          │
-│  │Messages │ │Success  │ │Avg Time │ │AI Conf  │          │
-│  └─────────┘ └─────────┘ └─────────┘ └─────────┘          │
-│                                                             │
-│  📈 EVIDENCE SOURCES:                                      │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ HL7 ORU/MDM: ████████████ 42 messages                 │ │
-│  │ FHIR R4 CA:  ██████████   38 bundles                  │ │
-│  │ Claims:      ████████     31 claims                   │ │
-│  │ Lab Results: ██████       24 results                  │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  🏗️ INFRASTRUCTURE:                                        │
-│  • 99.1% FHIR Compliance                                   │
-│  • Kubernetes Ready                                        │
-│  • Multi-cloud Deployment                                  │
-│  • Auto-scaling Enabled                                    │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ“Š PLATFORM METRICS                                       â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ”´ REAL-TIME METRICS:                                     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”‚
+â”‚  â”‚ 1,247   â”‚ â”‚ 95.2%   â”‚ â”‚ 1.1s    â”‚ â”‚ 94.8%   â”‚          â”‚
+â”‚  â”‚Messages â”‚ â”‚Success  â”‚ â”‚Avg Time â”‚ â”‚AI Conf  â”‚          â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜          â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“ˆ EVIDENCE SOURCES:                                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ HL7 ORU/MDM: â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ 42 messages                 â”‚ â”‚
+â”‚  â”‚ FHIR R4 CA:  â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ   38 bundles                  â”‚ â”‚
+â”‚  â”‚ Claims:      â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ     31 claims                   â”‚ â”‚
+â”‚  â”‚ Lab Results: â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ       24 results                  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ—ï¸ INFRASTRUCTURE:                                        â”‚
+â”‚  â€¢ 99.1% FHIR Compliance                                   â”‚
+â”‚  â€¢ Kubernetes Ready                                        â”‚
+â”‚  â€¢ Multi-cloud Deployment                                  â”‚
+â”‚  â€¢ Auto-scaling Enabled                                    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **6:30–6:45:** "Production-ready performance. 1,247 messages, 95.2% success..."
-- **6:45–7:00:** "Multi-standard processing: HL7, FHIR, Claims, Labs..."
-- **7:00–7:15:** "99.1% FHIR compliance, Kubernetes-ready, multi-cloud..."
+- **6:30â€“6:45:** "Production-style performance. 1,247 messages, 95.2% success..."
+- **6:45â€“7:00:** "Multi-standard processing: HL7, FHIR, Claims, Labs..."
+- **7:00â€“7:15:** "99.1% FHIR compliance, Kubernetes-ready, multi-cloud..."
 
 ### **HL7 Standards Highlighted:**
 - **Performance:** Multi-standard processing capability
@@ -239,42 +239,42 @@
 ---
 
 ## **STORYBOARD SCENE 7: SECURITY, PRIVACY & ETHICS**
-**Timestamp:** 7:15–8:00  
+**Timestamp:** 7:15â€“8:00
 **Evaluation Lens:** **[CONTEXTUAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  🔒 SECURITY & PRIVACY FRAMEWORK                           │
-│                                                             │
-│  🛡️ DEFENSE-IN-DEPTH:                                      │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ 🔐 OAuth2 SMART Scopes                                 │ │
-│  │ 🔒 TLS 1.3 Encryption                                  │ │
-│  │ 📋 Comprehensive Audit Trails                          │ │
-│  │ 🏥 HIPAA Compliance                                     │ │
-│  │ 📜 21st Century Cures Act                              │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  🤖 AI ETHICS:                                             │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ ⚖️ Bias Testing & Monitoring                           │ │
-│  │ 📊 Model Cards & Transparency                          │ │
-│  │ 👥 Human-in-the-Loop Review                           │ │
-│  │ 🎭 100% Synthetic Data - No PHI                       │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  🔏 PRIVACY-BY-DESIGN:                                     │
-│  • Data Minimization                                       │
-│  • Pseudonymization                                        │
-│  • Differential Privacy                                    │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ”’ SECURITY & PRIVACY FRAMEWORK                           â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ›¡ï¸ DEFENSE-IN-DEPTH:                                      â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ ðŸ” OAuth2 SMART Scopes                                 â”‚ â”‚
+â”‚  â”‚ ðŸ”’ TLS 1.3 Encryption                                  â”‚ â”‚
+â”‚  â”‚ ðŸ“‹ Comprehensive Audit Trails                          â”‚ â”‚
+â”‚  â”‚ ðŸ¥ HIPAA Compliance                                     â”‚ â”‚
+â”‚  â”‚ ðŸ“œ 21st Century Cures Act                              â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ¤– AI ETHICS:                                             â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ âš–ï¸ Bias Testing & Monitoring                           â”‚ â”‚
+â”‚  â”‚ ðŸ“Š Model Cards & Transparency                          â”‚ â”‚
+â”‚  â”‚ ðŸ‘¥ Human-in-the-Loop Review                           â”‚ â”‚
+â”‚  â”‚ ðŸŽ­ 100% Synthetic Data - No PHI                       â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ” PRIVACY-BY-DESIGN:                                     â”‚
+â”‚  â€¢ Data Minimization                                       â”‚
+â”‚  â€¢ Pseudonymization                                        â”‚
+â”‚  â€¢ Differential Privacy                                    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **7:15–7:30:** "Security paramount. Defense-in-depth, OAuth2 SMART scopes..."
-- **7:30–7:45:** "HIPAA compliance, 21st Century Cures Act, API-first..."
-- **7:45–8:00:** "AI ethics: bias testing, human-in-the-loop, 100% synthetic data..."
+- **7:15â€“7:30:** "Security paramount. Defense-in-depth, OAuth2 SMART scopes..."
+- **7:30â€“7:45:** "HIPAA compliance, 21st Century Cures Act, API-first..."
+- **7:45â€“8:00:** "AI ethics: bias testing, human-in-the-loop, 100% synthetic data..."
 
 ### **HL7 Standards Highlighted:**
 - **SMART Security:** OAuth2 scopes and authentication
@@ -284,42 +284,42 @@
 ---
 
 ## **STORYBOARD SCENE 8: OUTCOMES & ROI**
-**Timestamp:** 8:00–8:45  
+**Timestamp:** 8:00â€“8:45
 **Evaluation Lens:** **[FUNCTIONAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  💰 MEASURABLE IMPACT & ROI                                │
-│                                                             │
-│  📈 KEY IMPROVEMENTS:                                       │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ 💵 $1.7M+ Demonstrated ROI                             │ │
-│  │ ⚡ 95.3% Automated Evidence vs Manual Review           │ │
-│  │ 🕐 7-day vs 45-day Intervention Cycles                │ │
-│  │ 🎯 162 Proactive Care Gaps Identified                 │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  📊 BEFORE vs AFTER:                                       │
-│  ┌─────────────────┬─────────────────────────────────────┐ │
-│  │ TRADITIONAL     │ AI-POWERED                          │ │
-│  │ • 45-day cycle  │ • 7-day intervention               │ │
-│  │ • Manual review │ • 95.3% automated                  │ │
-│  │ • Reactive      │ • Proactive prediction             │ │
-│  │ • Chase & close │ • Predict & prevent                │ │
-│  └─────────────────┴─────────────────────────────────────┘ │
-│                                                             │
-│  🌍 POPULATION SCALE:                                      │
-│  • 1.6M Member Health Plan Ready                           │
-│  • Thousands of Prevented Non-compliant Cases              │
-│  • Millions in Quality Bonus Preservation                  │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ’° MEASURABLE IMPACT & ROI                                â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“ˆ KEY IMPROVEMENTS:                                       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ ðŸ’µ $1.7M+ Demonstrated ROI                             â”‚ â”‚
+â”‚  â”‚ âš¡ 95.3% Automated Evidence vs Manual Review           â”‚ â”‚
+â”‚  â”‚ ðŸ• 7-day vs 45-day Intervention Cycles                â”‚ â”‚
+â”‚  â”‚ ðŸŽ¯ 162 Proactive Care Gaps Identified                 â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“Š BEFORE vs AFTER:                                       â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ TRADITIONAL     â”‚ AI-POWERED                          â”‚ â”‚
+â”‚  â”‚ â€¢ 45-day cycle  â”‚ â€¢ 7-day intervention               â”‚ â”‚
+â”‚  â”‚ â€¢ Manual review â”‚ â€¢ 95.3% automated                  â”‚ â”‚
+â”‚  â”‚ â€¢ Reactive      â”‚ â€¢ Proactive prediction             â”‚ â”‚
+â”‚  â”‚ â€¢ Chase & close â”‚ â€¢ Predict & prevent                â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸŒ POPULATION SCALE:                                      â”‚
+â”‚  â€¢ 1.6M Member Health Plan Ready                           â”‚
+â”‚  â€¢ Thousands of Prevented Non-compliant Cases              â”‚
+â”‚  â€¢ Millions in Quality Bonus Preservation                  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **8:00–8:15:** "$1.7 million ROI through three key improvements..."
-- **8:15–8:30:** "95.3% automated vs manual, 7-day vs 45-day cycles..."
-- **8:30–8:45:** "1.6M member scalability, thousands prevented cases..."
+- **8:00â€“8:15:** "$1.7 million ROI through three key improvements..."
+- **8:15â€“8:30:** "95.3% automated vs manual, 7-day vs 45-day cycles..."
+- **8:30â€“8:45:** "1.6M member scalability, thousands prevented cases..."
 
 ### **HL7 Standards Highlighted:**
 - **Efficiency:** Standards-based automation benefits
@@ -329,40 +329,40 @@
 ---
 
 ## **STORYBOARD SCENE 9: ARCHITECTURE & DEPLOYMENT**
-**Timestamp:** 8:45–9:15  
+**Timestamp:** 8:45â€“9:15
 **Evaluation Lens:** **[TECHNICAL]**
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  🏗️ PRODUCTION ARCHITECTURE                                │
-│                                                             │
-│  🔄 EVENT-DRIVEN MICROSERVICES:                            │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ [HL7 Processing] ←→ [RabbitMQ] ←→ [Risk Prediction]    │ │
-│  │        ↕                              ↕                │ │
-│  │ [Care Orchestration] ←→ [PostgreSQL] ←→ [Dashboard]    │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  ☁️ MULTI-CLOUD DEPLOYMENT:                                │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ 🔵 AWS EKS    🔷 Azure AKS    🟡 GCP GKE              │ │
-│  │ • Auto-scaling                                          │ │
-│  │ • Load balancing                                        │ │
-│  │ • 99.9% uptime                                          │ │
-│  │ • 1,000+ messages/day capacity                          │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  📊 PERFORMANCE:                                           │
-│  • Docker/Kubernetes orchestration                         │
-│  • Horizontal scaling                                      │
-│  • Comprehensive monitoring                                │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸ—ï¸ PRODUCTION ARCHITECTURE                                â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ”„ EVENT-DRIVEN MICROSERVICES:                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ [HL7 Processing] â†â†’ [RabbitMQ] â†â†’ [Risk Prediction]    â”‚ â”‚
+â”‚  â”‚        â†•                              â†•                â”‚ â”‚
+â”‚  â”‚ [Care Orchestration] â†â†’ [PostgreSQL] â†â†’ [Dashboard]    â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  â˜ï¸ MULTI-CLOUD DEPLOYMENT:                                â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ ðŸ”µ AWS EKS    ðŸ”· Azure AKS    ðŸŸ¡ GCP GKE              â”‚ â”‚
+â”‚  â”‚ â€¢ Auto-scaling                                          â”‚ â”‚
+â”‚  â”‚ â€¢ Load balancing                                        â”‚ â”‚
+â”‚  â”‚ â€¢ 99.9% uptime                                          â”‚ â”‚
+â”‚  â”‚ â€¢ 1,000+ messages/day capacity                          â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“Š PERFORMANCE:                                           â”‚
+â”‚  â€¢ Docker/Kubernetes orchestration                         â”‚
+â”‚  â€¢ Horizontal scaling                                      â”‚
+â”‚  â€¢ Comprehensive monitoring                                â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **8:45–9:00:** "Event-driven microservices, Docker/Kubernetes deployment..."
-- **9:00–9:15:** "Production-ready: AWS, Azure, GCP. 1,000+ messages daily, 99.9% uptime..."
+- **8:45â€“9:00:** "Event-driven microservices, Docker/Kubernetes deployment..."
+- **9:00â€“9:15:** "Production-style: AWS, Azure, GCP. 1,000+ messages daily, 99.9% uptime..."
 
 ### **HL7 Standards Highlighted:**
 - **Architecture:** Standards-based service design
@@ -372,44 +372,44 @@
 ---
 
 ## **STORYBOARD SCENE 10: ROADMAP & CLOSE**
-**Timestamp:** 9:15–9:30  
+**Timestamp:** 9:15â€“9:30
 **Evaluation Lens:** Future Vision
 
 ### **Visual Elements:**
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  🚀 FUTURE ROADMAP                                         │
-│                                                             │
-│  📅 NEXT STEPS:                                            │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ 📊 Expand to 10+ HEDIS Measures                        │ │
-│  │ 🏘️ Integrate Social Determinants                       │ │
-│  │ 🧬 Enable Precision Medicine                           │ │
-│  │ 🤝 Federated Learning                                  │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  🎯 CALL TO ACTION:                                        │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │                                                         │ │
-│  │    AI-POWERED HEDIS CARE GAP CLOSURE PLATFORM          │ │
-│  │                                                         │ │
-│  │    "From Chase-and-Close to Predict-and-Prevent"       │ │
-│  │                                                         │ │
-│  │           🏆 HL7 AI CHALLENGE 2025 🏆                  │ │
-│  │                                                         │ │
-│  │              READY FOR DEPLOYMENT                       │ │
-│  │                                                         │ │
-│  └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ðŸš€ FUTURE ROADMAP                                         â”‚
+â”‚                                                             â”‚
+â”‚  ðŸ“… NEXT STEPS:                                            â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚ ðŸ“Š Expand to 10+ HEDIS Measures                        â”‚ â”‚
+â”‚  â”‚ ðŸ˜ï¸ Integrate Social Determinants                       â”‚ â”‚
+â”‚  â”‚ ðŸ§¬ Enable Precision Medicine                           â”‚ â”‚
+â”‚  â”‚ ðŸ¤ Federated Learning                                  â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â”‚                                                             â”‚
+â”‚  ðŸŽ¯ CALL TO ACTION:                                        â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚    AI-POWERED HEDIS CARE GAP CLOSURE PLATFORM          â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚    "From Chase-and-Close to Predict-and-Prevent"       â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚           ðŸ† HL7 AI CHALLENGE 2025 ðŸ†                  â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â”‚              READY FOR DEPLOYMENT                       â”‚ â”‚
+â”‚  â”‚                                                         â”‚ â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### **Narration Overlay:**
-- **9:15–9:25:** "Next steps: 10+ HEDIS measures, social determinants, precision medicine..."
-- **9:25–9:30:** "AI-Powered HEDIS Platform—chase-and-close to predict-and-prevent. Ready for deployment."
+- **9:15â€“9:25:** "Next steps: 10+ HEDIS measures, social determinants, precision medicine..."
+- **9:25â€“9:30:** "AI-Powered HEDIS Platformâ€”chase-and-close to predict-and-prevent. Ready for deployment."
 
 ### **Final Message:**
 - **Platform Value:** Transformative healthcare quality management
-- **Technical Excellence:** Production-ready HL7 standards implementation
+- **Technical Excellence:** Production-style HL7 standards implementation
 - **Call to Action:** Immediate deployment capability
 
 ---

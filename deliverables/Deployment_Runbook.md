@@ -1,8 +1,8 @@
 # Deployment Runbook
 ## AI-Powered HEDIS Care Gap Closure Platform
 
-**HL7 AI Challenge 2025 Submission**  
-**Version: 1.0**  
+**HL7 AI Challenge 2025 Submission**
+**Version: 1.0**
 **Date: August 2025**
 
 ---
@@ -80,7 +80,7 @@ DB_PASSWORD=postgres123
 RABBITMQ_HOST=rabbitmq
 RABBITMQ_PORT=5672
 RABBITMQ_USER=admin
-RABBITMQ_PASSWORD=admin123
+RABBITMQ_PASSWORD=demo-rabbitmq-password
 
 # Redis Configuration
 REDIS_HOST=redis
@@ -142,11 +142,11 @@ python scripts/load_sample_data.py
 python demo_end_to_end_test.py
 
 # Expected output:
-# ✅ HL7 Processing Service: Healthy
-# ✅ Risk Prediction Service: Healthy  
-# ✅ Care Orchestration Service: Healthy
-# ✅ Dashboard: Accessible
-# ✅ End-to-end workflow: Success
+# âœ… HL7 Processing Service: Healthy
+# âœ… Risk Prediction Service: Healthy
+# âœ… Care Orchestration Service: Healthy
+# âœ… Dashboard: Accessible
+# âœ… End-to-end workflow: Success
 ```
 
 ### Development Workflow
@@ -214,7 +214,7 @@ spec:
   hard:
     requests.cpu: "8"
     requests.memory: 16Gi
-    limits.cpu: "16" 
+    limits.cpu: "16"
     limits.memory: 32Gi
     persistentvolumeclaims: "10"
 ```
@@ -275,7 +275,7 @@ kubectl wait --for=condition=ready pod -l app=postgres -n hedis-ai-platform --ti
 # Deploy HL7 Processing Service
 kubectl apply -f k8s/hl7-processing-deployment.yaml
 
-# Deploy Risk Prediction Service  
+# Deploy Risk Prediction Service
 kubectl apply -f k8s/risk-prediction-deployment.yaml
 
 # Deploy Care Orchestration Service
@@ -323,7 +323,7 @@ spec:
 # Deploy Prometheus
 helm install prometheus prometheus-community/kube-prometheus-stack \
   --namespace hedis-ai-platform \
-  --set grafana.adminPassword=admin123
+  --set grafana.adminPassword=demo-rabbitmq-password
 
 # Deploy custom dashboards
 kubectl apply -f k8s/monitoring/grafana-dashboards.yaml
@@ -665,7 +665,7 @@ scrape_configs:
       },
       {
         "title": "Response Time",
-        "type": "graph", 
+        "type": "graph",
         "targets": [
           {
             "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))",
@@ -696,7 +696,7 @@ data:
       tag kubernetes.*
       format json
     </source>
-    
+
     <match kubernetes.**>
       @type elasticsearch
       host elasticsearch.logging.svc.cluster.local
@@ -735,7 +735,7 @@ groups:
       severity: critical
     annotations:
       summary: "Service {{ $labels.instance }} is down"
-      
+
   - alert: HighErrorRate
     expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
     for: 5m
@@ -743,7 +743,7 @@ groups:
       severity: warning
     annotations:
       summary: "High error rate on {{ $labels.service }}"
-      
+
   - alert: DatabaseConnectionFailure
     expr: database_connections_failed_total > 0
     for: 1m
@@ -849,15 +849,15 @@ data:
 # Check primary region health
 if ! curl -f http://primary-region-lb/health; then
     echo "Primary region unhealthy, initiating failover"
-    
+
     # Update DNS to point to secondary region
     aws route53 change-resource-record-sets \
         --hosted-zone-id Z123456789 \
         --change-batch file://failover-dns.json
-    
+
     # Scale up secondary region
     kubectl scale deployment --replicas=3 -n hedis-ai-platform
-    
+
     # Notify operations team
     curl -X POST -H 'Content-type: application/json' \
         --data '{"text":"Failover to secondary region initiated"}' \
@@ -915,9 +915,9 @@ docker stats
 
 # Check database performance
 docker-compose exec postgres psql -U postgres -c "
-SELECT query, calls, total_time, mean_time 
-FROM pg_stat_statements 
-ORDER BY total_time DESC 
+SELECT query, calls, total_time, mean_time
+FROM pg_stat_statements
+ORDER BY total_time DESC
 LIMIT 10;
 "
 

@@ -16,15 +16,15 @@ class RabbitMQConfig:
     port: int = int(os.getenv("RABBITMQ_PORT", "5672"))
     vhost: str = os.getenv("RABBITMQ_VHOST", "ml-predictor")
     username: str = os.getenv("RABBITMQ_USER", "ml-predictor")
-    password: str = os.getenv("RABBITMQ_PASSWORD", "P@ssPr3dictor")
+    password: str = os.getenv("RABBITMQ_PASSWORD", "demo-rabbitmq-password")
     ssl_enabled: bool = os.getenv("RABBITMQ_SSL_ENABLED", "false").lower() == "true"
-    
+
     @property
     def connection_url(self) -> str:
         """Generate RabbitMQ connection URL"""
         protocol = "amqps" if self.ssl_enabled else "amqp"
         return f"{protocol}://{self.username}:{self.password}@{self.host}:{self.port}/{self.vhost}"
-    
+
     @property
     def ssl_context(self):
         """SSL context for secure connections"""
@@ -54,8 +54,8 @@ class DatabaseConfig:
     port: int = int(os.getenv("DB_PORT", "5432"))
     database: str = os.getenv("DB_NAME", "hedis_ai")
     username: str = os.getenv("DB_USER", "postgres")
-    password: str = os.getenv("DB_PASSWORD", "password")
-    
+    password: str = os.getenv("DB_PASSWORD", "demo-postgres-password")
+
     @property
     def connection_url(self) -> str:
         """Generate database connection URL"""
@@ -69,7 +69,7 @@ class RedisConfig:
     port: int = int(os.getenv("REDIS_PORT", "6379"))
     db: int = int(os.getenv("REDIS_DB", "0"))
     password: Optional[str] = os.getenv("REDIS_PASSWORD")
-    
+
     @property
     def connection_url(self) -> str:
         """Generate Redis connection URL"""
@@ -86,7 +86,7 @@ class ServiceConfig:
     host: str = "0.0.0.0"
     debug: bool = os.getenv("DEBUG", "false").lower() == "true"
     log_level: str = os.getenv("LOG_LEVEL", "INFO")
-    
+
     @property
     def base_url(self) -> str:
         """Generate service base URL"""
@@ -95,13 +95,13 @@ class ServiceConfig:
 
 class Config:
     """Main configuration class"""
-    
+
     def __init__(self):
         self.rabbitmq = RabbitMQConfig()
         self.mlflow = MLflowConfig()
         self.database = DatabaseConfig()
         self.redis = RedisConfig()
-        
+
         # Service configurations
         self.services = {
             "hl7_processing": ServiceConfig("hl7-processing", 8001),
@@ -109,7 +109,7 @@ class Config:
             "care_orchestration": ServiceConfig("care-orchestration", 8003),
             "dashboard": ServiceConfig("dashboard", 3000)
         }
-        
+
         # RabbitMQ Exchange and Queue Configuration
         self.exchanges = {
             "hl7": {
@@ -118,13 +118,13 @@ class Config:
                 "durable": True
             },
             "risk": {
-                "name": "risk.exchange", 
+                "name": "risk.exchange",
                 "type": "topic",
                 "durable": True
             },
             "care": {
                 "name": "care.exchange",
-                "type": "topic", 
+                "type": "topic",
                 "durable": True
             },
             "dashboard": {
@@ -133,7 +133,7 @@ class Config:
                 "durable": True
             }
         }
-        
+
         self.queues = {
             "hl7_messages": {
                 "name": "hl7.messages",
@@ -161,15 +161,15 @@ class Config:
                 "exchange": "dashboard.exchange"
             }
         }
-    
+
     def get_service_config(self, service_name: str) -> ServiceConfig:
         """Get configuration for specific service"""
         return self.services.get(service_name)
-    
+
     def get_exchange_config(self, exchange_name: str) -> dict:
         """Get exchange configuration"""
         return self.exchanges.get(exchange_name)
-    
+
     def get_queue_config(self, queue_name: str) -> dict:
         """Get queue configuration"""
         return self.queues.get(queue_name)
@@ -183,7 +183,7 @@ config = Config()
 def load_environment_config():
     """Load environment-specific configuration"""
     env = os.getenv("ENVIRONMENT", "development")
-    
+
     if env == "production":
         # Production overrides
         config.database.host = os.getenv("PROD_DB_HOST", "localhost")
@@ -198,7 +198,7 @@ def load_environment_config():
         # Staging overrides
         config.database.host = os.getenv("STAGING_DB_HOST", "localhost")
         config.redis.host = os.getenv("STAGING_REDIS_HOST", "localhost")
-    
+
     # Development uses defaults
 
 

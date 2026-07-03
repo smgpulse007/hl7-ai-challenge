@@ -1,35 +1,35 @@
 # HEDIS AI Platform - Portability Guide
 
-## ✅ **Platform Independence Verification**
+## âœ… **Platform Independence Verification**
 
 The HEDIS AI Platform is now **100% portable** and independent of IEHP infrastructure. All external dependencies have been removed or made configurable.
 
 ---
 
-## 🔧 **Fixed Dependencies**
+## ðŸ”§ **Fixed Dependencies**
 
-### **✅ RabbitMQ Configuration**
-- **Before**: Hardcoded `rmq-dev.iehp.org:5671` (SSL)
+### **âœ… RabbitMQ Configuration**
+- **Before**: Hardcoded `rabbitmq:5671` (SSL)
 - **After**: Configurable via environment variables, defaults to `localhost:5672` (non-SSL)
 - **Docker**: Includes local RabbitMQ container with management UI
 
-### **✅ MLflow Configuration**
-- **Before**: Hardcoded `pvposwbc02.iehp.local:8000`
+### **âœ… MLflow Configuration**
+- **Before**: Hardcoded `localhost:8000`
 - **After**: Configurable via `MLFLOW_TRACKING_URI`, defaults to `localhost:5000`
 - **Note**: MLflow is optional for demo purposes
 
-### **✅ Database Configuration**
+### **âœ… Database Configuration**
 - **Before**: Production configs pointed to `prod-db.iehp.local`
 - **After**: All environments default to `localhost` with Docker containers
 
-### **✅ All External References Removed**
+### **âœ… All External References Removed**
 - No hardcoded IEHP URLs or hostnames
 - No IEHP-specific data dependencies
 - No IEHP network requirements
 
 ---
 
-## 🚀 **Quick Setup on New Machine**
+## ðŸš€ **Quick Setup on New Machine**
 
 ### **Prerequisites**
 ```bash
@@ -81,7 +81,7 @@ http://localhost:3000
 
 ---
 
-## 🌐 **Service Endpoints**
+## ðŸŒ **Service Endpoints**
 
 | Service | URL | Purpose |
 |---------|-----|---------|
@@ -95,7 +95,7 @@ http://localhost:3000
 
 ---
 
-## ⚙️ **Environment Variables**
+## âš™ï¸ **Environment Variables**
 
 All external dependencies are configurable via environment variables:
 
@@ -104,7 +104,7 @@ All external dependencies are configurable via environment variables:
 RABBITMQ_HOST=localhost          # Default: localhost
 RABBITMQ_PORT=5672              # Default: 5672
 RABBITMQ_USER=ml-predictor      # Default: ml-predictor
-RABBITMQ_PASSWORD=P@ssPr3dictor # Default: P@ssPr3dictor
+RABBITMQ_PASSWORD=demo-rabbitmq-password # Default: demo-rabbitmq-password
 RABBITMQ_VHOST=ml-predictor     # Default: ml-predictor
 RABBITMQ_SSL_ENABLED=false      # Default: false
 ```
@@ -115,7 +115,7 @@ DB_HOST=postgres                # Default: postgres (Docker)
 DB_PORT=5432                   # Default: 5432
 DB_NAME=hedis_ai               # Default: hedis_ai
 DB_USER=postgres               # Default: postgres
-DB_PASSWORD=password           # Default: password
+DB_PASSWORD=demo-postgres-password  # Default local demo placeholder
 ```
 
 ### **MLflow (Optional)**
@@ -125,31 +125,31 @@ MLFLOW_TRACKING_URI=http://localhost:5000/  # Default: localhost:5000
 
 ---
 
-## 📦 **What's Included**
+## ðŸ“¦ **What's Included**
 
 ### **Self-Contained Infrastructure**
-- ✅ Local RabbitMQ with management UI
-- ✅ PostgreSQL database with initialization
-- ✅ Redis cache
-- ✅ All microservices
-- ✅ React dashboard
-- ✅ Nginx reverse proxy
+- âœ… Local RabbitMQ with management UI
+- âœ… PostgreSQL database with initialization
+- âœ… Redis cache
+- âœ… All microservices
+- âœ… React dashboard
+- âœ… Nginx reverse proxy
 
 ### **Demo Data**
-- ✅ 25 synthetic members with realistic data
-- ✅ Population analytics
-- ✅ Care gap scenarios
-- ✅ ROI calculations
+- âœ… 25 synthetic members with realistic data
+- âœ… Population analytics
+- âœ… Care gap scenarios
+- âœ… ROI calculations
 
 ### **Test Scripts**
-- ✅ End-to-end pipeline validation
-- ✅ Integration testing
-- ✅ FHIR R4 processing tests
-- ✅ RabbitMQ setup verification
+- âœ… End-to-end pipeline validation
+- âœ… Integration testing
+- âœ… FHIR R4 processing tests
+- âœ… RabbitMQ setup verification
 
 ---
 
-## 🔍 **Verification Checklist**
+## ðŸ” **Verification Checklist**
 
 Run these commands to verify complete independence:
 
@@ -179,7 +179,7 @@ curl http://localhost:3000
 
 ---
 
-## 🚨 **Troubleshooting**
+## ðŸš¨ **Troubleshooting**
 
 ### **Port Conflicts**
 If ports are already in use, modify `docker-compose.yml`:
@@ -205,8 +205,8 @@ docker-compose up -d --build
 
 ---
 
-## ✅ **Portability Confirmed**
+## âœ… **Portability Confirmed**
 
 The platform is now **100% self-contained** and can run on any machine with Docker. No external dependencies, no IEHP infrastructure required, no network connectivity needed beyond initial Docker image downloads.
 
-**Ready for deployment anywhere!** 🎉
+**Ready for deployment anywhere!** ðŸŽ‰

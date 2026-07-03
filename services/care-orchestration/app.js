@@ -13,9 +13,16 @@ const { v4: uuidv4 } = require('uuid');
 const Client = require('fhirclient').default;
 
 // Configuration
+const rabbitProtocol = process.env.RABBITMQ_SSL_ENABLED === 'true' ? 'amqps' : 'amqp';
+const rabbitUser = process.env.RABBITMQ_USER || 'ml-predictor';
+const rabbitPassword = process.env.RABBITMQ_PASSWORD || 'demo-rabbitmq-password';
+const rabbitHost = process.env.RABBITMQ_HOST || 'rabbitmq';
+const rabbitPort = process.env.RABBITMQ_PORT || '5672';
+const rabbitVhost = process.env.RABBITMQ_VHOST || 'ml-predictor';
+
 const config = {
     rabbitmq: {
-        url: 'amqps://ml-predictor:P@ssPr3dictor@rmq-dev.iehp.org:5671/ml-predictor',
+        url: `${rabbitProtocol}://${rabbitUser}:${rabbitPassword}@${rabbitHost}:${rabbitPort}/${rabbitVhost}`,
         exchanges: {
             care: 'care.exchange',
             dashboard: 'dashboard.exchange'
@@ -372,7 +379,7 @@ class CareGapOrchestrator {
     async processRiskPrediction(messageData) {
         try {
             const { message_id, member_id, member_age, risk_predictions, high_risk_measures } = messageData;
-            
+
             logger.info(`Processing care orchestration for message ${message_id}, member ${member_id}`);
 
             const careGaps = [];
@@ -400,7 +407,7 @@ class CareGapOrchestrator {
                     measure_type: measureType,
                     risk_level: riskPrediction.risk_level,
                     risk_probability: riskPrediction.risk_probability,
-                    priority: riskPrediction.risk_level === 'HIGH' ? 'high' : 
+                    priority: riskPrediction.risk_level === 'HIGH' ? 'high' :
                              riskPrediction.risk_level === 'MEDIUM' ? 'medium' : 'low',
                     created_timestamp: new Date().toISOString(),
                     care_plan_id: carePlan.id,

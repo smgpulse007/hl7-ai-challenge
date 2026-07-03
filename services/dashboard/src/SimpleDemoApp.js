@@ -210,8 +210,8 @@ const SimpleDemoApp = () => {
           <h1 style={styles.title}>HEDIS AI Platform</h1>
           <h2 style={styles.subtitle}>The Only Platform That Does All Three</h2>
           <p style={styles.description}>
-            While every EMR can show you care gaps, <strong>no other platform can predict who won't close them, 
-            combine data from multiple sources beyond the EMR, and serve both payers and providers 
+            While every EMR can show you care gaps, <strong>no other platform can predict who won't close them,
+            combine data from multiple sources beyond the EMR, and serve both payers and providers
             with the same intelligence.</strong>
           </p>
           <div style={styles.badgeContainer}>
@@ -219,7 +219,7 @@ const SimpleDemoApp = () => {
               100% End-to-End Success Rate
             </span>
             <span style={{...styles.badge, backgroundColor: '#6b7280'}}>
-              Production Ready
+              Production-Style
             </span>
             <span style={{...styles.badge, backgroundColor: '#6b7280'}}>
               Projected ROI: $3.2M+
@@ -232,7 +232,7 @@ const SimpleDemoApp = () => {
       <div style={styles.card}>
         <div style={styles.cardHeader}>
           <h3 style={{margin: 0, fontSize: '1.25rem', fontWeight: '600'}}>Live Platform Metrics</h3>
-          <p style={{margin: '0.5rem 0 0 0', color: '#6b7280'}}>Real-time data from production-ready services</p>
+          <p style={{margin: '0.5rem 0 0 0', color: '#6b7280'}}>Real-time data from production-style services</p>
         </div>
         <div style={styles.cardContent}>
           <div style={styles.statsGrid}>
@@ -272,18 +272,18 @@ const SimpleDemoApp = () => {
 
       {/* Three Differentiators */}
       <div style={styles.differentiatorGrid}>
-        <div 
+        <div
           style={{...styles.card, ...styles.differentiatorCard, borderColor: '#3b82f6'}}
           onClick={() => setActiveDemo('multi-source')}
         >
           <div style={styles.differentiatorHeader}>
-            <div style={{...styles.differentiatorIcon, color: '#3b82f6'}}>📊</div>
+            <div style={{...styles.differentiatorIcon, color: '#3b82f6'}}>ðŸ“Š</div>
             <h3 style={styles.differentiatorTitle}>Multi-Source Integration</h3>
             <p style={styles.differentiatorSubtitle}>Input Agnostic Data Platform</p>
             <p style={styles.differentiatorDesc}>
               Captures 30-40% more completed care than EMR-only solutions
             </p>
-            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>✅ Demonstrated</span>
+            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>âœ… Demonstrated</span>
           </div>
           <div style={styles.cardContent}>
             <div style={{marginBottom: '1rem'}}>
@@ -306,18 +306,18 @@ const SimpleDemoApp = () => {
           </div>
         </div>
 
-        <div 
+        <div
           style={{...styles.card, ...styles.differentiatorCard, borderColor: '#16a34a'}}
           onClick={() => setActiveDemo('predictive')}
         >
           <div style={styles.differentiatorHeader}>
-            <div style={{...styles.differentiatorIcon, color: '#16a34a'}}>📈</div>
+            <div style={{...styles.differentiatorIcon, color: '#16a34a'}}>ðŸ“ˆ</div>
             <h3 style={styles.differentiatorTitle}>Predictive Analytics</h3>
             <p style={styles.differentiatorSubtitle}>Non-Compliance Prediction</p>
             <p style={styles.differentiatorDesc}>
               75% cost reduction with 3.2x higher success rates
             </p>
-            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>✅ Demonstrated</span>
+            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>âœ… Demonstrated</span>
           </div>
           <div style={styles.cardContent}>
             <div style={{marginBottom: '1rem'}}>
@@ -340,18 +340,18 @@ const SimpleDemoApp = () => {
           </div>
         </div>
 
-        <div 
+        <div
           style={{...styles.card, ...styles.differentiatorCard, borderColor: '#9333ea'}}
           onClick={() => setActiveDemo('multi-industry')}
         >
           <div style={styles.differentiatorHeader}>
-            <div style={{...styles.differentiatorIcon, color: '#9333ea'}}>🏢</div>
+            <div style={{...styles.differentiatorIcon, color: '#9333ea'}}>ðŸ¢</div>
             <h3 style={styles.differentiatorTitle}>Multi-Industry Platform</h3>
             <p style={styles.differentiatorSubtitle}>Scalable Business Models</p>
             <p style={styles.differentiatorDesc}>
               Scales from 2,400-patient practices to 450,000-member health plans
             </p>
-            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>✅ Demonstrated</span>
+            <span style={{...styles.badge, backgroundColor: '#16a34a'}}>âœ… Demonstrated</span>
           </div>
           <div style={styles.cardContent}>
             <div style={{marginBottom: '1rem'}}>
@@ -379,12 +379,12 @@ const SimpleDemoApp = () => {
       <div style={{...styles.card, backgroundColor: '#fef3c7', border: '2px solid #f59e0b'}}>
         <div style={styles.cardHeader}>
           <h3 style={{margin: 0, fontSize: '1.25rem', fontWeight: '600', color: '#92400e'}}>
-            ⚠️ Unique Market Position
+            âš ï¸ Unique Market Position
           </h3>
         </div>
         <div style={styles.cardContent}>
           <p style={{color: '#92400e', marginBottom: '1rem', fontSize: '1rem'}}>
-            <strong>No other platform combines all three capabilities.</strong> This creates an unassailable 
+            <strong>No other platform combines all three capabilities.</strong> This creates an unassailable
             competitive position in the healthcare quality management market.
           </p>
           <div style={styles.statsGrid}>
@@ -438,26 +438,26 @@ const SimpleDemoApp = () => {
             <p><strong>Last Screening:</strong> 2024-07-22 - Community Health Clinic</p>
             <p><strong>Confidence:</strong> <span style={{color: '#15803d'}}>High - Complete Picture</span></p>
             <p><strong>Projected Savings:</strong> <span style={{color: '#15803d', fontWeight: 'bold'}}>$50 outreach avoided</span></p>
-            
+
             <h4 style={{marginTop: '2rem', marginBottom: '1rem'}}>Data Sources Integrated:</h4>
             <div style={{display: 'grid', gap: '1rem'}}>
               <div style={{padding: '1rem', backgroundColor: '#dcfce7', borderLeft: '4px solid #16a34a', borderRadius: '0.5rem'}}>
-                <strong>📄 HL7 Lab Results</strong> - 2024-07-22<br/>
+                <strong>ðŸ“„ HL7 Lab Results</strong> - 2024-07-22<br/>
                 Pap smear - Normal cytology (LOINC: 33717-0)<br/>
                 <small>Community Health Clinic</small>
               </div>
               <div style={{padding: '1rem', backgroundColor: '#dbeafe', borderLeft: '4px solid #3b82f6', borderRadius: '0.5rem'}}>
-                <strong>🗄️ HIE Data</strong> - 2024-07-22<br/>
+                <strong>ðŸ—„ï¸ HIE Data</strong> - 2024-07-22<br/>
                 Cervical screening procedure documented<br/>
                 <small>Regional HIE Network</small>
               </div>
               <div style={{padding: '1rem', backgroundColor: '#f3e8ff', borderLeft: '4px solid #9333ea', borderRadius: '0.5rem'}}>
-                <strong>💳 Claims Data</strong> - 2024-07-25<br/>
+                <strong>ðŸ’³ Claims Data</strong> - 2024-07-25<br/>
                 CPT 88150 - Cytopathology, cervical/vaginal<br/>
                 <small>Claims Processing System</small>
               </div>
               <div style={{padding: '1rem', backgroundColor: '#fed7aa', borderLeft: '4px solid #ea580c', borderRadius: '0.5rem'}}>
-                <strong>💊 Pharmacy Data</strong> - 2024-07-20<br/>
+                <strong>ðŸ’Š Pharmacy Data</strong> - 2024-07-20<br/>
                 Anxiety medication filled (pre-procedure)<br/>
                 <small>CVS Pharmacy #4521</small>
               </div>
@@ -483,8 +483,8 @@ const SimpleDemoApp = () => {
               </div>
             </div>
             <p style={{textAlign: 'center', marginTop: '1rem', fontStyle: 'italic', color: '#4b5563'}}>
-              <strong>Key Differentiator:</strong> While EMR-only solutions miss 30-40% of completed care 
-              happening outside their system, our platform captures the complete member journey across 
+              <strong>Key Differentiator:</strong> While EMR-only solutions miss 30-40% of completed care
+              happening outside their system, our platform captures the complete member journey across
               all touchpoints.
             </p>
           </div>
@@ -509,7 +509,7 @@ const SimpleDemoApp = () => {
             </div>
             <div style={styles.cardContent}>
               <p><strong>Strategy:</strong> Contact all 1,247 members</p>
-              <p><strong>Cost:</strong> <span style={{color: '#dc2626', fontWeight: 'bold'}}>$62,350</span> (1,247 × $50)</p>
+              <p><strong>Cost:</strong> <span style={{color: '#dc2626', fontWeight: 'bold'}}>$62,350</span> (1,247 Ã— $50)</p>
               <p><strong>Success Rate:</strong> 20% (249 completions)</p>
               <p><strong>Efficiency:</strong> <span style={{color: '#dc2626'}}>Low - spray and pray</span></p>
             </div>
@@ -568,8 +568,8 @@ const SimpleDemoApp = () => {
               </div>
             </div>
             <p style={{textAlign: 'center', marginTop: '1rem', fontStyle: 'italic', color: '#4b5563'}}>
-              <strong>Key Differentiator:</strong> While traditional approaches waste resources on members 
-              who will comply naturally, our predictive AI identifies the 25% who need intervention to succeed. 
+              <strong>Key Differentiator:</strong> While traditional approaches waste resources on members
+              who will comply naturally, our predictive AI identifies the 25% who need intervention to succeed.
               This precision targeting delivers 3x higher success rates at 75% lower cost.
             </p>
           </div>
@@ -590,7 +590,7 @@ const SimpleDemoApp = () => {
         <div style={styles.differentiatorGrid}>
           <div style={{...styles.card, backgroundColor: '#eff6ff', border: '2px solid #3b82f6'}}>
             <div style={styles.cardHeader}>
-              <h3 style={{color: '#1e40af', margin: 0}}>🏢 Health Plan Operations</h3>
+              <h3 style={{color: '#1e40af', margin: 0}}>ðŸ¢ Health Plan Operations</h3>
             </div>
             <div style={styles.cardContent}>
               <p><strong>Organization:</strong> IEHP (Inland Empire Health Plan)</p>
@@ -603,7 +603,7 @@ const SimpleDemoApp = () => {
 
           <div style={{...styles.card, backgroundColor: '#f0fdf4', border: '2px solid #16a34a'}}>
             <div style={styles.cardHeader}>
-              <h3 style={{color: '#15803d', margin: 0}}>🏥 Health System</h3>
+              <h3 style={{color: '#15803d', margin: 0}}>ðŸ¥ Health System</h3>
             </div>
             <div style={styles.cardContent}>
               <p><strong>Organization:</strong> Riverside Medical Center</p>
@@ -616,7 +616,7 @@ const SimpleDemoApp = () => {
 
           <div style={{...styles.card, backgroundColor: '#f3e8ff', border: '2px solid #9333ea'}}>
             <div style={styles.cardHeader}>
-              <h3 style={{color: '#7c3aed', margin: 0}}>👩‍⚕️ Individual Practice</h3>
+              <h3 style={{color: '#7c3aed', margin: 0}}>ðŸ‘©â€âš•ï¸ Individual Practice</h3>
             </div>
             <div style={styles.cardContent}>
               <p><strong>Organization:</strong> Dr. Martinez Family Practice</p>
@@ -671,15 +671,15 @@ const SimpleDemoApp = () => {
                 <div style={{fontSize: '0.75rem', color: '#9ca3af'}}>Payer/Provider/Practice</div>
               </div>
               <div style={{textAlign: 'center'}}>
-                <div style={{fontSize: '2rem', fontWeight: 'bold', color: '#ea580c'}}>∞</div>
+                <div style={{fontSize: '2rem', fontWeight: 'bold', color: '#ea580c'}}>âˆž</div>
                 <div style={{fontSize: '0.875rem', color: '#6b7280'}}>Scalability</div>
                 <div style={{fontSize: '0.75rem', color: '#9ca3af'}}>2K to 450K population</div>
               </div>
             </div>
             <p style={{textAlign: 'center', marginTop: '1rem', fontStyle: 'italic', color: '#4b5563'}}>
-              <strong>Key Differentiator:</strong> While competitors build point solutions for single 
-              use cases, our platform scales from 2,400-patient practices to 450,000-member health plans 
-              using the same core AI intelligence. This multi-industry approach creates unprecedented 
+              <strong>Key Differentiator:</strong> While competitors build point solutions for single
+              use cases, our platform scales from 2,400-patient practices to 450,000-member health plans
+              using the same core AI intelligence. This multi-industry approach creates unprecedented
               market opportunities and competitive moats.
             </p>
           </div>
@@ -697,9 +697,9 @@ const SimpleDemoApp = () => {
             <h1 style={styles.navTitle}>HEDIS AI Platform Demo</h1>
             <p style={styles.navSubtitle}>The Only Platform That Does All Three</p>
           </div>
-          <span style={styles.badge}>Production Ready - 100% Success Rate</span>
+          <span style={styles.badge}>Production-Style - 100% Success Rate</span>
         </div>
-        
+
         <div style={styles.navButtons}>
           <button
             onClick={() => setActiveDemo('overview')}
@@ -708,7 +708,7 @@ const SimpleDemoApp = () => {
               ...(activeDemo === 'overview' ? styles.navButtonActive : styles.navButtonInactive)
             }}
           >
-            📊 Executive Overview
+            ðŸ“Š Executive Overview
           </button>
           <button
             onClick={() => setActiveDemo('multi-source')}
@@ -717,7 +717,7 @@ const SimpleDemoApp = () => {
               ...(activeDemo === 'multi-source' ? styles.navButtonActive : styles.navButtonInactive)
             }}
           >
-            📈 Multi-Source Integration
+            ðŸ“ˆ Multi-Source Integration
           </button>
           <button
             onClick={() => setActiveDemo('predictive')}
@@ -726,7 +726,7 @@ const SimpleDemoApp = () => {
               ...(activeDemo === 'predictive' ? styles.navButtonActive : styles.navButtonInactive)
             }}
           >
-            🎯 Predictive Analytics
+            ðŸŽ¯ Predictive Analytics
           </button>
           <button
             onClick={() => setActiveDemo('multi-industry')}
@@ -735,7 +735,7 @@ const SimpleDemoApp = () => {
               ...(activeDemo === 'multi-industry' ? styles.navButtonActive : styles.navButtonInactive)
             }}
           >
-            🏢 Multi-Industry Platform
+            ðŸ¢ Multi-Industry Platform
           </button>
         </div>
       </nav>

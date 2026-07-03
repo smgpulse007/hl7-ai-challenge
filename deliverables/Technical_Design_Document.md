@@ -1,9 +1,9 @@
 # AI-Powered HEDIS Care Gap Closure Platform
 ## Technical Design Document
 
-**HL7 AI Challenge 2025 Submission**  
-**Category: Clinical Quality Improvement**  
-**Version: 1.0**  
+**HL7 AI Challenge 2025 Submission**
+**Category: Clinical Quality Improvement**
+**Version: 1.0**
 **Date: August 2025**
 
 ---
@@ -13,8 +13,8 @@
 The AI-Powered HEDIS Care Gap Closure Platform transforms healthcare quality management from reactive "chase-and-close" to proactive "predict-and-prevent" care delivery. Built on HL7 standards with advanced AI capabilities, the platform processes multi-source clinical data to predict non-compliance risk and generate automated interventions.
 
 ### Key Innovation
-- **Multi-Standard Processing:** HL7 v2.x → FHIR R4 transformation with AI enhancement
-- **Predictive Analytics:** XGBoost models predict non-compliance with 85%+ accuracy  
+- **Multi-Standard Processing:** HL7 v2.x â†’ FHIR R4 transformation with AI enhancement
+- **Predictive Analytics:** XGBoost models predict non-compliance with synthetic demo risk-scoring behavior
 - **Real-time Clinical Decision Support:** SMART on FHIR integration with live care gap alerts
 - **Production Deployment:** Demonstrated $1.7M+ ROI with measurable quality improvements
 
@@ -51,11 +51,11 @@ def extract_clinical_evidence(self, text_content: str) -> Dict[str, Any]:
         "wcv_matches": [],
         "confidence_score": 0.0
     }
-    
+
     for i, line in enumerate(lines):
         doc = self.nlp(line)
         matches = self.matcher(doc)
-        
+
         if matches:
             # Categorize matches by HEDIS measure
             for match_id, start, end in matches:
@@ -66,7 +66,7 @@ def extract_clinical_evidence(self, text_content: str) -> Dict[str, Any]:
 
 **HEDIS Measure Patterns:**
 - **CCS:** Cervical Cancer Screening (SNOMED: 169550002, 439958008, 86662002)
-- **COL:** Colorectal Cancer Screening (SNOMED: 73761001, 174158000, 396226005)  
+- **COL:** Colorectal Cancer Screening (SNOMED: 73761001, 174158000, 396226005)
 - **WCV:** Well-Child Visits (SNOMED: 410620009, 390906007, 185349003)
 
 #### 2. Risk Prediction Service (Port 8002)
@@ -86,13 +86,13 @@ def predict_risk(self, features: Dict[str, Any], measure_type: str) -> Dict[str,
     for feature_name in feature_list:
         value = features.get(feature_name, 0)
         feature_vector.append(value)
-    
+
     X = np.array(feature_vector).reshape(1, -1)
-    
+
     # XGBoost prediction
     risk_probability = model.predict_proba(X)[0][1]  # Non-compliance probability
     risk_prediction = model.predict(X)[0]  # Binary prediction
-    
+
     # Risk stratification
     if risk_probability >= 0.7:
         risk_level = "HIGH"
@@ -109,9 +109,9 @@ def predict_risk(self, features: Dict[str, Any], measure_type: str) -> Dict[str,
 - **Social Determinants:** Geographic location, insurance type, care gaps history
 
 **Model Performance:**
-- **CCS Model:** 36 features, 85%+ accuracy on test set
-- **WCV Model:** 34 features, 85%+ accuracy on test set
-- **Risk Thresholds:** HIGH ≥70%, MEDIUM 40-69%, LOW <40%
+- **CCS Model:** 36 features, synthetic demo risk-scoring behavior on test set
+- **WCV Model:** 34 features, synthetic demo risk-scoring behavior on test set
+- **Risk Thresholds:** HIGH â‰¥70%, MEDIUM 40-69%, LOW <40%
 
 #### 3. Care Orchestration Service (Port 8003)
 **File Path:** `services/care-orchestration/app.js`
@@ -159,7 +159,7 @@ createRiskAssessmentResource(member_id, riskPrediction, measureType) {
 
 **Business Logic Engine:**
 - **HIGH Risk:** 7-day intervention window
-- **MEDIUM Risk:** 45-day intervention window  
+- **MEDIUM Risk:** 45-day intervention window
 - **LOW Risk:** 90-day intervention window
 
 ---
@@ -283,12 +283,12 @@ def extract_evidence_with_rag(self, text_content: str, measure_type: str) -> Dic
     prompt = f"""
     Analyze the following clinical text for evidence of {measure_type} compliance.
     Extract specific evidence with confidence scores.
-    
+
     Clinical Text: {text_content}
-    
+
     Provide structured evidence with reasoning.
     """
-    
+
     response = self.llm.invoke(prompt)
     return self._parse_rag_response(response, measure_type)
 ```
@@ -317,7 +317,7 @@ def _load_models_from_mlflow(self):
         order_by=["start_time DESC"],
         max_results=1
     )
-    
+
     if not ccs_runs.empty:
         ccs_run_id = ccs_runs.iloc[0]['run_id']
         self.ccs_model = mlflow.xgboost.load_model(f"runs:/{ccs_run_id}/model")
@@ -346,12 +346,12 @@ services:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}
       rabbitmq: {condition: service_healthy}
-    
+
   risk-prediction:
     build: ./services/risk-prediction
     ports: ["8002:8002"]
     environment:
-      MLFLOW_TRACKING_URI: "http://pvposwbc02.iehp.local:8000/"
+      MLFLOW_TRACKING_URI: "http://localhost:5000/"
 ```
 
 **Health Monitoring:**
@@ -370,7 +370,7 @@ healthcheck:
 
 **Exchange Configuration:**
 - **hl7.exchange:** Clinical evidence messages
-- **risk.exchange:** Risk prediction messages  
+- **risk.exchange:** Risk prediction messages
 - **care.exchange:** Care gap messages
 - **dashboard.exchange:** UI update messages
 
@@ -566,11 +566,11 @@ def test_complete_pipeline():
     # Test HL7 processing
     hl7_result = test_hl7_processing()
     assert hl7_result['success'] == True
-    
+
     # Test risk prediction
     risk_result = test_risk_prediction()
     assert risk_result['risk_level'] in ['HIGH', 'MEDIUM', 'LOW']
-    
+
     # Test FHIR resource creation
     fhir_result = test_care_orchestration()
     assert fhir_result['fhir_resources'] is not None
@@ -614,11 +614,11 @@ def test_complete_pipeline():
 
 ## Conclusion
 
-The AI-Powered HEDIS Care Gap Closure Platform represents a significant advancement in healthcare quality management, combining the power of HL7 standards with cutting-edge AI technologies. The platform's event-driven architecture, comprehensive HL7 integration, and production-ready deployment demonstrate its potential to transform healthcare delivery from reactive to proactive care management.
+The AI-Powered HEDIS Care Gap Closure Platform represents a significant advancement in healthcare quality management, combining the power of HL7 standards with cutting-edge AI technologies. The platform's event-driven architecture, comprehensive HL7 integration, and production-style deployment demonstrate its potential to transform healthcare delivery from reactive to proactive care management.
 
 **Key Technical Achievements:**
 - **Standards Compliance:** Full HL7 v2.x and FHIR R4 implementation
-- **AI Innovation:** Multi-modal AI with 85%+ prediction accuracy
+- **AI Innovation:** Multi-modal AI with synthetic demo risk-scoring behavior
 - **Production Readiness:** Scalable, secure, and maintainable architecture
 - **Clinical Impact:** Demonstrated ROI with measurable quality improvements
 

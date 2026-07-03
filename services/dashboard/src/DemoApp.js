@@ -43,7 +43,7 @@ const DemoApp = () => {
         "Care Captured": "+30-40%",
         "Projected Savings": "$50 per outreach"
       },
-      status: "✅ Demonstrated",
+      status: "âœ… Demonstrated",
       color: "blue"
     },
     {
@@ -57,7 +57,7 @@ const DemoApp = () => {
         "Success Rate": "3.2x higher",
         "Efficiency": "Precision targeting"
       },
-      status: "✅ Demonstrated",
+      status: "âœ… Demonstrated",
       color: "green"
     },
     {
@@ -71,7 +71,7 @@ const DemoApp = () => {
         "Industries": "3 verticals",
         "Revenue Streams": "Multiple"
       },
-      status: "✅ Demonstrated",
+      status: "âœ… Demonstrated",
       color: "purple"
     }
   ];
@@ -89,8 +89,8 @@ const DemoApp = () => {
               The Only Platform That Does All Three
             </h2>
             <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-              While every EMR can show you care gaps, <strong>no other platform can predict who won't close them, 
-              combine data from multiple sources beyond the EMR, and serve both payers and providers 
+              While every EMR can show you care gaps, <strong>no other platform can predict who won't close them,
+              combine data from multiple sources beyond the EMR, and serve both payers and providers
               with the same intelligence.</strong>
             </p>
             <div className="flex justify-center space-x-4 pt-4">
@@ -98,7 +98,7 @@ const DemoApp = () => {
                 100% End-to-End Success Rate
               </Badge>
               <Badge variant="outline" className="text-lg px-4 py-2">
-                Production Ready
+                Production-Style
               </Badge>
               <Badge variant="outline" className="text-lg px-4 py-2">
                 Projected ROI: $3.2M+
@@ -112,7 +112,7 @@ const DemoApp = () => {
       <Card>
         <CardHeader>
           <h3 className="text-xl font-semibold">Live Platform Metrics</h3>
-          <p className="text-gray-600">Real-time data from production-ready services</p>
+          <p className="text-gray-600">Real-time data from production-style services</p>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -153,8 +153,8 @@ const DemoApp = () => {
       {/* Three Unique Differentiators */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {differentiators.map((diff, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             className={`h-full border-2 hover:shadow-lg transition-all cursor-pointer border-${diff.color}-200 hover:border-${diff.color}-400`}
             onClick={() => setActiveDemo(diff.id)}
           >
@@ -198,7 +198,7 @@ const DemoApp = () => {
         </CardHeader>
         <CardContent>
           <p className="text-yellow-800 mb-4">
-            <strong>No other platform combines all three capabilities.</strong> This creates an unassailable 
+            <strong>No other platform combines all three capabilities.</strong> This creates an unassailable
             competitive position in the healthcare quality management market.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -236,10 +236,10 @@ const DemoApp = () => {
               </div>
             </div>
             <Badge variant="success" className="bg-green-600 text-white">
-              Production Ready - 100% Success Rate
+              Production-Style - 100% Success Rate
             </Badge>
           </div>
-          
+
           <div className="flex space-x-1">
             <button
               onClick={() => setActiveDemo('overview')}

@@ -260,7 +260,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
       >
         <div className="p-6">
           <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text-dark)' }}>
-            Live HL7 → FHIR Processing Workflow
+            Live HL7 â†’ FHIR Processing Workflow
           </h2>
           <p className="mb-4" style={{ color: 'var(--text-light)' }}>
             This demo showcases our complete HL7 AI platform processing a real ADT^A01 message through our two-layer AI architecture:
@@ -268,7 +268,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(0, 166, 81, 0.1)' }}>
               <h4 className="font-semibold mb-2" style={{ color: 'var(--secondary-green)' }}>
-                🧠 Layer 1: Evidence Discovery
+                ðŸ§  Layer 1: Evidence Discovery
               </h4>
               <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
                 NER + RAG pipeline extracts clinical entities and retrieves evidence from multi-source data with 95%+ confidence
@@ -276,10 +276,10 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
             </div>
             <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(255, 107, 53, 0.1)' }}>
               <h4 className="font-semibold mb-2" style={{ color: 'var(--accent-orange)' }}>
-                🎯 Layer 2: Risk Prediction
+                ðŸŽ¯ Layer 2: Risk Prediction
               </h4>
               <p className="text-sm" style={{ color: 'var(--text-dark)' }}>
-                ML models predict non-compliance risk and identify care gaps with 85%+ accuracy for targeted interventions
+                ML models predict non-compliance risk and identify care gaps with synthetic demo risk-scoring behavior for targeted interventions
               </p>
             </div>
           </div>
@@ -288,7 +288,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
 
       {/* Header with Real-time Metrics */}
       <div className="metrics-grid">
-        <motion.div 
+        <motion.div
           className="metric-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -299,7 +299,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
           <div className="metric-change positive">+{processedMessages} today</div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="metric-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -310,7 +310,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
           <div className="metric-change positive">+0.3% this week</div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="metric-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -321,7 +321,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
           <div className="metric-change positive">-0.2s improved</div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="metric-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -338,13 +338,13 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
       {/* Demo Control */}
       <div className="processing-pipeline">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-xl font-bold text-gray-800">Live HL7 → FHIR Processing Demo</h3>
+          <h3 className="text-xl font-bold text-gray-800">Live HL7 â†’ FHIR Processing Demo</h3>
           <motion.button
             onClick={startProcessing}
             disabled={isProcessing}
             className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-              isProcessing 
-                ? 'bg-gray-300 cursor-not-allowed' 
+              isProcessing
+                ? 'bg-gray-300 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700 text-white hover:scale-105'
             }`}
             whileHover={{ scale: isProcessing ? 1 : 1.05 }}
@@ -377,7 +377,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div 
+                <div
                   className="step-icon"
                   style={{ backgroundColor: isCompleted ? 'var(--success-green)' : step.color }}
                 >
@@ -389,7 +389,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
                     <Icon className="w-5 h-5" />
                   )}
                 </div>
-                
+
                 <div className="step-content">
                   <div className="step-title">{step.title}</div>
                   <div className="step-description">{step.description}</div>
@@ -435,7 +435,7 @@ DG1|1|I9|E11.9|Type 2 diabetes mellitus without complications|20250816131500`;
                 ))}
                 {isProcessing && (
                   <div className="text-yellow-400 animate-pulse">
-                    ▶ Processing...
+                    â–¶ Processing...
                   </div>
                 )}
               </div>

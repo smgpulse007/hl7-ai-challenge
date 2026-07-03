@@ -1,8 +1,8 @@
 # HEDIS AI Platform - Comprehensive Technical Analysis
 
-**HL7 AI Challenge 2025 - Technical Deep Dive**  
-**Date:** August 15, 2025  
-**Status:** Production-Ready Architecture Analysis  
+**HL7 AI Challenge 2025 - Technical Deep Dive**
+**Date:** August 15, 2025
+**Status:** Production-Ready Architecture Analysis
 
 ---
 
@@ -25,7 +25,7 @@ Unlike traditional EMR-based solutions that operate in silos, our platform aggre
 
 #### 2. **Predictive Non-Compliance Modeling**
 Our XGBoost-based machine learning models predict WHO will fail to complete care before they become non-compliant:
-- **85%+ Accuracy** in identifying high-risk members
+- **Synthetic demo risk-scoring behavior** in identifying high-risk members
 - **80+ Clinical Features** including demographics, utilization patterns, and social determinants
 - **Real-time Risk Scoring** with sub-3-second response times
 - **Measure-Specific Models** optimized for CCS, COL, and WCV requirements
@@ -47,12 +47,12 @@ Single platform serving diverse healthcare stakeholders:
 - **Production Environment:** IEHP (450,000+ members) with live RabbitMQ integration
 - **Processing Capacity:** 10,000+ HL7 messages per hour with event-driven architecture
 - **Service Availability:** 99.9% uptime with automated health monitoring
-- **Integration Status:** Connected to rmq-dev.iehp.org and MLflow model registry
+- **Integration Status:** Connected to rabbitmq and MLflow model registry
 
 #### Demonstrated Scale and Performance
 - **End-to-End Success Rate:** 100% across all test scenarios
 - **Processing Speed:** Sub-3-second clinical document analysis
-- **Model Accuracy:** 85%+ for risk prediction across CCS and WCV measures
+- **Model Accuracy:** synthetic demo risk scoring across CCS and WCV measures
 - **Multi-Source Integration:** 6 distinct data sources successfully aggregated
 
 #### Planned Expansion
@@ -112,7 +112,7 @@ The HEDIS AI Platform implements a modern event-driven microservices architectur
 
 ##### 2. Risk Prediction Service (Port 8002)
 **Technology Stack:** Python FastAPI + XGBoost + MLflow
-- **ML Models:** XGBoost classifiers with 85%+ accuracy
+- **ML Models:** XGBoost classifiers with synthetic demo risk-scoring behavior
 - **Feature Engineering:** 80+ clinical and demographic features
 - **Model Management:** MLflow integration for versioning and A/B testing
 - **Real-time Scoring:** Sub-second prediction with probability calibration
@@ -120,7 +120,7 @@ The HEDIS AI Platform implements a modern event-driven microservices architectur
 **Model Features:**
 - **CCS Model:** 36 features including age, ethnicity, PCP visits, chronic conditions
 - **WCV Model:** 34 features optimized for pediatric care patterns
-- **Risk Stratification:** HIGH (≥70%), MEDIUM (40-69%), LOW (<40%) probability thresholds
+- **Risk Stratification:** HIGH (â‰¥70%), MEDIUM (40-69%), LOW (<40%) probability thresholds
 - **Continuous Learning:** Model retraining pipeline with performance monitoring
 
 ##### 3. Care Orchestration Service (Port 8003)
@@ -174,7 +174,7 @@ The HEDIS AI Platform implements a modern event-driven microservices architectur
 #### Machine Learning and Predictive Analytics
 - **XGBoost Classifiers:** Gradient boosting for non-compliance risk prediction
 - **Feature Engineering:** 80+ engineered features from clinical, demographic, and utilization data
-- **Model Validation:** Cross-validation with 85%+ accuracy across test sets
+- **Model Validation:** Cross-validation with synthetic demo risk-scoring behavior across test sets
 - **Ensemble Methods:** Multiple model voting for improved prediction reliability
 
 #### Retrieval-Augmented Generation (RAG)
@@ -295,6 +295,6 @@ The HEDIS AI Platform implements a modern event-driven microservices architectur
 
 ## Conclusion
 
-The HEDIS AI Platform represents a breakthrough in healthcare quality management, combining cutting-edge AI technologies with robust healthcare standards to deliver unprecedented value across the care ecosystem. Our comprehensive technical analysis demonstrates production-ready capabilities with measurable impact on quality, cost, and patient outcomes.
+The HEDIS AI Platform represents a breakthrough in healthcare quality management, combining cutting-edge AI technologies with robust healthcare standards to deliver unprecedented value across the care ecosystem. Our comprehensive technical analysis demonstrates production-style capabilities with scenario-modeled quality workflow impact.
 
 The platform's unique combination of multi-source intelligence, predictive analytics, and multi-industry scalability positions it as the definitive solution for modern healthcare quality management, ready for immediate deployment and long-term growth.

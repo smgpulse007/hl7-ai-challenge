@@ -11,7 +11,7 @@
 
 While every EMR can show you care gaps, **no other platform can predict who won't close them, combine data from multiple sources beyond the EMR, and serve both payers and providers with the same intelligence.** The HEDIS AI Platform is the only solution that does all three, creating an unprecedented competitive advantage in the quality management market.
 
-**Current Status:** ✅ **Production-Ready** with 100% end-to-end pipeline success rate and all three unique differentiators demonstrated.
+**Current Status:** âœ… **Production-Ready** with 100% end-to-end pipeline success rate and all three unique differentiators demonstrated.
 
 ---
 
@@ -58,7 +58,7 @@ While every EMR can show you care gaps, **no other platform can predict who won'
 
 **Traditional Approach:**
 - Contact all 1,247 members
-- Cost: $62,350 (1,247 × $50 outreach)
+- Cost: $62,350 (1,247 Ã— $50 outreach)
 - Success Rate: 20% (249 completions)
 
 **Our Predictive AI Approach:**
@@ -72,9 +72,9 @@ While every EMR can show you care gaps, **no other platform can predict who won'
 ### **Multi-Industry Platform Demo Results**
 **Same AI Intelligence, Different Business Models:**
 
-- **Health Plan (IEHP):** 450,000 members → $5.6M quality bonus revenue
-- **Health System (Riverside Medical):** 85,000 lives → $1.2M value-based revenue
-- **Practice (Dr. Martinez):** 2,400 patients → $45K quality incentives
+- **Health Plan (IEHP):** 450,000 members â†’ $5.6M quality bonus revenue
+- **Health System (Riverside Medical):** 85,000 lives â†’ $1.2M value-based revenue
+- **Practice (Dr. Martinez):** 2,400 patients â†’ $45K quality incentives
 
 **Impact:** Unprecedented market scalability from practices to health plans
 
@@ -86,7 +86,7 @@ While every EMR can show you care gaps, **no other platform can predict who won'
 
 **Cervical Cancer Screening (CCS):**
 - **Current Performance:** 72% (Below 75th percentile)
-- **Projected Improvement:** 85%+ (90th percentile target)
+- **Projected Improvement:** scenario-modeled improvement target
 - **Impact:** Early identification of overdue screenings with 6-month intervention window
 
 **Well-Child Visits (WCV):**
@@ -166,7 +166,7 @@ While every EMR can show you care gaps, **no other platform can predict who won'
 
 ### Production-Ready Microservices Platform
 - **HL7 Processing Service:** Automated PDF extraction and clinical text analysis
-- **Risk Prediction Service:** XGBoost ML models with 85%+ accuracy rates
+- **Risk Prediction Service:** XGBoost ML models with synthetic demo risk-scoring behavior rates
 - **Care Orchestration Service:** FHIR R4 compliant resource management
 - **Provider Dashboard:** Real-time React interface with EHR integration capabilities
 
