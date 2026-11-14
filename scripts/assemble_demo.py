@@ -31,7 +31,8 @@ def main():
                 'method': 'Actual local React/Express screenshots captured by Playwright CLI in isolated Microsoft Edge',
                 'synthetic_only': True, 'viewport': [1440, 1100], 'durations_ms': durations,
                 'frames': [{'file': str(p.relative_to(ROOT).as_posix()), 'sha256': digest(p)} for p in paths],
-                'source_sha256': {name: digest(ROOT / name) for name in sources},
+                'source_hash_format': 'UTF-8 bytes with CRLF normalized to LF, matching Git blobs',
+                'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes().replace(b'\r\n', b'\n')).hexdigest() for name in sources},
                 'export': {'event_types': [e['type'] for e in result['events']], 'sha256': digest(download)},
                 'gif_sha256': digest(target)}
     (ROOT / 'docs/demo-recording.json').write_text(json.dumps(metadata, indent=2) + '\n', encoding='utf-8')
