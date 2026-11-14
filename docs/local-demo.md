@@ -33,4 +33,4 @@ Vite replaces the inconsistent Create React App lockfile. JSX files now use `.js
 
 Run the supported quickstart and capture the actual UI using Playwright CLI at 1440 Ã— 1100. Save `01-queue.png`, `02-review.png`, `03-decision.png`, and `04-closed.png` under `output/playwright/`. Show the synthetic labels. Export the actual session to `.playwright-cli/synthetic-session.json`.
 
-Run `python scripts/assemble_demo.py` with Pillow installed. It assembles real screenshots without mock UI elements and records source, frame, and download hashes in `docs/demo-recording.json`. A separate 390-pixel browser check verifies no page overflow; the wide review table scrolls within its container.
+Run `python scripts/assemble_demo.py` with Pillow installed. It assembles real screenshots without mock UI elements and records source, frame, and download hashes in `docs/demo-recording.json`. Source hashes normalize CRLF to LF so they match Git blobs across platforms; image and download hashes use their exact bytes. A separate 390-pixel browser check verifies no page overflow; the wide review table scrolls within its container.
