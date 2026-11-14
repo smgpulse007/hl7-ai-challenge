@@ -1,0 +1,12 @@
+{
+  "name": "hl7-workflow-demo",
+  "private": true,
+  "version": "1.0.0",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "setup:demo": "npm --prefix services/dashboard ci --ignore-scripts --no-fund && npm --prefix services/care-orchestration ci --ignore-scripts --no-fund",
+    "build:demo": "npm --prefix services/dashboard run build:demo",
+    "demo": "node services/care-orchestration/demo-server.cjs",
+    "test": "node --test services/care-orchestration/test/demo.test.cjs"
+  }
+}

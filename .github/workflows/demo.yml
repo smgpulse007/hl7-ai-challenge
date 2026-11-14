@@ -1,0 +1,27 @@
+name: Synthetic workflow
+on:
+  pull_request:
+  push:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  local-demo:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+      - run: npm run setup:demo
+      - run: npm test
+      - run: npm --prefix services/care-orchestration run lint
+      - run: npm --prefix services/dashboard run build
+      - run: npm run build:demo
+      - run: node scripts/smoke-demo.cjs
+      - run: npm --prefix services/dashboard audit --omit=dev
+      - run: npm --prefix services/care-orchestration audit --omit=dev

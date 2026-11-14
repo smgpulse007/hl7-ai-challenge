@@ -1,5 +1,5 @@
 # Development stage - Direct React development server
-FROM node:18-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci --ignore-scripts
 
 # Copy source code
 COPY . .
@@ -16,8 +16,7 @@ COPY . .
 EXPOSE 3000
 
 # Set environment variables
-ENV REACT_APP_API_BASE_URL=http://localhost:8003
-ENV CHOKIDAR_USEPOLLING=true
+ENV VITE_API_BASE_URL=http://localhost:8003
 
 # Start development server
-CMD ["npm", "start"]
+CMD ["npm", "start", "--", "--host", "0.0.0.0"]
