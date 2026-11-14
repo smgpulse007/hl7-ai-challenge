@@ -1,0 +1,47 @@
+{
+  "recorded_utc": "2026-11-14T05:30:45.197502+00:00",
+  "method": "Actual local React/Express screenshots captured by Playwright CLI in isolated Microsoft Edge",
+  "synthetic_only": true,
+  "viewport": [
+    1440,
+    1100
+  ],
+  "durations_ms": [
+    2600,
+    3200,
+    3800,
+    3000
+  ],
+  "frames": [
+    {
+      "file": "output/playwright/01-queue.png",
+      "sha256": "8e7668e87b3dd781241d11e017445345ddeb4e0f3ccef70cfdcef466dc03b101"
+    },
+    {
+      "file": "output/playwright/02-review.png",
+      "sha256": "209e6d2550ad98860fa539ac64ef6a3f13464a9108f192b62baaf44cb3a568ad"
+    },
+    {
+      "file": "output/playwright/03-decision.png",
+      "sha256": "f67cbf09137a1744fdf6eac7027c5a04eebca43ba06febb88725140f8ad4a3df"
+    },
+    {
+      "file": "output/playwright/04-closed.png",
+      "sha256": "3e21695e4ece5a7d211c09dcf1aabac087e71eea26d3ee46a7b7c17f8df391c8"
+    }
+  ],
+  "source_sha256": {
+    "services/care-orchestration/demo-server.cjs": "cfcc148c0d6dd0a9d7c8256d73b0020c2aff235444592659f39a3358c23a4298",
+    "services/care-orchestration/demo-state.cjs": "c93d7c1044dc3dd71dc9036429fc33eba20eaaecdbd4b80a920f5690b421cbde",
+    "services/dashboard/src/demo.jsx": "c31fc1ec5dfe7c89a4ccb5d7bc68bcca70e79a091978f00cba11404214b4fbe5",
+    "services/dashboard/src/components/CareManagementDashboard.jsx": "85b52dc144c370018b269e12972110c8a5607f836c10edab05aed415d9cec5ed"
+  },
+  "export": {
+    "event_types": [
+      "outreach_simulated",
+      "gap_closed"
+    ],
+    "sha256": "5446fad0b27061f1e261a8342fa844c9ccbb9171eb883cc5dd5bbaacd32674de"
+  },
+  "gif_sha256": "072d385b97172084201b352449f0cb7f1a6f6221b17f019fa02de3a3983f1193"
+}

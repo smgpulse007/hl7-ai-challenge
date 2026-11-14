@@ -1,6 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+const localDemo = import.meta.env.MODE === 'demo';
+const apiBase = import.meta.env.VITE_API_BASE_URL || (localDemo ? '' : 'http://localhost:8003');
+async function api(route, body) {
+  const response = await fetch(apiBase + route, body === undefined ? undefined : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || 'Request failed.');
+  return data;
+}
 
 const CareManagementDashboard = () => {
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [reason, setReason] = useState('');
+  const [evidence, setEvidence] = useState('');
+  const modalRef = useRef(null);
+  const previousFocus = useRef(null);
   const [members, setMembers] = useState([]);
   const [allMembers, setAllMembers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +36,7 @@ const CareManagementDashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (allMembers.length > 0) {
+    {
       let filteredMembers = allMembers;
 
       if (filterHighRisk) {
@@ -36,109 +52,81 @@ const CareManagementDashboard = () => {
   }, [filterHighRisk, filterEvidenceFound, allMembers]);
 
   const fetchCareGaps = async () => {
+    setLoading(true);
+    setError('');
     try {
-      setLoading(true);
+      const [data, counts] = await Promise.all([api('/care-gaps'), api('/care-management-stats')]);
+      if (!Array.isArray(data)) throw new Error('The member response is invalid.');
+      setAllMembers(data);
+      setStats({ total: counts.total_members, highRisk: counts.high_risk,
+        mediumRisk: counts.medium_risk, lowRisk: counts.low_risk,
+        evidenceFound: counts.evidence_found, closed: counts.closed_gaps || 0,
+        inputSources: counts.evidence_sources || {}, measures: counts.measures });
+    } catch (failure) {
+      setError(failure.message || 'Unable to load the local API. Start the demo and retry.');
+    } finally { setLoading(false); }
+  };
 
-      // Fetch both member data and statistics
-      const [membersResponse, statsResponse] = await Promise.all([
-        fetch('http://localhost:8003/care-gaps'),
-        fetch('http://localhost:8003/care-management-stats')
-      ]);
+  const openMemberModal = async memberId => {
+    setError('');
+    try {
+      const data = await api(`/member/${encodeURIComponent(memberId)}`);
+      previousFocus.current = document.activeElement;
+      setSelectedMember(data);
+      setReason(''); setEvidence(''); setShowModal(true);
+    } catch (failure) { setError(failure.message); }
+  };
 
-      const membersData = await membersResponse.json();
-      const statsData = await statsResponse.json();
-
-      setAllMembers(membersData);
-      setMembers(filterHighRisk ? membersData.filter(m => m.risk_level === 'HIGH') : membersData);
-
-      // Use enhanced statistics from backend
-      const newStats = {
-        total: statsData.total_members,
-        highRisk: statsData.high_risk,
-        mediumRisk: statsData.medium_risk,
-        lowRisk: statsData.low_risk,
-        evidenceFound: statsData.evidence_found,
-        inputSources: statsData.evidence_sources,
-        measures: statsData.measures,
-        costImpact: statsData.cost_impact
-      };
-
-      setStats(newStats);
-    } catch (error) {
-      console.error('Error fetching care gaps:', error);
-      // Fallback to basic calculation if enhanced stats fail
-      try {
-        const response = await fetch('http://localhost:8003/care-gaps');
-        const data = await response.json();
-        setMembers(data);
-
-        const fallbackStats = {
-          total: data.length,
-          highRisk: data.filter(m => m.risk_level === 'HIGH').length,
-          mediumRisk: data.filter(m => m.risk_level === 'MEDIUM').length,
-          lowRisk: data.filter(m => m.risk_level === 'LOW').length,
-          evidenceFound: data.filter(m => m.evidence_found).length,
-          inputSources: {}
-        };
-
-        data.forEach(member => {
-          const source = member.evidence_source || 'NONE';
-          fallbackStats.inputSources[source] = (fallbackStats.inputSources[source] || 0) + 1;
-        });
-
-        setStats(fallbackStats);
-      } catch (fallbackError) {
-        console.error('Error with fallback data fetch:', fallbackError);
+  useEffect(() => {
+    if (!showModal) return;
+    const dialog = modalRef.current;
+    dialog?.querySelector('button')?.focus();
+    const handleKey = event => {
+      if (event.key === 'Escape') setShowModal(false);
+      if (event.key === 'Tab') {
+        const items = [...dialog.querySelectorAll('button:not(:disabled), input, textarea, a[href]')];
+        const first = items[0]; const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
       }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const openMemberModal = async (memberId) => {
-    try {
-      const response = await fetch(`http://localhost:8003/member/${memberId}`);
-      const memberData = await response.json();
-      setSelectedMember(memberData);
-      setShowModal(true);
-    } catch (error) {
-      console.error('Error fetching member details:', error);
-    }
-  };
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => { document.removeEventListener('keydown', handleKey); previousFocus.current?.focus(); };
+  }, [showModal]);
 
   const sendManualAlert = async (memberId, alertType, message) => {
+    setBusy(true); setError('');
     try {
-      const response = await fetch(`http://localhost:8003/member/${memberId}/alert`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ alertType, message })
-      });
-
-      if (response.ok) {
-        alert('Alert sent successfully!');
-        fetchCareGaps(); // Refresh data
-      }
-    } catch (error) {
-      console.error('Error sending alert:', error);
-    }
+      const result = await api(`/member/${encodeURIComponent(memberId)}/alert`, { alertType, message });
+      setNotice(result.message || 'Scenario action recorded.');
+    } catch (failure) { setError(failure.message); }
+    finally { setBusy(false); }
   };
 
-  const closeGap = async (memberId, measureType, reason, evidence) => {
+  const closeGap = async (memberId, measureType) => {
+    setBusy(true); setError('');
     try {
-      const response = await fetch(`http://localhost:8003/member/${memberId}/close-gap`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ measureType, closureReason: reason, evidence })
-      });
+      await api(`/member/${encodeURIComponent(memberId)}/close-gap`, { measureType, closureReason: reason, evidence });
+      setNotice('Synthetic gap closed. The event is available in the session export.');
+      setShowModal(false); await fetchCareGaps();
+    } catch (failure) { setError(failure.message); }
+    finally { setBusy(false); }
+  };
 
-      if (response.ok) {
-        alert('Care gap closed successfully!');
-        setShowModal(false);
-        fetchCareGaps(); // Refresh data
-      }
-    } catch (error) {
-      console.error('Error closing gap:', error);
-    }
+  const resetDemo = async () => {
+    setBusy(true); setError('');
+    try { await api('/demo/reset', {}); setShowModal(false); setNotice('Demo reset: six open gaps, no events.'); await fetchCareGaps(); }
+    catch (failure) { setError(failure.message); }
+    finally { setBusy(false); }
+  };
+  const exportEvents = async () => {
+    setError('');
+    try {
+      const data = await api('/demo/events');
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      const link = document.createElement('a'); link.href = url; link.download = 'synthetic-session.json'; link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (failure) { setError(failure.message); }
   };
 
   const getEvidenceSourceDisplay = (source) => {
@@ -149,6 +137,7 @@ const CareManagementDashboard = () => {
       'SFTP Charts': { label: 'SFTP Charts', color: '#f59e0b', icon: '📊' },
       'FTP Load': { label: 'FTP Load', color: '#06b6d4', icon: '📁' },
       'None': { label: 'No Evidence Found', color: '#ef4444', icon: '❌' },
+      'Synthetic fixture': { label: 'Synthetic fixture', color: '#059669', icon: '◈' },
       'NONE': { label: 'No Evidence Found', color: '#ef4444', icon: '❌' }
     };
 
@@ -295,7 +284,14 @@ const CareManagementDashboard = () => {
 
   if (loading) {
     return (
-      <div style={styles.container}>
+      <div style={styles.container} className="care-workflow">
+      {error && <div className="workflow-error" role="alert">{error} <button onClick={fetchCareGaps}>Retry loading</button></div>}
+      {notice && <div className="workflow-status" role="status">{notice}</div>}
+      {localDemo && <div className="workflow-toolbar">
+        <p>Review evidence, record a decision, and inspect the event history.</p>
+        <button onClick={exportEvents} disabled={busy}>Export session JSON</button>
+        <button onClick={resetDemo} disabled={busy}>Reset demo</button>
+      </div>}
         <div style={{ textAlign: 'center', padding: '4rem' }}>
           <div style={{ fontSize: '1.5rem', color: '#6b7280' }}>Loading care management data...</div>
         </div>
@@ -304,41 +300,25 @@ const CareManagementDashboard = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="care-workflow">
+      {error && <div className="workflow-error" role="alert">{error} <button onClick={fetchCareGaps}>Retry loading</button></div>}
+      {notice && <div className="workflow-status" role="status">{notice}</div>}
+      {localDemo && <div className="workflow-toolbar">
+        <p>Review evidence, record a decision, and inspect the event history.</p>
+        <button onClick={exportEvents} disabled={busy}>Export session JSON</button>
+        <button onClick={resetDemo} disabled={busy}>Reset demo</button>
+      </div>}
       {/* Header */}
       <div style={styles.header}>
-        <h1 style={styles.title}>Population Health Intelligence</h1>
+        <h1 style={styles.title}>Review a Synthetic Care Gap</h1>
         <p style={styles.subtitle}>
-          Multi-Standard AI Platform: HL7 v2.x • FHIR R4 • CDA Documents • Real-time Clinical Decision Support
+          Six fictional members. Inspect the evidence, simulate outreach, and record a reviewed closure.
         </p>
 
-        {/* Data Source Diversity Indicators */}
         <div style={styles.dataSourceIndicators}>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>📋</div>
-            <div style={styles.sourceLabel}>HL7 v2.x</div>
-            <div style={styles.sourceCount}>MDM, ORU, ADT</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🔗</div>
-            <div style={styles.sourceLabel}>FHIR R4</div>
-            <div style={styles.sourceCount}>Patient, DiagnosticReport</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🏥</div>
-            <div style={styles.sourceLabel}>EMR</div>
-            <div style={styles.sourceCount}>Epic, Cerner</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>🌐</div>
-            <div style={styles.sourceLabel}>HIE</div>
-            <div style={styles.sourceCount}>Multi-facility</div>
-          </div>
-          <div style={styles.sourceCard}>
-            <div style={styles.sourceIcon}>💊</div>
-            <div style={styles.sourceLabel}>Pharmacy</div>
-            <div style={styles.sourceCount}>Claims, Labs</div>
-          </div>
+          <div style={styles.sourceCard}><div style={styles.sourceLabel}>01 · Review</div><div style={styles.sourceCount}>Inspect a fictional member and evidence</div></div>
+          <div style={styles.sourceCard}><div style={styles.sourceLabel}>02 · Decide</div><div style={styles.sourceCount}>Record a reason and supporting evidence</div></div>
+          <div style={styles.sourceCard}><div style={styles.sourceLabel}>03 · Inspect</div><div style={styles.sourceCount}>Export the real session event history</div></div>
         </div>
       </div>
 
@@ -356,7 +336,7 @@ const CareManagementDashboard = () => {
           </div>
           <div style={{ ...styles.statLabel, color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: '600' }}>Total Members</div>
           <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.8)', marginTop: '0.5rem', padding: '0.5rem', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '0.375rem' }}>
-            📊 Risk Distribution: <span style={{ fontWeight: 'bold' }}>{stats.highRisk}H</span> / <span style={{ fontWeight: 'bold' }}>{stats.mediumRisk}M</span> / <span style={{ fontWeight: 'bold' }}>{stats.lowRisk}L</span>
+            📊 Fixture Priorities: <span style={{ fontWeight: 'bold' }}>{stats.highRisk}H</span> / <span style={{ fontWeight: 'bold' }}>{stats.mediumRisk}M</span> / <span style={{ fontWeight: 'bold' }}>{stats.lowRisk}L</span>
           </div>
         </div>
 
@@ -375,6 +355,8 @@ const CareManagementDashboard = () => {
             transform: filterEvidenceFound ? 'scale(1.02)' : 'scale(1)',
             transition: 'all 0.3s ease'
           }}
+          role="button" tabIndex={0} aria-pressed={filterEvidenceFound}
+          onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setFilterEvidenceFound(!filterEvidenceFound); } }}
           onClick={() => setFilterEvidenceFound(!filterEvidenceFound)}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
@@ -403,7 +385,7 @@ const CareManagementDashboard = () => {
             borderRadius: '0.375rem',
             fontWeight: 'bold'
           }}>
-            🎯 {stats.total > 0 ? Math.round((stats.evidenceFound / stats.total) * 100) : 0}% Automated Closure Rate
+            🎯 {stats.total > 0 ? Math.round((stats.evidenceFound / stats.total) * 100) : 0}% with fixture evidence
           </div>
         </div>
 
@@ -417,7 +399,7 @@ const CareManagementDashboard = () => {
             <div style={{ fontSize: '2.5rem' }}>🔗</div>
             <div style={{ ...styles.statValue, color: 'white', fontSize: '2.5rem', fontWeight: 'bold' }}>{Object.keys(stats.inputSources || {}).length}</div>
           </div>
-          <div style={{ ...styles.statLabel, color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: '600' }}>Data Sources</div>
+          <div style={{ ...styles.statLabel, color: 'rgba(255,255,255,0.9)', fontSize: '1rem', fontWeight: '600' }}>Evidence Categories</div>
           <div style={{
             marginTop: '0.5rem',
             fontSize: '0.875rem',
@@ -452,6 +434,8 @@ const CareManagementDashboard = () => {
             transform: filterHighRisk ? 'scale(1.02)' : 'scale(1)',
             transition: 'all 0.3s ease'
           }}
+          role="button" tabIndex={0} aria-pressed={filterHighRisk}
+          onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setFilterHighRisk(!filterHighRisk); } }}
           onClick={() => setFilterHighRisk(!filterHighRisk)}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
@@ -469,7 +453,7 @@ const CareManagementDashboard = () => {
             fontSize: '1rem',
             fontWeight: '600'
           }}>
-            High Risk - Immediate Action {filterHighRisk ? '(Filtered)' : '(Click to Filter)'}
+            High Priority (Fixture) {filterHighRisk ? '(Filtered)' : '(Click to Filter)'}
           </div>
           <div style={{
             fontSize: '0.875rem',
@@ -480,24 +464,24 @@ const CareManagementDashboard = () => {
             borderRadius: '0.375rem',
             fontWeight: 'bold'
           }}>
-            🚨 85% Non-Compliance Risk
+            🚨 Illustrative priority; not a prediction
           </div>
         </div>
 
         <div style={styles.statCard}>
-          <div style={{ ...styles.statValue, color: '#06b6d4' }}>60%</div>
-          <div style={styles.statLabel}>Avoided Unnecessary Outreach</div>
+          <div style={{ ...styles.statValue, color: '#06b6d4' }}>{stats.closed || 0}</div>
+          <div style={styles.statLabel}>Gaps Closed This Session</div>
           <div style={{ fontSize: '0.75rem', color: '#06b6d4', marginTop: '0.25rem' }}>
-            EMR-only would miss {stats.evidenceFound || 0} completed screenings
+            Explicit review actions recorded in memory
           </div>
         </div>
       </div>
 
       {/* Members Table */}
-      <div style={styles.table}>
+      <div className="workflow-table-scroll"><div style={styles.table}>
         <div style={styles.tableHeader}>
           <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: '600' }}>
-            Care Gaps Requiring Intervention
+            Synthetic Care Gap Review Queue
           </h3>
         </div>
 
@@ -509,6 +493,7 @@ const CareManagementDashboard = () => {
               key={member.member_id}
               style={{
                 ...styles.tableRow,
+                minWidth: 840,
                 backgroundColor: index % 2 === 0 ? 'white' : '#f9fafb'
               }}
               onClick={() => openMemberModal(member.member_id)}
@@ -537,7 +522,7 @@ const CareManagementDashboard = () => {
                     ...styles.badge,
                     backgroundColor: getRiskColor(member.risk_level)
                   }}>
-                    {member.risk_level} RISK
+                    {member.risk_level} PRIORITY
                   </span>
                 </div>
 
@@ -555,7 +540,7 @@ const CareManagementDashboard = () => {
                     {evidenceSource.label}
                   </div>
                   <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
-                    Processing: {member.processing_time}s
+                    Status: {member.gap_status || 'scenario'}
                   </div>
                 </div>
 
@@ -580,16 +565,17 @@ const CareManagementDashboard = () => {
         })}
       </div>
 
+      </div>
       {/* Member Detail Modal */}
       {showModal && selectedMember && (
         <div style={styles.modal}>
-          <div style={styles.modalContent}>
+          <div style={styles.modalContent} role="dialog" aria-modal="true" aria-labelledby="member-dialog-title" ref={modalRef}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+              <h2 id="member-dialog-title" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                 Member Details: {selectedMember.name || `Member ${selectedMember.member_id}`}
               </h2>
               <button
-                onClick={() => setShowModal(false)}
+                aria-label="Close member details" onClick={() => setShowModal(false)}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -630,7 +616,7 @@ const CareManagementDashboard = () => {
                   </div>
                   <div>
                     <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Risk Level:</strong>
+                      <strong>Fixture priority:</strong>
                       <span style={{
                         ...styles.badge,
                         backgroundColor: getRiskColor(selectedMember.risk_level),
@@ -643,7 +629,7 @@ const CareManagementDashboard = () => {
                       <strong>Measure Type:</strong> {selectedMember.measure_type}
                     </div>
                     <div style={{ marginBottom: '0.5rem' }}>
-                      <strong>Risk Probability:</strong> {(selectedMember.risk_probability * 100).toFixed(1)}%
+                      <strong>Illustrative priority score:</strong> {(selectedMember.risk_probability * 100).toFixed(1)}%
                     </div>
                     <div style={{ marginBottom: '0.5rem' }}>
                       <strong>Due Date:</strong> {selectedMember.intervention_due_date}
@@ -661,7 +647,7 @@ const CareManagementDashboard = () => {
                   border: '2px solid var(--success-green)'
                 }}>
                   <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: 'var(--success-green)' }}>
-                    🤖 AI Layer 1: Evidence Extraction Engine
+                    🤖 Synthetic Evidence for Review
                   </h3>
                   <div style={{
                     backgroundColor: 'white',
@@ -688,7 +674,7 @@ const CareManagementDashboard = () => {
                     </span>
                   </div>
                   <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Processing Time:</strong> {selectedMember.processing_time}s
+                    <strong>Data origin:</strong> Synthetic fixture
                   </div>
                 </div>
               )}
@@ -702,7 +688,7 @@ const CareManagementDashboard = () => {
                   border: '2px solid #ef4444'
                 }}>
                   <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#ef4444' }}>
-                    🧠 AI Layer 2: Non-Compliance Risk Prediction
+                    🧠 Synthetic Priority Context
                   </h3>
                   <div style={{
                     backgroundColor: 'white',
@@ -715,7 +701,7 @@ const CareManagementDashboard = () => {
                       ⚠️ No Evidence Found - Risk Analysis:
                     </div>
                     <div style={{ fontSize: '0.875rem', lineHeight: '1.5', color: '#374151' }}>
-                      High probability ({(selectedMember.risk_probability * 100).toFixed(1)}%) of non-compliance based on member profile and historical patterns. Immediate intervention recommended.
+                      The fixture assigns a score of {(selectedMember.risk_probability * 100).toFixed(0)}%. This is demonstration data, not a model prediction or care recommendation.
                     </div>
                   </div>
                   <div style={{ marginBottom: '0.5rem' }}>
@@ -729,7 +715,7 @@ const CareManagementDashboard = () => {
                     </span>
                   </div>
                   <div style={{ marginBottom: '0.5rem' }}>
-                    <strong>Processing Time:</strong> {selectedMember.processing_time}s
+                    <strong>Data origin:</strong> Synthetic fixture
                   </div>
                 </div>
               )}
@@ -807,9 +793,10 @@ const CareManagementDashboard = () => {
                       fontSize: '0.875rem',
                       fontWeight: '600'
                     }}
+                    disabled={busy || !localDemo}
                     onClick={() => sendManualAlert(selectedMember.member_id, 'text', 'Care gap intervention needed')}
                   >
-                    📱 Text Patient Alert
+                    📱 Simulate Text Outreach
                   </button>
                   <button
                     style={{
@@ -820,11 +807,18 @@ const CareManagementDashboard = () => {
                       fontSize: '0.875rem',
                       fontWeight: '600'
                     }}
+                    disabled={busy || !localDemo}
                     onClick={() => sendManualAlert(selectedMember.member_id, 'reminder', 'Appointment reminder')}
                   >
-                    📅 Send Appointment Reminder
+                    📅 Simulate Appointment Reminder
                   </button>
-                  {selectedMember.evidence_found ? (
+                  {localDemo && selectedMember.gap_status !== 'closed' && <div className="review-inputs">
+                    <label>Review reason<input value={reason} maxLength={500} onChange={event => setReason(event.target.value)} placeholder="Use synthetic review notes only" /></label>
+                    <label>Evidence reviewed<textarea value={evidence} maxLength={500} onChange={event => setEvidence(event.target.value)} placeholder="Describe the synthetic evidence you reviewed" /></label>
+                  </div>}
+                  {error && <p role="alert" className="workflow-error">{error}</p>}
+                  {notice && <p role="status" className="workflow-status">{notice}</p>}
+                  {selectedMember.gap_status === 'closed' ? (
                     <button
                       style={{
                         ...styles.button,
@@ -838,7 +832,7 @@ const CareManagementDashboard = () => {
                       }}
                       disabled
                     >
-                      ✅ Care Gap Closed (Automated)
+                      ✅ Gap Closed in This Demo Session
                     </button>
                   ) : (
                     <button
@@ -850,9 +844,10 @@ const CareManagementDashboard = () => {
                         fontSize: '0.875rem',
                         fontWeight: '600'
                       }}
-                      onClick={() => closeGap(selectedMember.member_id, selectedMember.measure_type, 'Manual intervention', 'Provider review')}
+                      disabled={busy || !localDemo || !reason.trim() || !evidence.trim()}
+                      onClick={() => closeGap(selectedMember.member_id, selectedMember.measure_type)}
                     >
-                      🔄 Manual Gap Closure
+                      🔄 Record Reviewed Closure
                     </button>
                   )}
                 </div>

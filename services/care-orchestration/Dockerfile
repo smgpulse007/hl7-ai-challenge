@@ -1,5 +1,5 @@
 # Care Orchestration Service Dockerfile
-FROM node:18-slim
+FROM node:22-slim
 
 # Set working directory
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install --only=production
+RUN npm ci --omit=dev --ignore-scripts
 
 # Copy service code
 COPY . .

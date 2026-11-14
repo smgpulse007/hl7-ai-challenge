@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CareManagementDashboard from './components/CareManagementDashboard';
-import QualityActuarialDashboard from './components/QualityActuarialDashboard';
 import ProviderIntelligenceHub from './components/ProviderIntelligenceHub';
 import LiveProcessingDemo from './components/LiveProcessingDemo';
 import MetricsOverview from './components/MetricsOverview';
@@ -8,6 +7,8 @@ import AIExplanationPanel from './components/AIExplanationPanel';
 import LegacyDashboard from './components/LegacyDashboard';
 import { Activity, Brain, BarChart3, Zap, Stethoscope, Clock } from 'lucide-react';
 import './App.css';
+
+const localDemo = import.meta.env.MODE === 'demo';
 
 function App() {
   // Default to Population Health for demo-first payer value prop
@@ -33,21 +34,21 @@ function App() {
       id: 'provider-intelligence',
       label: 'Clinical Decision Support • For Providers',
       icon: Stethoscope,
-      description: 'SMART on FHIR app with CDS Hooks',
+      description: 'Historical provider workflow scenario',
       audience: 'provider'
     },
     {
       id: 'live-demo',
-      label: 'Live Processing Demo',
+      label: 'Processing Scenario',
       icon: Zap,
-      description: 'Real-time HL7 → FHIR transformation',
+      description: 'Historical scripted processing scenario',
       audience: 'technical'
     },
     {
       id: 'metrics',
-      label: 'Platform Metrics',
+      label: 'Scenario Metrics',
       icon: BarChart3,
-      description: 'Real-time performance analytics',
+      description: 'Illustrative scenario figures, not measured performance',
       audience: 'technical'
     },
     {
@@ -89,16 +90,16 @@ function App() {
             </div>
             <div>
               <h1 className="text-xl font-bold text-white m-0">
-                AI-Powered HEDIS Care Gap Closure Platform
+                Care Gap Workflow Lab
               </h1>
               <p className="text-sm text-blue-100 m-0">
-                HL7 AI Challenge 2025 • Standards-based: HL7 v2.x • FHIR R4 • CDA
+                HL7 AI Challenge prototype • Synthetic workflow exploration
               </p>
             </div>
           </div>
 
-          <div className="flex gap-2">
-            {navigationViews.map((view) => {
+          <div className="flex gap-2 flex-wrap" hidden={localDemo}>
+            {!localDemo && navigationViews.map((view) => {
               const Icon = view.icon;
               return (
                 <button
@@ -117,6 +118,11 @@ function App() {
         </div>
       </nav>
 
+      <div className="demo-notice" role="note">
+        {localDemo
+          ? 'LOCAL SYNTHETIC DEMO · Actions update memory only. Outreach sends no messages. Restart or reset clears the session.'
+          : 'HISTORICAL SCENARIOS · Figures and scripted processing are illustrative, not measured results or clinical validation.'}
+      </div>
       {/* Current View */}
       <div className="dashboard-container">
         {renderCurrentView()}

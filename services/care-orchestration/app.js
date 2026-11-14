@@ -7,10 +7,7 @@
 const express = require('express');
 const cors = require('cors');
 const amqp = require('amqplib');
-const { v4: uuidv4 } = require('uuid');
-
-// FHIR client
-const Client = require('fhirclient').default;
+const { randomUUID: uuidv4 } = require('node:crypto');
 
 // Configuration
 const rabbitProtocol = process.env.RABBITMQ_SSL_ENABLED === 'true' ? 'amqps' : 'amqp';

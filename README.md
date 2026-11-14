@@ -1,144 +1,68 @@
-# HEDIS AI Platform
+# Care Gap Workflow Lab
 
-**HL7 AI Challenge 2025 - Clinical Quality Improvement**
+[![Synthetic workflow CI](https://github.com/smgpulse007/hl7-ai-challenge/actions/workflows/demo.yml/badge.svg)](https://github.com/smgpulse007/hl7-ai-challenge/actions/workflows/demo.yml)
 
-An event-driven microservices platform that transforms reactive "chase and close" to proactive "predict and prevent" care gap management using HL7 standards and AI/ML clinical decision support.
+**An inspectable care-management workflow, from evidence review to an exportable decision record.**
 
-> Public challenge/demo code using synthetic or sample data only. No PHI/PII. Not a production clinical decision system.
+Explore six fictional members, filter the review queue, simulate outreach, and close a gap with an explicit reason and evidence. The local API really changes session state: the dashboard count and exported event history reflect your actions. Repeated closure requests do not create duplicate events.
 
-## 🏆 HL7 AI Challenge Submission
+![Actual local demo: review a synthetic member, record a decision, and see the closed gap](docs/workflow-demo.gif)
 
-**Category:** Clinical Quality Improvement
-**Focus:** Solutions that improve care delivery, clinical outcomes, and quality
+The recording uses the running React UI and Express API. All fixtures are synthetic; outreach sends no messages. [Recording details](docs/local-demo.md#recording-the-demo).
 
-### Key Innovation
-- **Multi-Standard Processing:** HL7 v2.x → FHIR R4 transformation with AI enhancement
-- **Predictive Analytics:** XGBoost-style demo models for care-gap risk prioritization
-- **Real-time Clinical Decision Support:** SMART on FHIR integration with live care gap alerts
-- **Production-Style Architecture:** Scenario modeling for ROI and quality improvement workflows
+## Run it locally
 
-## 🚀 Quick Start
+Install **Node.js 22.12 or newer** with npm, then:
 
-### Prerequisites
-- Docker Desktop
-- 8GB+ RAM
-- 10GB+ disk space
-
-### Installation
-```bash
-# Clone repository
+```sh
 git clone https://github.com/smgpulse007/hl7-ai-challenge.git
 cd hl7-ai-challenge
-
-# Start all services
-docker-compose up -d
-
-# Setup message queues (one-time)
-python setup_rabbitmq.py
-
-# Verify installation
-python demo_end_to_end_test.py
-
-# Access dashboard
-open http://localhost:3000
+npm run setup:demo
+npm run build:demo
+npm run demo
 ```
 
-## 🏗️ Architecture
+Open **http://127.0.0.1:4177**. No Docker, API key, model download, database, or message broker is needed for this workflow. For an existing checkout, start the npm commands from its root.
 
-### Microservices
-- **HL7 Processing Service** - spaCy NLP + LLaMA 3.2 RAG for clinical evidence extraction
-- **Risk Prediction Service** - XGBoost models for non-compliance prediction
-- **Care Orchestration Service** - FHIR R4 resource creation and workflow management
-- **Dashboard Service** - Real-time Population Health Intelligence interface
+1. Select **Manage** for a fictional member and inspect the fixture evidence.
+2. Choose **Simulate Text Outreach** to record an event. Nothing is sent externally.
+3. Enter a synthetic review reason and evidence, then **Record Reviewed Closure**.
+4. **Export session JSON** to inspect what happened. **Reset demo** restores the six open gaps.
 
-### Infrastructure
-- **Message Broker:** RabbitMQ with event-driven processing
-- **Database:** PostgreSQL with Redis caching
-- **Containerization:** Docker with health monitoring
-- **Standards:** HL7 v2.x, FHIR R4, SMART on FHIR
+State exists only in the server's memory and is shared by browser tabs connected to that process. Restart/reset clears it. Export first to retain your synthetic session. Use fictional notes only.
 
-## 📊 Demo Results
+## What you can learn and extend
 
-- ✅ **100% Success Rate** - End-to-end pipeline processing
-- ✅ **Real-time Processing** - <2 second response times
-- ✅ **Standards Compliance** - Full HL7 v2.x and FHIR R4 support
-- ✅ **Production-Style Design** - Demo ROI methodology and quality workflow architecture
+- A UI/API contract with honest action receipts, visible errors, and state that survives page refresh within the session.
+- Review-before-closure validation, duplicate closure handling, bounded event history, reset, and JSON export.
+- A small default dashboard bundle that excludes historical scenario screens.
+- Real HTTP regressions and clean-install/build checks on Windows and Linux.
 
-## 🎯 HL7 Standards Showcase
+This is a workflow prototype, not clinical software. Priority scores and evidence are fixed fixtures; it does not infer clinical risk, adjudicate a quality measure, or demonstrate patient outcomes. It has no production identity, durable database, EHR integration, or clinical validation.
 
-### Input Processing
-- **HL7 v2.x Messages:** MDM, ORU, ADT with clinical NLP
-- **FHIR R4 Resources:** Patient, DiagnosticReport, Procedure, Encounter
+## Verify your change
 
-### Output Generation
-- **FHIR R4 Resources:** Patient, RiskAssessment, CarePlan, Task
-- **SMART on FHIR:** Clinical decision support integration
-- **CDS Hooks:** Real-time provider alerts
-
-## 📈 Value Proposition
-
-### Demo Value Proposition
-- **65% vs 20%** care gap closure success rates
-- **$1.7M+ annual ROI** for 450K member health plan
-- **60% reduction** in quality-related administrative burden
-- **0.5-1.0 star rating** improvement projected
-
-These figures are challenge/demo scenario assumptions, not verified production outcomes.
-
-### Technical Innovation
-- **Multi-source intelligence** from EMR, HIE, claims, labs, pharmacy
-- **Predictive non-compliance** identification before gaps occur
-- **Event-driven architecture** supporting 10,000+ messages/hour
-- **Standards-first approach** enabling seamless EHR integration
-
-## 📚 Documentation
-
-- [Deployment Guide](DEPLOYMENT_GUIDE.md) - Complete setup instructions
-- [Portability Guide](PORTABILITY_GUIDE.md) - Platform independence verification
-- [HL7 AI Challenge Alignment](HL7_AI_Challenge_Alignment.md) - Evaluation criteria alignment
-- [Technical Documentation](docs/) - Detailed architecture and analysis
-
-## 🧪 Testing
-
-```bash
-# End-to-end pipeline test
-python demo_end_to_end_test.py
-
-# Service integration test
-python integration_test.py
-
-# RabbitMQ setup verification
-python setup_rabbitmq.py
+```sh
+npm test
+npm --prefix services/care-orchestration run lint
+npm run build:demo
+node scripts/smoke-demo.cjs
 ```
 
-## 🌐 Service Endpoints
+Tests send real HTTP requests to ephemeral localhost servers. They cover closure state/counts, repeats, invalid evidence, unknown members, simulated outreach, reset, separate instances, origin/Host restrictions, body size, and event limits. The smoke command verifies the built dashboard and a closure through the API. CI also builds the historical dashboard and audits both Node production dependency trees; it publishes no images or packages.
 
-| Service | URL | Purpose |
-|---------|-----|---------|
-| Dashboard | http://localhost:3000 | Population Health Intelligence |
-| HL7 Processing | http://localhost:8001 | Message processing |
-| Risk Prediction | http://localhost:8002 | ML predictions |
-| Care Orchestration | http://localhost:8003 | FHIR resources |
-| RabbitMQ Management | http://localhost:15672 | Queue management |
+See [local architecture, API, troubleshooting, and recording](docs/local-demo.md).
 
-## 🏥 Multi-Industry Application
+## The wider HL7 challenge prototype
 
-- **Health Plans:** Population health management and Star Ratings optimization
-- **Health Systems:** Care coordination and quality improvement
-- **Provider Practices:** Panel management and clinical decision support
+The repository preserves the original HL7 AI Challenge 2025 work: Python HL7/FHIR processing, a risk service with external XGBoost loading hooks and synthetic dummy-model fallback, RabbitMQ orchestration, Compose files, and historical scenario screens. These are separate from the lightweight workflow above.
 
-## 📄 License
+The full multi-service stack remains an advanced, unverified path in this repair. It requires further integration work and external NLP/model dependencies. Historical figures, submission documents, SMART/CDS aspirations, throughput, ROI, and outcome figures are not verified results or conformance certification. The public tree does not contain the trained clinical models described in those materials.
 
-MIT License - see [LICENSE](LICENSE) file for details.
+Source: [HL7/FHIR service](services/hl7-processing), [risk service](services/risk-prediction), [legacy orchestration](services/care-orchestration/app.js), [historical architecture](docs/architecture.md). The [deployment guide](DEPLOYMENT_GUIDE.md) and submission artifacts are historical references, not the tested quickstart.
 
-## 🤝 Contributing
+## Contributing
 
-This platform demonstrates advanced HL7 standards implementation with AI/ML clinical decision support. For questions or collaboration opportunities, please open an issue.
+Useful next contributions include synthetic failure cases, persistent demo-state adapters, and evidence-backed interoperability tests. Keep real patient data, credentials, and employer material out of fixtures and recordings. Explain what each test establishes and its limits.
 
-## Portfolio Relevance
-
-Demonstrates event-driven healthcare AI architecture, HL7 v2.x to FHIR R4 processing, care-gap intelligence, SMART/CDS integration patterns, XGBoost-style risk scoring, Dockerized services, and public-safe healthcare interoperability storytelling.
-
----
-
-**Built for HL7 AI Challenge 2025** - Showcasing how HL7 standards enable innovative AI solutions that deliver measurable healthcare improvements.
+The repository includes an existing [MIT license](LICENSE); historical service metadata and attribution are preserved.
