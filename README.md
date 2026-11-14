@@ -2,7 +2,7 @@
 
 **HL7 AI Challenge 2025 - Clinical Quality Improvement**
 
-An event-driven microservices platform that transforms reactive "chase and close" to proactive "predict and prevent" care gap management using HL7 standards and AI/ML clinical decision support.
+A challenge prototype for exploring event-driven care-gap workflows with HL7/FHIR-style resources, synthetic features, and local demo services.
 
 > Public challenge/demo code using synthetic or sample data only. No PHI/PII. Not a production clinical decision system.
 
@@ -11,10 +11,10 @@ An event-driven microservices platform that transforms reactive "chase and close
 **Category:** Clinical Quality Improvement
 **Focus:** Solutions that improve care delivery, clinical outcomes, and quality
 
-### Key Innovation
+### Prototype Scope
 - **Multi-Standard Processing:** HL7 v2.x → FHIR R4 transformation with AI enhancement
-- **Predictive Analytics:** XGBoost-style demo models for care-gap risk prioritization
-- **Real-time Clinical Decision Support:** SMART on FHIR integration with live care gap alerts
+- **Risk-scoring demonstration:** XGBoost loading hooks with synthetic dummy-model fallback
+- **Workflow exploration:** FHIR-shaped resources and dashboard examples; SMART/CDS integration is not established by this demo
 - **Production-Style Architecture:** Scenario modeling for ROI and quality improvement workflows
 
 ## 🚀 Quick Start
@@ -46,8 +46,8 @@ open http://localhost:3000
 ## 🏗️ Architecture
 
 ### Microservices
-- **HL7 Processing Service** - spaCy NLP + LLaMA 3.2 RAG for clinical evidence extraction
-- **Risk Prediction Service** - XGBoost models for non-compliance prediction
+- **HL7 Processing Service** - spaCy matching and Ollama `llama3` prompting for sample evidence extraction
+- **Risk Prediction Service** - XGBoost loader and synthetic dummy models when trained artifacts are unavailable
 - **Care Orchestration Service** - FHIR R4 resource creation and workflow management
 - **Dashboard Service** - Real-time Population Health Intelligence interface
 
@@ -55,14 +55,15 @@ open http://localhost:3000
 - **Message Broker:** RabbitMQ with event-driven processing
 - **Database:** PostgreSQL with Redis caching
 - **Containerization:** Docker with health monitoring
-- **Standards:** HL7 v2.x, FHIR R4, SMART on FHIR
+- **Resource formats explored:** selected HL7 v2.x messages and FHIR R4-style resources
 
-## 📊 Demo Results
+## Demo boundaries and evidence
 
-- ✅ **100% Success Rate** - End-to-end pipeline processing
-- ✅ **Real-time Processing** - <2 second response times
-- ✅ **Standards Compliance** - Full HL7 v2.x and FHIR R4 support
-- ✅ **Production-Style Design** - Demo ROI methodology and quality workflow architecture
+The checked-in risk service loads external artifacts when configured, otherwise it trains dummy XGBoost classifiers on `make_classification` data. Its message features are generated synthetically. No trained model binaries are included in the public tree; metadata alone does not establish reproducible clinical performance.
+
+The integration scripts exercise a running local stack. They are not load tests, clinical validation, or HL7/FHIR conformance certification. This README makes no measured throughput, latency, reliability, care-gap closure, or ROI claim. Record the commit, environment, inputs, commands, and raw results before publishing a benchmark.
+
+Historical submission documents and dashboard scenarios contain illustrative figures and design aspirations. They should not be treated as verified deployment results or evidence that SMART authorization, CDS Hooks, or full standards support is implemented.
 
 ## 🎯 HL7 Standards Showcase
 
@@ -72,24 +73,21 @@ open http://localhost:3000
 
 ### Output Generation
 - **FHIR R4 Resources:** Patient, RiskAssessment, CarePlan, Task
-- **SMART on FHIR:** Clinical decision support integration
-- **CDS Hooks:** Real-time provider alerts
+
+SMART on FHIR authorization and CDS Hooks remain integration goals; an end-to-end conformant implementation is not demonstrated here.
 
 ## 📈 Value Proposition
 
-### Demo Value Proposition
-- **65% vs 20%** care gap closure success rates
-- **$1.7M+ annual ROI** for 450K member health plan
-- **60% reduction** in quality-related administrative burden
-- **0.5-1.0 star rating** improvement projected
+### Questions the demo can help explore
+- How can message-derived evidence be routed into a care-management workflow?
+- What resource contracts and failure handling would an integration need?
+- What data, evaluation, authorization, and workflow review are still needed before deployment?
 
-These figures are challenge/demo scenario assumptions, not verified production outcomes.
-
-### Technical Innovation
-- **Multi-source intelligence** from EMR, HIE, claims, labs, pharmacy
-- **Predictive non-compliance** identification before gaps occur
-- **Event-driven architecture** supporting 10,000+ messages/hour
-- **Standards-first approach** enabling seamless EHR integration
+### Workflow Design
+- **Multiple source categories** represented in demo scenarios; live EMR, HIE, claims, lab, and pharmacy integrations are not established here
+- **Simulated prioritization** for exploring care-gap workflows
+- **Event-driven architecture** using RabbitMQ; capacity has not been benchmarked here
+- **Standards-oriented prototype** requiring further validation and EHR integration work
 
 ## 📚 Documentation
 
@@ -133,12 +131,12 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🤝 Contributing
 
-This platform demonstrates advanced HL7 standards implementation with AI/ML clinical decision support. For questions or collaboration opportunities, please open an issue.
+Contributions that add reproducible synthetic fixtures, failure-path tests, or documented interoperability validation are welcome. Please keep example data synthetic.
 
 ## Portfolio Relevance
 
-Demonstrates event-driven healthcare AI architecture, HL7 v2.x to FHIR R4 processing, care-gap intelligence, SMART/CDS integration patterns, XGBoost-style risk scoring, Dockerized services, and public-safe healthcare interoperability storytelling.
+Demonstrates a multi-service prototype, selected message/resource parsing, synthetic risk-scoring workflows, and Docker packaging. The next engineering milestone is reproducible integration and failure-path testing, not a claim of clinical readiness.
 
 ---
 
-**Built for HL7 AI Challenge 2025** - Showcasing how HL7 standards enable innovative AI solutions that deliver measurable healthcare improvements.
+**Built for HL7 AI Challenge 2025** — an exploratory demo, not evidence of measured healthcare outcomes.
